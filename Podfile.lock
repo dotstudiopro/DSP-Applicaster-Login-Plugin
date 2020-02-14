@@ -1,0 +1,29 @@
+PODS:
+  - DotstudioPlugin (0.0.1):
+    - DotstudioPlugin/Core (= 0.0.1)
+  - DotstudioPlugin/Core (0.0.1):
+    - ZappPlugins
+  - ZappCore (0.5.0)
+  - ZappPlugins (11.3.1):
+    - ZappCore
+
+DEPENDENCIES:
+  - DotstudioPlugin (from `Dotstudio.podspec`)
+
+SPEC REPOS:
+  "git@github.com:applicaster/CocoaPods.git":
+    - ZappCore
+    - ZappPlugins
+
+EXTERNAL SOURCES:
+  DotstudioPlugin:
+    :path: Dotstudio.podspec
+
+SPEC CHECKSUMS:
+  DotstudioPlugin: 87887bc18e65f17d679892420bc98fcc134ea2ad
+  ZappCore: f92ff80112b8dfac6ebba117b393df0665e93241
+  ZappPlugins: 9cd05b7787db4788c04747409907056fe867213b
+
+PODFILE CHECKSUM: d693cb710d9431d9382bb2c3c633d952ed5ba334
+
+COCOAPODS: 1.8.4
