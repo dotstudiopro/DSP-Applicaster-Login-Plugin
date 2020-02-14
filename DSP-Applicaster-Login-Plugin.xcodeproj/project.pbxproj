@@ -1,0 +1,693 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */; };
+		6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA54F623F6D5C40036E3D5 /* Main.storyboard */; };
+		6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */; };
+		6CAA550123F6D5C40036E3D5 /* plugin_configurations.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA550023F6D5C40036E3D5 /* plugin_configurations.json */; };
+		6CAA550423F6D5C60036E3D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA550323F6D5C60036E3D5 /* Assets.xcassets */; };
+		6CAA550723F6D5C60036E3D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA550523F6D5C60036E3D5 /* LaunchScreen.storyboard */; };
+		6CAA551223F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551123F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift */; };
+		6CAA551D23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */; };
+		6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */; };
+		6F3B664705CE72D80ED1EE4F /* Pods_DSP_Applicaster_Login_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6CAA550E23F6D5C60036E3D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA54E923F6D5C40036E3D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CAA54F023F6D5C40036E3D5;
+			remoteInfo = "DSP-Applicaster-Login-Plugin";
+		};
+		6CAA551923F6D5C60036E3D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA54E923F6D5C40036E3D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CAA54F023F6D5C40036E3D5;
+			remoteInfo = "DSP-Applicaster-Login-Plugin";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSP_Applicaster_Login_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSP-Applicaster-Login-Plugin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6CAA54F723F6D5C40036E3D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6CAA54FA23F6D5C40036E3D5 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../../Podfile; sourceTree = "<group>"; };
+		6CAA54FB23F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = "DSP-Applicaster-Login-Plugin.podspec"; path = "../../DSP-Applicaster-Login-Plugin.podspec"; sourceTree = "<group>"; };
+		6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6CAA550023F6D5C40036E3D5 /* plugin_configurations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = plugin_configurations.json; path = ../plugin_configurations.json; sourceTree = "<group>"; };
+		6CAA550223F6D5C40036E3D5 /* plugin_manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = plugin_manifest.json; path = ../plugin_manifest.json; sourceTree = "<group>"; };
+		6CAA550323F6D5C60036E3D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6CAA550623F6D5C60036E3D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6CAA550823F6D5C60036E3D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CAA550D23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DSP-Applicaster-Login-PluginTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAA551123F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSP_Applicaster_Login_PluginTests.swift; sourceTree = "<group>"; };
+		6CAA551323F6D5C60036E3D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CAA551823F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DSP-Applicaster-Login-PluginUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSP_Applicaster_Login_PluginUITests.swift; sourceTree = "<group>"; };
+		6CAA551E23F6D5C60036E3D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPlugin.swift; path = PluginClasses/LoginPlugin.swift; sourceTree = SOURCE_ROOT; };
+		9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
+		E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CAA54EE23F6D5C40036E3D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F3B664705CE72D80ED1EE4F /* Pods_DSP_Applicaster_Login_Plugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA550A23F6D5C60036E3D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA551523F6D5C60036E3D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47129AAAD19FDE0C1E8DC90B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CAA54E823F6D5C40036E3D5 = {
+			isa = PBXGroup;
+			children = (
+				6CAA54F323F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */,
+				6CAA551023F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests */,
+				6CAA551B23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests */,
+				6CAA54F223F6D5C40036E3D5 /* Products */,
+				CE5205CFE74151C0B2CEFDE1 /* Pods */,
+				47129AAAD19FDE0C1E8DC90B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6CAA54F223F6D5C40036E3D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */,
+				6CAA550D23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests.xctest */,
+				6CAA551823F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CAA54F323F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */,
+				6CAA54F623F6D5C40036E3D5 /* Main.storyboard */,
+				6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */,
+				6CAA550323F6D5C60036E3D5 /* Assets.xcassets */,
+				6CAA550523F6D5C60036E3D5 /* LaunchScreen.storyboard */,
+				6CAA550823F6D5C60036E3D5 /* Info.plist */,
+				6CAA54F923F6D5C40036E3D5 /* Zapp-Resources */,
+				6CAA54FC23F6D5C40036E3D5 /* PluginClasses */,
+			);
+			path = "DSP-Applicaster-Login-Plugin";
+			sourceTree = "<group>";
+		};
+		6CAA54F923F6D5C40036E3D5 /* Zapp-Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA54FA23F6D5C40036E3D5 /* Podfile */,
+				6CAA54FB23F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.podspec */,
+				6CAA550023F6D5C40036E3D5 /* plugin_configurations.json */,
+				6CAA550223F6D5C40036E3D5 /* plugin_manifest.json */,
+			);
+			path = "Zapp-Resources";
+			sourceTree = "<group>";
+		};
+		6CAA54FC23F6D5C40036E3D5 /* PluginClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */,
+			);
+			path = PluginClasses;
+			sourceTree = "<group>";
+		};
+		6CAA551023F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA551123F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift */,
+				6CAA551323F6D5C60036E3D5 /* Info.plist */,
+			);
+			path = "DSP-Applicaster-Login-PluginTests";
+			sourceTree = "<group>";
+		};
+		6CAA551B23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */,
+				6CAA551E23F6D5C60036E3D5 /* Info.plist */,
+			);
+			path = "DSP-Applicaster-Login-PluginUITests";
+			sourceTree = "<group>";
+		};
+		CE5205CFE74151C0B2CEFDE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */,
+				E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6CAA54F023F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAA552123F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-Plugin" */;
+			buildPhases = (
+				B0AC7292FDA331C49D2A7683 /* [CP] Check Pods Manifest.lock */,
+				6CAA54ED23F6D5C40036E3D5 /* Sources */,
+				6CAA54EE23F6D5C40036E3D5 /* Frameworks */,
+				6CAA54EF23F6D5C40036E3D5 /* Resources */,
+				2CE26A1C18DD4D72ED59CF72 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DSP-Applicaster-Login-Plugin";
+			productName = "DSP-Applicaster-Login-Plugin";
+			productReference = 6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6CAA550C23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAA552423F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-PluginTests" */;
+			buildPhases = (
+				6CAA550923F6D5C60036E3D5 /* Sources */,
+				6CAA550A23F6D5C60036E3D5 /* Frameworks */,
+				6CAA550B23F6D5C60036E3D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CAA550F23F6D5C60036E3D5 /* PBXTargetDependency */,
+			);
+			name = "DSP-Applicaster-Login-PluginTests";
+			productName = "DSP-Applicaster-Login-PluginTests";
+			productReference = 6CAA550D23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6CAA551723F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAA552723F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-PluginUITests" */;
+			buildPhases = (
+				6CAA551423F6D5C60036E3D5 /* Sources */,
+				6CAA551523F6D5C60036E3D5 /* Frameworks */,
+				6CAA551623F6D5C60036E3D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CAA551A23F6D5C60036E3D5 /* PBXTargetDependency */,
+			);
+			name = "DSP-Applicaster-Login-PluginUITests";
+			productName = "DSP-Applicaster-Login-PluginUITests";
+			productReference = 6CAA551823F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6CAA54E923F6D5C40036E3D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Ketan Sakariya";
+				TargetAttributes = {
+					6CAA54F023F6D5C40036E3D5 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					6CAA550C23F6D5C60036E3D5 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 6CAA54F023F6D5C40036E3D5;
+					};
+					6CAA551723F6D5C60036E3D5 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 6CAA54F023F6D5C40036E3D5;
+					};
+				};
+			};
+			buildConfigurationList = 6CAA54EC23F6D5C40036E3D5 /* Build configuration list for PBXProject "DSP-Applicaster-Login-Plugin" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6CAA54E823F6D5C40036E3D5;
+			productRefGroup = 6CAA54F223F6D5C40036E3D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CAA54F023F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */,
+				6CAA550C23F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginTests */,
+				6CAA551723F6D5C60036E3D5 /* DSP-Applicaster-Login-PluginUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6CAA54EF23F6D5C40036E3D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */,
+				6CAA550723F6D5C60036E3D5 /* LaunchScreen.storyboard in Resources */,
+				6CAA550423F6D5C60036E3D5 /* Assets.xcassets in Resources */,
+				6CAA550123F6D5C40036E3D5 /* plugin_configurations.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA550B23F6D5C60036E3D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA551623F6D5C60036E3D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2CE26A1C18DD4D72ED59CF72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0AC7292FDA331C49D2A7683 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DSP-Applicaster-Login-Plugin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CAA54ED23F6D5C40036E3D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */,
+				6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */,
+				6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA550923F6D5C60036E3D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAA551223F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAA551423F6D5C60036E3D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAA551D23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CAA550F23F6D5C60036E3D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CAA54F023F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */;
+			targetProxy = 6CAA550E23F6D5C60036E3D5 /* PBXContainerItemProxy */;
+		};
+		6CAA551A23F6D5C60036E3D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CAA54F023F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */;
+			targetProxy = 6CAA551923F6D5C60036E3D5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6CAA54F623F6D5C40036E3D5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CAA54F723F6D5C40036E3D5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6CAA550523F6D5C60036E3D5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CAA550623F6D5C60036E3D5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6CAA551F23F6D5C60036E3D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6CAA552023F6D5C60036E3D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CAA552223F6D5C60036E3D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-Plugin/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-Plugin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6CAA552323F6D5C60036E3D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-Plugin/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-Plugin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6CAA552523F6D5C60036E3D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-PluginTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-PluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DSP-Applicaster-Login-Plugin.app/DSP-Applicaster-Login-Plugin";
+			};
+			name = Debug;
+		};
+		6CAA552623F6D5C60036E3D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-PluginTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-PluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DSP-Applicaster-Login-Plugin.app/DSP-Applicaster-Login-Plugin";
+			};
+			name = Release;
+		};
+		6CAA552823F6D5C60036E3D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-PluginUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-PluginUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DSP-Applicaster-Login-Plugin";
+			};
+			name = Debug;
+		};
+		6CAA552923F6D5C60036E3D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 63G3T8C3T9;
+				INFOPLIST_FILE = "DSP-Applicaster-Login-PluginUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-PluginUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DSP-Applicaster-Login-Plugin";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CAA54EC23F6D5C40036E3D5 /* Build configuration list for PBXProject "DSP-Applicaster-Login-Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAA551F23F6D5C60036E3D5 /* Debug */,
+				6CAA552023F6D5C60036E3D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAA552123F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAA552223F6D5C60036E3D5 /* Debug */,
+				6CAA552323F6D5C60036E3D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAA552423F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-PluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAA552523F6D5C60036E3D5 /* Debug */,
+				6CAA552623F6D5C60036E3D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAA552723F6D5C60036E3D5 /* Build configuration list for PBXNativeTarget "DSP-Applicaster-Login-PluginUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAA552823F6D5C60036E3D5 /* Debug */,
+				6CAA552923F6D5C60036E3D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6CAA54E923F6D5C40036E3D5 /* Project object */;
+}

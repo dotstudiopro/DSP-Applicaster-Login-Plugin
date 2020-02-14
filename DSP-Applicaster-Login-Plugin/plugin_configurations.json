@@ -1,0 +1,21 @@
+[{
+	"plugin": {
+		"api": {
+			"class_name": "DSP-Applicaster-Login-PluginPlugin.ZappDSP-Applicaster-Login-PluginAdapter"
+		},
+		"author_name": "Ketan Sakariya",
+		"author_email": "ketan@dotstudiopro.com",
+		"manifest_version": "0.0.1",
+		"name": "DSP-Applicaster-Login-Plugin",
+		"description": "iOS swift Login plugin for Applicaster",
+		"identifier": "com.dotstudioz.loginplugin",
+		"type": "general",
+		"platform": "ios",
+		"min_zapp_sdk": "12.1.0",
+		"whitelisted_account_ids": [],
+		"dependency_repository_url": [],
+		"dependency_name": "",
+		"dependency_version": ""
+	},
+	"configuration_json": {}
+}]
