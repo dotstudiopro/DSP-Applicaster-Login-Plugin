@@ -1,0 +1,2 @@
+include ':app', ':loginplugin'
+rootProject.name='DSP-Applicaster-Login-Plugin'
