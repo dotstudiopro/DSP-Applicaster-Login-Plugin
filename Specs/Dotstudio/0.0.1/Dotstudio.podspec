@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '10.0'
     s.requires_arc = true
     s.swift_version = '5.0'
+
+    spec.ios.dependency 'Lock', '~> 2.10'
    
     s.subspec 'Core' do |c|
       s.resources = []
