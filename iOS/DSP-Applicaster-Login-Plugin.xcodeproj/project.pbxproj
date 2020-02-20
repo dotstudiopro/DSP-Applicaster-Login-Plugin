@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C08C6D223FC36830036FA17 /* SPLTAuth0LoginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */; };
 		6C08C6D423FC3A8A0036FA17 /* SPLTTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */; };
+		6C7820EC23FEC81400FD55D5 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C7820EB23FEC81400FD55D5 /* Auth0.plist */; };
 		6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */; };
 		6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA54F623F6D5C40036E3D5 /* Main.storyboard */; };
 		6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */; };
@@ -19,7 +20,6 @@
 		6CAA551D23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */; };
 		6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */; };
 		6CF2E90C23FD45E7002E0C6F /* Auth0SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */; };
-		6CF2E90E23FE9844002E0C6F /* data in Resources */ = {isa = PBXBuildFile; fileRef = 6CF2E90D23FE9844002E0C6F /* data */; };
 		6F3B664705CE72D80ED1EE4F /* Pods_DSP_Applicaster_Login_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +44,8 @@
 		58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSP_Applicaster_Login_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTAuth0LoginUtility.swift; path = PluginClasses/SPLTAuth0LoginUtility.swift; sourceTree = SOURCE_ROOT; };
 		6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTTokenAPI.swift; path = PluginClasses/SPLTTokenAPI.swift; sourceTree = SOURCE_ROOT; };
+		6C7820EB23FEC81400FD55D5 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		6C7820ED23FECBA400FD55D5 /* DSP-Applicaster-Login-Plugin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DSP-Applicaster-Login-Plugin.entitlements"; sourceTree = "<group>"; };
 		6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSP-Applicaster-Login-Plugin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CAA54F723F6D5C40036E3D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,7 +65,6 @@
 		6CAA551E23F6D5C60036E3D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPlugin.swift; path = PluginClasses/LoginPlugin.swift; sourceTree = SOURCE_ROOT; };
 		6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth0SessionManager.swift; path = PluginClasses/Auth0SessionManager.swift; sourceTree = SOURCE_ROOT; };
-		6CF2E90D23FE9844002E0C6F /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +103,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6C7820EA23FEC81400FD55D5 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6C7820EB23FEC81400FD55D5 /* Auth0.plist */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		6CAA54E823F6D5C40036E3D5 = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +136,8 @@
 		6CAA54F323F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				6CF2E90D23FE9844002E0C6F /* data */,
+				6C7820ED23FECBA400FD55D5 /* DSP-Applicaster-Login-Plugin.entitlements */,
+				6C7820EA23FEC81400FD55D5 /* data */,
 				6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */,
 				6CAA54F623F6D5C40036E3D5 /* Main.storyboard */,
 				6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */,
@@ -295,11 +305,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C7820EC23FEC81400FD55D5 /* Auth0.plist in Resources */,
 				6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */,
 				6CAA550723F6D5C60036E3D5 /* LaunchScreen.storyboard in Resources */,
 				6CAA550423F6D5C60036E3D5 /* Assets.xcassets in Resources */,
 				6CAA550123F6D5C40036E3D5 /* plugin_configurations.json in Resources */,
-				6CF2E90E23FE9844002E0C6F /* data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +555,7 @@
 			baseConfigurationReference = 9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "DSP-Applicaster-Login-Plugin/DSP-Applicaster-Login-Plugin.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63G3T8C3T9;
 				INFOPLIST_FILE = "DSP-Applicaster-Login-Plugin/Info.plist";
@@ -553,7 +564,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-Plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dotstudioz.dotstudioprotest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,6 +576,7 @@
 			baseConfigurationReference = E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "DSP-Applicaster-Login-Plugin/DSP-Applicaster-Login-Plugin.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63G3T8C3T9;
 				INFOPLIST_FILE = "DSP-Applicaster-Login-Plugin/Info.plist";
@@ -573,7 +585,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dotstudioz..DSP-Applicaster-Login-Plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dotstudioz.dotstudioprotest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
