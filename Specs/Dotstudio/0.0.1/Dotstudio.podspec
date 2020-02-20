@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.homepage         = "https://github.com/dotstudiopro/DSP-Applicaster-Login-Plugin.git"
     s.license          = 'MIT'
     s.author           = { "Ketan Sakariya" => "ketan@dotstudiopro.com" }
-    s.source           = { :git => "https://github.com/dotstudiopro/DSP-Applicaster-Login-Plugin.git", :tag => s.version.to_s }
+    s.source           = { :git => "https://github.com/dotstudiopro/DSP-Applicaster-Login-Plugin.git/iOS", :tag => s.version.to_s }
   
     s.ios.deployment_target  = "10.0"
     s.platform     = :ios, '10.0'
