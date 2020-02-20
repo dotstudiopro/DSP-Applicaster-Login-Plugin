@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C08C6D223FC36830036FA17 /* SPLTAuth0LoginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */; };
+		6C08C6D423FC3A8A0036FA17 /* SPLTTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */; };
 		6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */; };
 		6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA54F623F6D5C40036E3D5 /* Main.storyboard */; };
 		6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */; };
@@ -16,6 +18,7 @@
 		6CAA551223F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551123F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginTests.swift */; };
 		6CAA551D23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */; };
 		6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */; };
+		6CF2E90C23FD45E7002E0C6F /* Auth0SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */; };
 		6F3B664705CE72D80ED1EE4F /* Pods_DSP_Applicaster_Login_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSP_Applicaster_Login_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTAuth0LoginUtility.swift; path = PluginClasses/SPLTAuth0LoginUtility.swift; sourceTree = SOURCE_ROOT; };
+		6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTTokenAPI.swift; path = PluginClasses/SPLTTokenAPI.swift; sourceTree = SOURCE_ROOT; };
 		6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSP-Applicaster-Login-Plugin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CAA54F723F6D5C40036E3D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 		6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSP_Applicaster_Login_PluginUITests.swift; sourceTree = "<group>"; };
 		6CAA551E23F6D5C60036E3D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPlugin.swift; path = PluginClasses/LoginPlugin.swift; sourceTree = SOURCE_ROOT; };
+		6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth0SessionManager.swift; path = PluginClasses/Auth0SessionManager.swift; sourceTree = SOURCE_ROOT; };
 		9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				6CAA552A23F6D88C0036E3D5 /* LoginPlugin.swift */,
+				6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */,
+				6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */,
+				6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */,
 			);
 			path = PluginClasses;
 			sourceTree = "<group>";
@@ -353,6 +362,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C08C6D223FC36830036FA17 /* SPLTAuth0LoginUtility.swift in Sources */,
+				6CF2E90C23FD45E7002E0C6F /* Auth0SessionManager.swift in Sources */,
+				6C08C6D423FC3A8A0036FA17 /* SPLTTokenAPI.swift in Sources */,
 				6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */,
 				6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */,
 				6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */,

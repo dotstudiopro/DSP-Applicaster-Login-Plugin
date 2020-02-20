@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Dotstudio
+//import Dotstudio
 import ZappPlugins
 
 class ViewController: UIViewController {
@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.startLoginPlugin()
     }
 
     @IBAction func createPluginButtonClicked(_ sender: Any) {
@@ -31,19 +32,23 @@ class ViewController: UIViewController {
     }
     
     func startLoginPlugin() {
-        if let loginPlugin = ZAAppConnector.sharedInstance().pluginsDelegate?.loginPluginsManager?.createWithUserData(),
-            let extensions = [:] as? [String : NSObject] {
-            if let isUserComply = loginPlugin.isUserComply?(policies: extensions),
-                isUserComply == true {
-                //show welcome screen
-                let alert = UIAlertController(title: "Welcome", message: "You are logged in now.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
-            } else {
-                //show login screen
-//                guard let facebookInfoVC = segue.destination as? FacebookInfoViewController else { return }
-//                facebookInfoVC.loginPlugin = loginPlugin
-            }
+//        if let loginPlugin = ZAAppConnector.sharedInstance().pluginsDelegate?.loginPluginsManager?.createWithUserData(),
+//            let extensions = [:] as? [String : NSObject] {
+//            if let isUserComply = loginPlugin.isUserComply?(policies: extensions),
+//                isUserComply == true {
+//                //show welcome screen
+//                let alert = UIAlertController(title: "Welcome", message: "You are logged in now.", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//                self.present(alert, animated: true)
+//            } else {
+//                //show login screen
+////                guard let facebookInfoVC = segue.destination as? FacebookInfoViewController else { return }
+////                facebookInfoVC.loginPlugin = loginPlugin
+//            }
+//        }
+        let loginPlugin = LoginPlugin()
+        loginPlugin.executeOnApplicationReady(displayViewController: self) {
+            print("executed on app ready")
         }
     }
 

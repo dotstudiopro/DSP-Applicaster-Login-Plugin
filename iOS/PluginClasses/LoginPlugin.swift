@@ -18,7 +18,7 @@ import ZappPlugins
  in this example we choose to implemented the facebook login plugin
  This is the main class of the implementation
  **/
-@objc class LoginPlugin: NSObject, ZPLoginProviderProtocol, ZPLoginProviderUserDataProtocol {
+@objc class LoginPlugin: NSObject, ZPAppLoadingHookProtocol, ZPLoginProviderProtocol, ZPLoginProviderUserDataProtocol {
     
     public var configurationJSON: NSDictionary?
     var loginCompletion: ((ZPLoginOperationStatus) -> Void)?
@@ -29,6 +29,67 @@ import ZappPlugins
         super.init()
     }
     
+//MARK: ZPAppLoadingHookProtocol
+    /*
+      This method called after Plugins loaded locally, but the account load failed
+      */
+    @objc func executeOnFailedLoading(completion: (() -> Void)?) {
+        
+    }
+    
+    /*
+        This method called after Plugins loaded, and also after initial account data retrieved, you can add logic that not related to the application data.
+    */
+    @objc func executeOnLaunch(completion: (() -> Void)?) {
+        
+    }
+
+    /*
+        This method called after all the data loaded and before viewController presented.
+    */
+    @objc func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
+//        let alert = UIAlertController(title: "ZPAppLoadingHookProtocol", message: "executeOnApplicationReady", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        displayViewController?.present(alert, animated: true)
+
+//        SPLTAuth0LoginUtility.sharedInstance.loginWith((self.textFieldEmailId?.text)!, strPassword: (self.textFieldPassword?.text)!, completion: { (bSuccess) in
+//            print("success")
+//        }) { (error) in
+//            // handle error.
+//            print(error)
+//        }
+        
+        SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
+            print("success")
+//            if bSuccess {
+//                self.restoreInAppPurchaseAndLoadSubscribeViewController()
+//            } else {
+//               _ = DSUtility.shared.showAlertOnWindow("Revry", message: "Error while login. Please try again later.", preferredStyle: .alert)
+//            }
+        }) { (error) in
+            print("error")
+            // handle error.
+//            _ = DSUtility.shared.showAlertOnWindow("Revry", message: "Error while login. Please try again later.", preferredStyle: .alert)
+        }
+        
+    }
+
+    /*
+      This method called after viewController is presented.
+      */
+    @objc func executeAfterAppRootPresentation(displayViewController: UIViewController?, completion: (() -> Void)?) {
+//        let alert = UIAlertController(title: "ZPAppLoadingHookProtocol", message: "executeAfterAppRootPresentation", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        displayViewController?.present(alert, animated: true)
+    }
+
+    /*
+      This method called when the application:continueUserActivity:restorationHandler is called.
+      */
+    @objc func executeOnContinuingUserActivity(_ userActivity: NSUserActivity?, completion: (() -> Void)?) {
+        
+    }
+
     
 //MARK: ZPLoginProviderUserDataProtocol
     
