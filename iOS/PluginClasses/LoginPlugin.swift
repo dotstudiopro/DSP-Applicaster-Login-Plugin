@@ -20,7 +20,31 @@ import ZappPlugins
  **/
 @objc class LoginPlugin: NSObject, ZPAppLoadingHookProtocol, ZPLoginProviderProtocol, ZPLoginProviderUserDataProtocol {
     
-    public var configurationJSON: NSDictionary?
+    public var configurationJSON: NSDictionary? {
+        didSet {
+            if let show_on_startup = configurationJSON?["show_on_startup"] as? Bool {
+                LoginPluginConstants.show_on_startup = show_on_startup
+            }
+            if let apiKey = configurationJSON?["apiKey"] as? String {
+                LoginPluginConstants.apiKey = apiKey
+            }
+            if let auth0ClientId = configurationJSON?["auth0ClientId"] as? String {
+                LoginPluginConstants.auth0ClientId = auth0ClientId
+            }
+            if let apiKey = configurationJSON?["apiKey"] as? String {
+                LoginPluginConstants.apiKey = apiKey
+            }
+            if let backgroundColor = configurationJSON?["backgroundColor"] as? UIColor {
+                LoginPluginConstants.backgroundColor = backgroundColor
+            }
+            if let headerColor = configurationJSON?["headerColor"] as? UIColor {
+                LoginPluginConstants.headerColor = headerColor
+            }
+            if let titleColor = configurationJSON?["titleColor"] as? UIColor {
+                LoginPluginConstants.titleColor = titleColor
+            }
+        }
+    }
     var loginCompletion: ((ZPLoginOperationStatus) -> Void)?
 //    var fbToken: AccessToken?
 //    var loginManager:LoginManager?

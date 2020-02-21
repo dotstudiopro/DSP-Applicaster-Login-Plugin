@@ -7,13 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 public class LoginPluginConstants {
     
-    static public let apiKey: String = ""
-    static public let auth0ClientId: String = "" //nil //"fRI7uheX6IzdEKa4GXpQAAWBsIGX67oR"
-    static public let auth0Domain: String = "dotstudiopro.auth0.com"
+    static public var show_on_startup: Bool = true
     
+    static public var apiKey: String = ""
+    static public var auth0ClientId: String = "" //nil //"fRI7uheX6IzdEKa4GXpQAAWBsIGX67oR"
+    static public var auth0Domain: String = "dotstudiopro.auth0.com"
     
+    static public var backgroundColor: UIColor = .white
+    static public var headerColor: UIColor = .white
+    static public var titleColor: UIColor = .black
     
 }
