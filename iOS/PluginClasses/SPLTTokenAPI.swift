@@ -30,11 +30,8 @@ open class SPLTTokenAPI {
         
         // MARK: URLStringConvertible
         // apiKey : dpro : c681a9f6a3b9d51502cc3978298feaccfa9f500b
-        self.keychain.setString("c681a9f6a3b9d51502cc3978298feaccfa9f500b", forKey: "apiKey")
         var parameters: [String: String] = [:]
-        if let strApiKey = self.keychain.string(forKey: "apiKey") {
-            parameters["key"] = strApiKey
-        }
+        parameters["key"] = LoginPluginConstants.apiKey
 
         Alamofire.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             if (response.result.value != nil) {

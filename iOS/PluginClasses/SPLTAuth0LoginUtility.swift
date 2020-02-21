@@ -58,8 +58,11 @@ open class SPLTAuth0LoginUtility {
     open func showLoginController(strCompanyId: String, initialLoginScreen: InitialLoginScreen, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: (_ error: NSError) -> Void) {
         // c: 5690134e97f8154731aeed2d
         if let sourceViewController = self.sourceViewController {
+            
+            
+            
             Lock
-                .classic()
+                .classic(clientId: LoginPluginConstants.auth0ClientId, domain: LoginPluginConstants.auth0Domain)
                 // withConnections, withOptions, withStyle, etc
                 .withOptions {
                     $0.closable = true

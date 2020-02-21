@@ -67,7 +67,8 @@ public class Auth0SessionManager {
             return callback(Auth0SessionManagerError.noRefreshToken)
         }
         Auth0
-            .authentication()
+            .authentication(clientId: LoginPluginConstants.auth0ClientId, domain: LoginPluginConstants.auth0Domain)
+//            .authentication()
             .renew(withRefreshToken: refreshToken, scope: "openid profile offline_access")
             .start { result in
                 switch(result) {

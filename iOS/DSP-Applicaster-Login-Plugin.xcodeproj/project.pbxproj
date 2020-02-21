@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C08C6D223FC36830036FA17 /* SPLTAuth0LoginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */; };
 		6C08C6D423FC3A8A0036FA17 /* SPLTTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */; };
-		6C7820EC23FEC81400FD55D5 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C7820EB23FEC81400FD55D5 /* Auth0.plist */; };
+		6C3A102B23FEDE1000A91F44 /* LoginPluginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A102A23FEDE1000A91F44 /* LoginPluginConstants.swift */; };
 		6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */; };
 		6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA54F623F6D5C40036E3D5 /* Main.storyboard */; };
 		6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */; };
@@ -44,7 +44,7 @@
 		58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DSP_Applicaster_Login_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTAuth0LoginUtility.swift; path = PluginClasses/SPLTAuth0LoginUtility.swift; sourceTree = SOURCE_ROOT; };
 		6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPLTTokenAPI.swift; path = PluginClasses/SPLTTokenAPI.swift; sourceTree = SOURCE_ROOT; };
-		6C7820EB23FEC81400FD55D5 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		6C3A102A23FEDE1000A91F44 /* LoginPluginConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPluginConstants.swift; path = PluginClasses/LoginPluginConstants.swift; sourceTree = SOURCE_ROOT; };
 		6C7820ED23FECBA400FD55D5 /* DSP-Applicaster-Login-Plugin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DSP-Applicaster-Login-Plugin.entitlements"; sourceTree = "<group>"; };
 		6CAA54F123F6D5C40036E3D5 /* DSP-Applicaster-Login-Plugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSP-Applicaster-Login-Plugin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,14 +103,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6C7820EA23FEC81400FD55D5 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				6C7820EB23FEC81400FD55D5 /* Auth0.plist */,
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
 		6CAA54E823F6D5C40036E3D5 = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				6C7820ED23FECBA400FD55D5 /* DSP-Applicaster-Login-Plugin.entitlements */,
-				6C7820EA23FEC81400FD55D5 /* data */,
 				6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */,
 				6CAA54F623F6D5C40036E3D5 /* Main.storyboard */,
 				6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */,
@@ -168,6 +159,7 @@
 				6C08C6D123FC36820036FA17 /* SPLTAuth0LoginUtility.swift */,
 				6C08C6D323FC3A8A0036FA17 /* SPLTTokenAPI.swift */,
 				6CF2E90B23FD45E7002E0C6F /* Auth0SessionManager.swift */,
+				6C3A102A23FEDE1000A91F44 /* LoginPluginConstants.swift */,
 			);
 			path = PluginClasses;
 			sourceTree = "<group>";
@@ -305,7 +297,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C7820EC23FEC81400FD55D5 /* Auth0.plist in Resources */,
 				6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */,
 				6CAA550723F6D5C60036E3D5 /* LaunchScreen.storyboard in Resources */,
 				6CAA550423F6D5C60036E3D5 /* Assets.xcassets in Resources */,
@@ -378,6 +369,7 @@
 			files = (
 				6C08C6D223FC36830036FA17 /* SPLTAuth0LoginUtility.swift in Sources */,
 				6CF2E90C23FD45E7002E0C6F /* Auth0SessionManager.swift in Sources */,
+				6C3A102B23FEDE1000A91F44 /* LoginPluginConstants.swift in Sources */,
 				6C08C6D423FC3A8A0036FA17 /* SPLTTokenAPI.swift in Sources */,
 				6CAA552B23F6D88C0036E3D5 /* LoginPlugin.swift in Sources */,
 				6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */,
