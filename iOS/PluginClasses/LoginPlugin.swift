@@ -8,6 +8,8 @@
 
 import Foundation
 import ZappPlugins
+import SimpleKeychain
+import JWTDecode
 //import FacebookCore
 //import FacebookLogin
 
@@ -21,7 +23,9 @@ import ZappPlugins
 @objc class LoginPlugin: NSObject, ZPAppLoadingHookProtocol, ZPLoginProviderProtocol, ZPLoginProviderUserDataProtocol {
     
     public var configurationJSON: NSDictionary?
-    
+    public let keychain = A0SimpleKeychain(service: "Dotstudio")
+    var displayViewController: UIViewController?
+
     var loginCompletion: ((ZPLoginOperationStatus) -> Void)?
 //    var fbToken: AccessToken?
 //    var loginManager:LoginManager?
@@ -74,30 +78,15 @@ import ZappPlugins
         This method called after all the data loaded and before viewController presented.
     */
     @objc func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
-//        let alert = UIAlertController(title: "ZPAppLoadingHookProtocol", message: "executeOnApplicationReady", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//        displayViewController?.present(alert, animated: true)
-
-//        SPLTAuth0LoginUtility.sharedInstance.loginWith((self.textFieldEmailId?.text)!, strPassword: (self.textFieldPassword?.text)!, completion: { (bSuccess) in
-//            print("success")
-//        }) { (error) in
-//            // handle error.
-//            print(error)
-//        }
-        
-        SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
-            print("success")
-//            if bSuccess {
-//                self.restoreInAppPurchaseAndLoadSubscribeViewController()
-//            } else {
-//               _ = DSUtility.shared.showAlertOnWindow("Revry", message: "Error while login. Please try again later.", preferredStyle: .alert)
-//            }
-        }) { (error) in
-            print("error")
-            // handle error.
-//            _ = DSUtility.shared.showAlertOnWindow("Revry", message: "Error while login. Please try again later.", preferredStyle: .alert)
+        self.displayViewController = displayViewController
+        if LoginPluginConstants.show_on_startup {
+            SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
+                print("success")
+            }) { (error) in
+                print("error")
+                // handle error.
+            }
         }
-        
     }
 
     /*
@@ -133,11 +122,10 @@ import ZappPlugins
      Getter to the user Token usually can be used for authentication check
     */
     public func getUserToken() -> String {
-        var token = ""
-        if let userToken = UserDefaults.standard.string(forKey: "dsp_login_token") {
-            token = userToken
+        if let strClientToken = LoginPluginConstants.strClientToken {
+            return strClientToken
         }
-        return token
+        return ""
     }
     
     /**
@@ -145,7 +133,9 @@ import ZappPlugins
      @Params: the authentication recieved when login successfuly
      */
     public func setUserToken(token: String?) {
-        UserDefaults.standard.set(token, forKey: "dsp_login_token")
+        if let strClientToken = token {
+            LoginPluginConstants.strClientToken = strClientToken
+        }
     }
     
 //MARK: ZPLoginProviderProtocol
@@ -174,29 +164,21 @@ import ZappPlugins
      */
     public func login(_ additionalParameters: [String : Any]?, completion: @escaping ((ZPLoginOperationStatus) -> Void)) {
         print("start login.")
-//        if let loginManager = loginManager {
-//            loginManager.logIn(readPermissions:[ .publicProfile ], viewController: nil) { loginResult in
-//                switch loginResult {
-//                case .failed(let error):
-//                    print(error)
-//                    completion(.failed)
-//                case .cancelled:
-//                    print("User cancelled login.")
-//                    completion(.cancelled)
-//                case .success( _, _, let accessToken):
-//                    print("Logged in!")
-//                    if accessToken.authenticationToken.isEmptyOrWhitespace() == false {
-//                        self.setUserToken(token: accessToken.authenticationToken)
-//                        self.setUserExpirationDate(token: accessToken.expirationDate)
-//                        completion(.completedSuccessfully)
-//                    } else {
-//                        completion(.failed)
-//                    }
-//                }
-//            }
-//        } else {
-//            completion(.failed)
-//        }
+        if let displayViewController = self.displayViewController {
+            SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController, completion: { (bSuccess) in
+            print("success")
+                if bSuccess {
+                    completion(.completedSuccessfully)
+                } else {
+                    completion(.failed)
+                }
+            }) { (error) in
+                print("error")
+                completion(.failed)
+            }
+        } else {
+            completion(.failed)
+        }
     }
     
     /**
@@ -204,12 +186,8 @@ import ZappPlugins
      The completion should always be called when the process is done - no matter what is the result.
     */
     public func logout(_ completion: @escaping ((ZPLoginOperationStatus) -> Void)) {
-//        if let loginManager = loginManager {
-//            loginManager.logOut()
-//            completion(.completedSuccessfully)
-//        } else {
-//            completion(.failed)
-//        }
+        SPLTAuth0LoginUtility.shared.logoutUser()
+        completion(.completedSuccessfully)
     }
     
     /**
@@ -230,13 +208,13 @@ import ZappPlugins
     }
 
 //MARK: Public
-    public func getUserExpirationDate() -> Date? {
-        return UserDefaults.standard.object(forKey: "dsp_expiration_date") as? Date
-    }
-    
-    public func setUserExpirationDate(token: Date?) {
-        UserDefaults.standard.set(token, forKey:"dsp_expiration_date")
-    }
+//    public func getUserExpirationDate() -> Date? {
+//        return UserDefaults.standard.object(forKey: "dsp_expiration_date") as? Date
+//    }
+//
+//    public func setUserExpirationDate(token: Date?) {
+//        UserDefaults.standard.set(token, forKey:"dsp_expiration_date")
+//    }
     
     func deleteCookies() {
         let storage = HTTPCookieStorage.shared
@@ -247,7 +225,7 @@ import ZappPlugins
     
 //MARK: Private
     private func isTokenValid() -> Bool {
-        return true
+        return !self.isTokenExpired()
         // check JWT token & validate for expiry
 //        var retVal = false
 //        if let expirationDate = self.getUserExpirationDate(),
@@ -258,6 +236,60 @@ import ZappPlugins
 //            }
 //        }
 //        return retVal
+    }
+    
+    open func isTokenExpired() -> Bool {
+        if self.isAccessTokenExpired() {
+            return true
+        }
+        if self.isClientTokenExpired() {
+            return true
+        }
+        return false
+    }
+    open func isAccessTokenExpired() -> Bool {
+        if let strAccessToken = LoginPluginConstants.strAccessToken {
+            do {
+                let jwt = try decode(jwt: strAccessToken)
+                if let iExpiryMiliseconds = jwt.body["expires"] as? Int {
+                    let iCurMiliseconds = Int(Date().timeIntervalSince1970 * 1000)
+                    print(iExpiryMiliseconds)
+                    print(iCurMiliseconds)
+                    if iExpiryMiliseconds < iCurMiliseconds {
+                        print("Access Token Expired")
+                        return true
+                    } else {
+                        print("Access Token not Expired")
+                        return false
+                    }
+                }
+            } catch {
+                print("Something went wrong!")
+            }
+        }
+        return true // return true as access token is not available.
+    }
+    open func isClientTokenExpired() -> Bool {
+        if let strClientToken = LoginPluginConstants.strClientToken {
+            do {
+                let jwt = try decode(jwt: strClientToken)
+                if let iExpiryMiliseconds = jwt.body["expires"] as? Int {
+                    let iCurMiliseconds = Int(Date().timeIntervalSince1970 * 1000)
+                    print(iExpiryMiliseconds)
+                    print(iCurMiliseconds)
+                    if iExpiryMiliseconds < iCurMiliseconds {
+                        print("Client Token Expired")
+                        return true
+                    } else {
+                        print("Client Token not Expired")
+                    }
+                }
+                
+            } catch {
+                print("Something went wrong!")
+            }
+        }
+        return false
     }
 }
 

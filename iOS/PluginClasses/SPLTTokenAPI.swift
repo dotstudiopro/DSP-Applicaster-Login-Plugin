@@ -42,6 +42,7 @@ open class SPLTTokenAPI {
                         if (bSuccess == true) {
                             if let strAccessToken = infoDict["token"] as? String {
                                 self.keychain.setString(strAccessToken, forKey: "accessToken")
+                                LoginPluginConstants.strAccessToken = strAccessToken
 //                                SPLTRouter.strAccessToken = strAccessToken
 //                                UserDefaults.standard.setValue(strAccessToken, forKey: "strAccessToken")
 //                                UserDefaults.standard.synchronize()
@@ -89,6 +90,7 @@ open class SPLTTokenAPI {
                         if (bSuccess == true) {
                             if let strClientToken = infoDict["client_token"] as? String {
                                 self.keychain.setString(strClientToken, forKey: "clientToken")
+                                LoginPluginConstants.strClientToken = strClientToken
 //                                SPLTRouter.strClientToken = strClientToken
 //                                UserDefaults.standard.setValue(strClientToken, forKey: "strClientToken")
 //                                UserDefaults.standard.synchronize()

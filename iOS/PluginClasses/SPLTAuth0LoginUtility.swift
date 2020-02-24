@@ -108,6 +108,7 @@ open class SPLTAuth0LoginUtility {
                         DispatchQueue.main.async {
                             if let strClientToken = Auth0SessionManager.shared.profile?.customClaims?["spotlight"] as? String {
                                 self.keychain.setString(strClientToken, forKey: "clientToken")
+                                LoginPluginConstants.strClientToken = strClientToken
 //                                    SPLTRouter.strClientToken = strClientToken
 //                                    UserDefaults.standard.setValue(strClientToken, forKey: "strClientToken")
 //                                    UserDefaults.standard.synchronize()

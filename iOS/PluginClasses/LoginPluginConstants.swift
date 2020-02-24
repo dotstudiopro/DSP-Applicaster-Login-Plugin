@@ -11,6 +11,9 @@ import UIKit
 
 public class LoginPluginConstants {
     
+    static public var strAccessToken: String? = nil
+    static public var strClientToken: String? = nil
+    
     static public var show_on_startup: Bool = true
     
     static public var apiKey: String = ""
