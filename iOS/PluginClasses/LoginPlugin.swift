@@ -20,37 +20,39 @@ import ZappPlugins
  **/
 @objc class LoginPlugin: NSObject, ZPAppLoadingHookProtocol, ZPLoginProviderProtocol, ZPLoginProviderUserDataProtocol {
     
-    public var configurationJSON: NSDictionary? {
-        didSet {
-            if let show_on_startup = configurationJSON?["show_on_startup"] as? Bool {
-                LoginPluginConstants.show_on_startup = show_on_startup
-            }
-            if let apiKey = configurationJSON?["apiKey"] as? String {
-                LoginPluginConstants.apiKey = apiKey
-            }
-            if let auth0ClientId = configurationJSON?["auth0ClientId"] as? String {
-                LoginPluginConstants.auth0ClientId = auth0ClientId
-            }
-            if let apiKey = configurationJSON?["apiKey"] as? String {
-                LoginPluginConstants.apiKey = apiKey
-            }
-            if let backgroundColor = configurationJSON?["backgroundColor"] as? UIColor {
-                LoginPluginConstants.backgroundColor = backgroundColor
-            }
-            if let headerColor = configurationJSON?["headerColor"] as? UIColor {
-                LoginPluginConstants.headerColor = headerColor
-            }
-            if let titleColor = configurationJSON?["titleColor"] as? UIColor {
-                LoginPluginConstants.titleColor = titleColor
-            }
-        }
-    }
+    public var configurationJSON: NSDictionary?
+    
     var loginCompletion: ((ZPLoginOperationStatus) -> Void)?
 //    var fbToken: AccessToken?
 //    var loginManager:LoginManager?
     
     public required override init() {
         super.init()
+    }
+    
+    func parseConfigurationJSON() {
+        if let show_on_startup = configurationJSON?["show_on_startup"] as? String {
+            LoginPluginConstants.show_on_startup = show_on_startup.boolValue()
+        }
+        if let apiKey = configurationJSON?["apiKey"] as? String {
+            LoginPluginConstants.apiKey = apiKey
+        }
+        if let auth0ClientId = configurationJSON?["auth0ClientId"] as? String {
+            LoginPluginConstants.auth0ClientId = auth0ClientId
+        }
+
+        if let strBackgroundColor = configurationJSON?["backgroundColor"] as? String,
+            let backgroundColor = UIColor(argbHexString: strBackgroundColor) {
+            LoginPluginConstants.backgroundColor = backgroundColor
+        }
+        if let strHeaderColor = configurationJSON?["headerColor"] as? String,
+            let headerColor = UIColor(argbHexString: strHeaderColor) {
+            LoginPluginConstants.headerColor = headerColor
+        }
+        if let strTitleColor = configurationJSON?["titleColor"] as? String,
+            let titleColor = UIColor(argbHexString: strTitleColor) {
+            LoginPluginConstants.titleColor = titleColor
+        }
     }
     
 //MARK: ZPAppLoadingHookProtocol
@@ -156,6 +158,7 @@ import ZappPlugins
         super.init()
 //        self.loginManager = LoginManager()
         self.configurationJSON = configurationJSON
+        self.parseConfigurationJSON()
     }
     
     /**

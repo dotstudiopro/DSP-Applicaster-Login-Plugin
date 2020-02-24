@@ -83,9 +83,9 @@ open class SPLTAuth0LoginUtility {
                     // style.
 //                    $0.logo = LazyImage(name: "AppIconLogin")
                     $0.title = ""
-//                    $0.backgroundColor = UIColor.white
-//                    $0.headerColor = UIColor.white
-//                    $0.titleColor = UIColor.black
+                    $0.backgroundColor = LoginPluginConstants.backgroundColor
+                    $0.headerColor = LoginPluginConstants.headerColor
+                    $0.titleColor = LoginPluginConstants.titleColor
 ////                        $0.inputTextColor = UIColor.white
 ////                    $0.primaryColor = UIColor.white
 //                    $0.secondaryButtonColor = UIColor.black
