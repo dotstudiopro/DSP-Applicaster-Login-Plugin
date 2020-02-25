@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class LoginPlugin extends BaseLoginContract {
 
-	@Override
+    @Override
     public void executeOnApplicationReady(Context context, HookListener listener) {
         super.executeOnApplicationReady(context, listener);
     }
