@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class LoginPluginConstants {
+public class SPLTLoginPluginConstants {
     
     static public var strAccessToken: String? = nil
     static public var strClientToken: String? = nil

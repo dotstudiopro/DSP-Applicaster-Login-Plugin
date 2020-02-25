@@ -36,26 +36,26 @@ import JWTDecode
     
     func parseConfigurationJSON() {
         if let show_on_startup = configurationJSON?["show_on_startup"] as? String {
-            LoginPluginConstants.show_on_startup = show_on_startup.boolValue()
+            SPLTLoginPluginConstants.show_on_startup = show_on_startup.boolValue()
         }
         if let apiKey = configurationJSON?["apiKey"] as? String {
-            LoginPluginConstants.apiKey = apiKey
+            SPLTLoginPluginConstants.apiKey = apiKey
         }
         if let auth0ClientId = configurationJSON?["auth0ClientId"] as? String {
-            LoginPluginConstants.auth0ClientId = auth0ClientId
+            SPLTLoginPluginConstants.auth0ClientId = auth0ClientId
         }
 
         if let strBackgroundColor = configurationJSON?["backgroundColor"] as? String,
             let backgroundColor = UIColor(argbHexString: strBackgroundColor) {
-            LoginPluginConstants.backgroundColor = backgroundColor
+            SPLTLoginPluginConstants.backgroundColor = backgroundColor
         }
         if let strHeaderColor = configurationJSON?["headerColor"] as? String,
             let headerColor = UIColor(argbHexString: strHeaderColor) {
-            LoginPluginConstants.headerColor = headerColor
+            SPLTLoginPluginConstants.headerColor = headerColor
         }
         if let strTitleColor = configurationJSON?["titleColor"] as? String,
             let titleColor = UIColor(argbHexString: strTitleColor) {
-            LoginPluginConstants.titleColor = titleColor
+            SPLTLoginPluginConstants.titleColor = titleColor
         }
     }
     
@@ -79,7 +79,7 @@ import JWTDecode
     */
     @objc func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
         self.displayViewController = displayViewController
-        if LoginPluginConstants.show_on_startup {
+        if SPLTLoginPluginConstants.show_on_startup {
             SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
                 print("success")
             }) { (error) in
@@ -122,7 +122,7 @@ import JWTDecode
      Getter to the user Token usually can be used for authentication check
     */
     public func getUserToken() -> String {
-        if let strClientToken = LoginPluginConstants.strClientToken {
+        if let strClientToken = SPLTLoginPluginConstants.strClientToken {
             return strClientToken
         }
         return ""
@@ -134,7 +134,7 @@ import JWTDecode
      */
     public func setUserToken(token: String?) {
         if let strClientToken = token {
-            LoginPluginConstants.strClientToken = strClientToken
+            SPLTLoginPluginConstants.strClientToken = strClientToken
         }
     }
     
@@ -248,7 +248,7 @@ import JWTDecode
         return false
     }
     open func isAccessTokenExpired() -> Bool {
-        if let strAccessToken = LoginPluginConstants.strAccessToken {
+        if let strAccessToken = SPLTLoginPluginConstants.strAccessToken {
             do {
                 let jwt = try decode(jwt: strAccessToken)
                 if let iExpiryMiliseconds = jwt.body["expires"] as? Int {
@@ -270,7 +270,7 @@ import JWTDecode
         return true // return true as access token is not available.
     }
     open func isClientTokenExpired() -> Bool {
-        if let strClientToken = LoginPluginConstants.strClientToken {
+        if let strClientToken = SPLTLoginPluginConstants.strClientToken {
             do {
                 let jwt = try decode(jwt: strClientToken)
                 if let iExpiryMiliseconds = jwt.body["expires"] as? Int {

@@ -25,13 +25,13 @@ import Foundation
 import SimpleKeychain
 import Auth0
 
-enum Auth0SessionManagerError: Error {
+enum SPLTAuth0SessionManagerError: Error {
     case noAccessToken
     case noRefreshToken
 }
 
-public class Auth0SessionManager {
-    public static let shared = Auth0SessionManager()
+public class SPLTAuth0SessionManager {
+    public static let shared = SPLTAuth0SessionManager()
     public let keychain = A0SimpleKeychain(service: "Auth0")
     public var profile: UserInfo?
     
@@ -46,7 +46,7 @@ public class Auth0SessionManager {
     
     public func retrieveProfile(_ callback: @escaping (Error?) -> ()) {
         guard let accessToken = self.keychain.string(forKey: "access_token") else {
-            return callback(Auth0SessionManagerError.noAccessToken)
+            return callback(SPLTAuth0SessionManagerError.noAccessToken)
         }
         Auth0
             .authentication()
@@ -64,10 +64,10 @@ public class Auth0SessionManager {
     
     public func refreshToken(_ callback: @escaping (Error?) -> ()) {
         guard let refreshToken = self.keychain.string(forKey: "refresh_token") else {
-            return callback(Auth0SessionManagerError.noRefreshToken)
+            return callback(SPLTAuth0SessionManagerError.noRefreshToken)
         }
         Auth0
-            .authentication(clientId: LoginPluginConstants.auth0ClientId, domain: LoginPluginConstants.auth0Domain)
+            .authentication(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
 //            .authentication()
             .renew(withRefreshToken: refreshToken, scope: "openid profile offline_access")
             .start { result in

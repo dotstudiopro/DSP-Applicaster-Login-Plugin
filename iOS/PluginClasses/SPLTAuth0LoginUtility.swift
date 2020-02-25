@@ -62,7 +62,7 @@ open class SPLTAuth0LoginUtility {
             
             
             Lock
-                .classic(clientId: LoginPluginConstants.auth0ClientId, domain: LoginPluginConstants.auth0Domain)
+                .classic(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
                 // withConnections, withOptions, withStyle, etc
                 .withOptions {
                     $0.closable = true
@@ -83,9 +83,9 @@ open class SPLTAuth0LoginUtility {
                     // style.
 //                    $0.logo = LazyImage(name: "AppIconLogin")
                     $0.title = ""
-                    $0.backgroundColor = LoginPluginConstants.backgroundColor
-                    $0.headerColor = LoginPluginConstants.headerColor
-                    $0.titleColor = LoginPluginConstants.titleColor
+                    $0.backgroundColor = SPLTLoginPluginConstants.backgroundColor
+                    $0.headerColor = SPLTLoginPluginConstants.headerColor
+                    $0.titleColor = SPLTLoginPluginConstants.titleColor
 ////                        $0.inputTextColor = UIColor.white
 ////                    $0.primaryColor = UIColor.white
 //                    $0.secondaryButtonColor = UIColor.black
@@ -102,13 +102,13 @@ open class SPLTAuth0LoginUtility {
                     print("Authentication is successful")
                     print(credentials)
                     if let accessToken = credentials.accessToken {
-                        Auth0SessionManager.shared.storeTokens(accessToken, refreshToken: credentials.refreshToken)
+                        SPLTAuth0SessionManager.shared.storeTokens(accessToken, refreshToken: credentials.refreshToken)
                     }
-                    Auth0SessionManager.shared.retrieveProfile { error in
+                    SPLTAuth0SessionManager.shared.retrieveProfile { error in
                         DispatchQueue.main.async {
-                            if let strClientToken = Auth0SessionManager.shared.profile?.customClaims?["spotlight"] as? String {
+                            if let strClientToken = SPLTAuth0SessionManager.shared.profile?.customClaims?["spotlight"] as? String {
                                 self.keychain.setString(strClientToken, forKey: "clientToken")
-                                LoginPluginConstants.strClientToken = strClientToken
+                                SPLTLoginPluginConstants.strClientToken = strClientToken
 //                                    SPLTRouter.strClientToken = strClientToken
 //                                    UserDefaults.standard.setValue(strClientToken, forKey: "strClientToken")
 //                                    UserDefaults.standard.synchronize()
