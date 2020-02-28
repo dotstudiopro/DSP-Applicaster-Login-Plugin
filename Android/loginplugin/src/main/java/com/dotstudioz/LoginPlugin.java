@@ -1,5 +1,6 @@
 package com.dotstudioz;
 
+import com.applicaster.hook_screen.HookScreenListener;
 import com.applicaster.plugin_manager.login.BaseLoginContract;
 import com.applicaster.plugin_manager.hook.HookListener;
 import com.applicaster.plugin_manager.login.LoginContract;
@@ -10,11 +11,13 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginPlugin extends BaseLoginContract implements PluginScreen {
+public class LoginPlugin extends BaseLoginContract implements PluginScreen, HookScreenListener {
 
     private static String TAG = "LoginPlugin";
 
@@ -53,5 +56,15 @@ public class LoginPlugin extends BaseLoginContract implements PluginScreen {
     public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
         Log.d(TAG, "generateFragment: CALLED");
         return null;
+    }
+
+    @Override
+    public void hookCompleted(@Nullable Map<String, Object> map) {
+        Log.d(TAG, "hookCompleted: CALLED");
+    }
+
+    @Override
+    public void hookFailed(@Nullable Map<String, Object> map) {
+        Log.d(TAG, "hookFailed: CALLED");
     }
 }
