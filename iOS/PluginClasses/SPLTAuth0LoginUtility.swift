@@ -81,7 +81,7 @@ open class SPLTAuth0LoginUtility {
 //                }
                 .withStyle {
                     // style.
-//                    $0.logo = LazyImage(name: "AppIconLogin")
+                    $0.logo = LazyImage(name: "LoginIcon")
                     $0.title = ""
                     $0.backgroundColor = SPLTLoginPluginConstants.backgroundColor
                     $0.headerColor = SPLTLoginPluginConstants.headerColor
