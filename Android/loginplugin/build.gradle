@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "0.0.7"
         consumerProguardFiles 'proguard-rules.pro'
+        manifestPlaceholders = [
+                auth0Domain: "dotstudiopro.auth0.com",
+                auth0Scheme: "demo",
+        ]
     }
 
     buildTypes {
@@ -66,4 +70,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.github.dotstudiopro:dotstudiopro-android-model:1.0.18'
+    implementation ('com.github.dotstudiopro:dotstudiopro-android-services:1.0.72') {
+        exclude group: 'com.android.support', module: 'customtabs'
+        exclude group: 'com.google.code.gson', module: 'gson'
+        exclude group: 'com.android.support', module: 'multidex'
+    }
 }
