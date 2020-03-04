@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin extends BaseLoginContract implements LoginContract, PluginScreen, HookScreen, ApplicationLoaderHookUpI {
+public class LoginPlugin extends BaseLoginContract implements LoginContract/*, PluginScreen, HookScreen, ApplicationLoaderHookUpI*/ {
 
     private static String TAG = "LoginPlugin";
 
@@ -47,8 +47,8 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Plu
         //getPluginParams();
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
-        SPLTAuth0LoginUtility.getInstance().initialize(context);
-        SPLTAuth0LoginUtility.getInstance().login(context);
+        /*SPLTAuth0LoginUtility.getInstance().initialize(context);
+        SPLTAuth0LoginUtility.getInstance().login(context);*/
     }
 
     protected void logout(Context context, Map additionalParams) {
@@ -136,70 +136,6 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Plu
     @Override
     public void setToken(String token) {
 
-    }
-
-    @Override
-    public void present(Context context, HashMap<String, Object> screenMap, Serializable dataSource, boolean isActivity) {
-        Log.d(TAG, "present: CALLED");
-        logd("present", screenMap);
-    }
-
-    @Override
-    public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
-        Log.d(TAG, "generateFragment: CALLED");
-        logd("generateFragment", screenMap);
-        return null;
-    }
-
-    
-
-    @NotNull
-    @Override
-    public HashMap<String, String> getHook() {
-        Log.d(TAG, "getHook: CALLED");
-        return null;
-    }
-
-    @Override
-    public void setHook(@NotNull HashMap<String, String> hashMap) {
-        Log.d(TAG, "setHook: CALLED");
-        logd("setHook", hashMap);
-    }
-
-    @Override
-    public void executeHook(@NotNull Context context, @NotNull HookScreenListener hookScreenListener, @Nullable Map<String, ?> map) {
-        Log.d(TAG, "executeHook: CALLED");
-        logd("executeHook", map);
-    }
-
-    @NotNull
-    @Override
-    public HookScreenListener getListener() {
-        Log.d(TAG, "getListener: CALLED");
-        return null;
-    }
-
-    @Override
-    public void hookDismissed() {
-        Log.d(TAG, "hookDismissed: CALLED");
-    }
-
-    @Override
-    public boolean isFlowBlocker() {
-        Log.d(TAG, "isFlowBlocker: CALLLED");
-        return false;
-    }
-
-    @Override
-    public boolean isRecurringHook() {
-        Log.d(TAG, "isRecurringHook: CALLED");
-        return false;
-    }
-
-    @Override
-    public boolean shouldPresent() {
-        Log.d(TAG, "shouldPresent: CALLED");
-        return false;
     }
 
     /**
