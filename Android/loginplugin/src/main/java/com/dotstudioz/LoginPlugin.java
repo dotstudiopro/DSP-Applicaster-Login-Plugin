@@ -2,6 +2,8 @@ package com.dotstudioz;
 
 import com.applicaster.hook_screen.HookScreen;
 import com.applicaster.hook_screen.HookScreenListener;
+import com.applicaster.plugin_manager.GenericPluginI;
+import com.applicaster.plugin_manager.Plugin;
 import com.applicaster.plugin_manager.hook.ApplicationLoaderHookUpI;
 import com.applicaster.plugin_manager.login.BaseLoginContract;
 import com.applicaster.plugin_manager.hook.HookListener;
@@ -22,144 +24,47 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin extends BaseLoginContract implements LoginContract/*, PluginScreen, HookScreen, ApplicationLoaderHookUpI*/ {
+public class LoginPlugin extends BaseLoginContract implements GenericPluginI {
 
     private static String TAG = "LoginPlugin";
 
-    private HookListener hookListener;
     @Override
     public void executeOnApplicationReady(Context context, HookListener listener) {
-        //super.executeOnApplicationReady(context, listener);
-        this.hookListener = listener;
+        super.executeOnApplicationReady(context, listener);
         Log.d(TAG, "executeOnApplicationReady: CALLED");
-        getPluginParams();
-    }
-
-    /***
-     * this function called after Plugins loaded, you can add logic that not related to the application data
-     * as Zapp strings or applicaster models.
-     * @param context APIntroActivity
-     * @param listener listener to continue the application flow after execution finished.
-     */
-    @Override
-    public void executeOnStartup(Context context, HookListener listener) {
-        Log.d(TAG, "executeOnStartup: CALLED");
-        //getPluginParams();
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
         SPLTAuth0LoginUtility.getInstance().initialize(context);
         SPLTAuth0LoginUtility.getInstance().login(context);
-
     }
 
     protected void logout(Context context, Map additionalParams) {
-    	// TODO:
-        Log.d(TAG, "logout: CALLED");
+        // TODO:
     }
 
     protected void login(Context context, Playable playable, Map additionalParams) {
-    	// TODO:
-        Log.d(TAG, "login: playable CALLED");
+        // TODO:
     }
 
     protected void login(Context context, Map additionalParams) {
-    	// TODO:
-        Log.d(TAG, "login: CALLED");
-    }
-
-    /**
-     * This method performs login in the current provider.
-     *
-     * @param context
-     * @param additionalParams Extra parameters you would like to provide to the current login provider.
-     * @param callback         The callback to be invoked when the login process is done.
-     */
-    @Override
-    public void login(Context context, Map additionalParams, Callback callback) {
-        Log.d(TAG, "login: CALLED");
-        //callback.onResult(true);
-    }
-
-    /**
-     * This method performs login in the current provider.
-     * This login method is being called before trying to play an item.
-     *
-     * @param context
-     * @param playable         The playable we want to perform login for.
-     * @param additionalParams Extra parameters you would like to provide to the current login provider.
-     * @param callback         The callback to be invoked when the login process is done.
-     */
-    @Override
-    public void login(Context context, Playable playable, Map additionalParams, Callback callback) {
-        Log.d(TAG, "login: CALLED");
-    }
-
-    /**
-     * Call this method in order to perform logout from the current provider.
-     *
-     * @param context
-     * @param additionalParams Extra parameters you would like to provide to the current login provider.
-     * @param callback         The callback to be invoked when the logout process is done.
-     * @return
-     */
-    @Override
-    public void logout(Context context, Map additionalParams, Callback callback) {
-        Log.d(TAG, "logout: CALLED");
+        // TODO:
     }
 
     public boolean isItemLocked(Object model) {
-        Log.d(TAG, "isItemLocked: CALLED");
         return false;
     }
 
     /**
-     * @return true if the login provider has a valid token - in most cases it would be just checking the the token is persisted.
-     * This method shouldn't consider authorization for this token and user - means you don't need to really validate the token is
-     */
-    @Override
-    public boolean isTokenValid() {
-        return false;
-    }
-
-    /**
-     * @return The token held by the current login provider.
-     */
-    @Override
-    public String getToken() {
-        return null;
-    }
-
-    /**
-     * This method allows external screens / JavaScript / React to set the token.
+     * initialization of the player plugin configuration with a Plugin,
+     * which contains configuration
      *
-     * @param token The new token.
+     * @param plugin
      */
     @Override
-    public void setToken(String token) {
-
+    public void setPluginModel(Plugin plugin) {
+        if(plugin != null && plugin.configuration != null)
+            readPluginParameters(plugin.configuration);
     }
-
-    /**
-     * This interface is being deprecated due to not passing all information about plugin
-     * PLEASE USE GenericPluginI instead
-     * initialization of the player plugin configuration with a Map params
-     *
-     * @param params
-     */
-    @Override
-    public void setPluginConfigurationParams(Map params) {
-        Log.d(TAG, "setPluginConfigurationParams: CALLED");
-        logd("setPluginConfigurationParams", params);
-        readPluginParameters(params);
-    }
-
-    @Override
-    public boolean handlePluginScheme(Context context, Map<String, String> data) {
-        Log.d(TAG, "handlePluginScheme: CALLED");
-        logd("handlePluginScheme", data);
-        return false;
-    }
-
     private void readPluginParameters(Object obj) {
         if(obj != null) {
             if (obj instanceof List) {
@@ -178,25 +83,6 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract/*, P
             } else {
 
             }
-        }
-    }
-
-    private void logd(String methodName, Object obj) {
-        if(obj != null) {
-            if (obj instanceof List) {
-                Log.d(TAG, "logd: "+methodName+" : Length==>"+((List)obj).size());
-            } else if (obj instanceof Map) {
-                Log.d(TAG, "logd: "+methodName+" : Length==>"+((Map)obj).size());
-                Iterator<String> itrk = ((Map)obj).keySet().iterator();
-                while(itrk.hasNext()) {
-                    String keyString = itrk.next();
-                    Log.d(TAG, "logd: "+keyString+"==>"+((Map)obj).get(keyString));
-                }
-            } else {
-                Log.d(TAG, "logd: "+methodName+" : Length==>"+obj.toString());
-            }
-        } else {
-            Log.d(TAG, "logd: "+methodName+" : Empty");
         }
     }
 }
