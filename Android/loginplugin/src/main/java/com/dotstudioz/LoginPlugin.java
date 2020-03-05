@@ -49,6 +49,7 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract/*, P
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
         SPLTAuth0LoginUtility.getInstance().initialize(context);
         SPLTAuth0LoginUtility.getInstance().login(context);
+
     }
 
     protected void logout(Context context, Map additionalParams) {
