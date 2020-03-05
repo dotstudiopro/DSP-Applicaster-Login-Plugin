@@ -71,7 +71,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.auth0.android:lock:2.14.1'
+    implementation ('com.auth0.android:lock:2.14.1') {
+        exclude group: 'com.android.support', module: 'customtabs'
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
     implementation 'com.auth0:java-jwt:2.1.0'
 
     implementation 'com.github.dotstudiopro:dotstudiopro-android-model:1.0.18'
