@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin extends BaseLoginContract implements GenericPluginI {
+public class LoginPlugin extends BaseLoginContract implements GenericPluginI, PluginScreen {
 
     private static String TAG = "LoginPlugin";
 
@@ -84,5 +84,19 @@ public class LoginPlugin extends BaseLoginContract implements GenericPluginI {
 
             }
         }
+    }
+
+    @Override
+    public void present(Context context, HashMap<String, Object> screenMap, Serializable dataSource, boolean isActivity) {
+        Log.d(TAG, "present: CALLED");
+        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+        SPLTAuth0LoginUtility.getInstance().login(context);
+    }
+
+    @Override
+    public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
+        return null;
     }
 }
