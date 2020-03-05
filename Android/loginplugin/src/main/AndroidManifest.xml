@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dotstudioz" >
 
     <application
@@ -24,12 +25,18 @@
                     android:scheme="demo"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.auth0.android.provider.RedirectActivity"
+            tools:node="remove"
+            />
+
         <!--android:pathPrefix="/android/com.dotstudioz.dotstudioPRO.revry/callback"-->
         <!-- Auth0 Lock End -->
 
-        <activity
+        <!--<activity
             android:name="com.auth0.android.provider.WebAuthActivity"
-            android:theme="@style/MyLockTheme" />
+            android:theme="@style/MyLockTheme" />-->
     </application>
 
 </manifest>
