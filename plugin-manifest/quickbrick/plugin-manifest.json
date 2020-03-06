@@ -1,0 +1,47 @@
+{
+  "api": {
+    "require_startup_execution": true,
+    "class_name": "Dotstudio.LoginPlugin",
+    "react_packages": [
+      "react-native-auth0"
+    ]
+  },
+  "dependency_repository_url": [
+
+  ],
+  "platform": "android_tv",
+  "manifest_version": "0.1.0",
+  "author_email": "ketan@dotstudiopro.com",
+  "author_name": "Ketan Sakariya",
+  "name": "DotstudioLogin",
+  "description": "Quickbrick plugin",
+  "type": "login",
+  "screen": true,
+  "identifier": "com.dotstudioz.loginplugin",
+  "ui_builder_support": true,
+  "whitelisted_account_ids": [
+    "5d812bbb7b81ea000e1168de"
+  ],
+  "min_zapp_sdk": "4.28.9",
+  "deprecated_since_zapp_sdk": "",
+  "unsupported_since_zapp_sdk": "",
+  "react_native": true,
+  "react_bundle_url": "https://reactnative.com",
+  "extra_dependencies": [
+
+  ],
+  "npm_dependencies": [
+
+  ],
+  "project_dependencies": [
+
+  ],
+  "custom_configuration_fields": [
+    {
+      "type": "text",
+      "key": "title",
+      "tooltip_text": "Enter title of company",
+      "default": "DotstudioPRO"
+    }
+  ]
+}

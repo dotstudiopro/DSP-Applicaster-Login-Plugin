@@ -1,0 +1,99 @@
+{
+  "api": {
+    "require_startup_execution": true,
+    "class_name": "Dotstudio.LoginPlugin",
+    "modules": [
+
+    ]
+  },
+  "dependency_repository_url": [
+	"git@github.com:dotstudiopro/DSP-Applicaster-Login-Plugin.git"
+  ],
+  "dependency_name": "Dotstudio",
+  "dependency_version": "0.0.5",
+  "platform": "ios",
+  "manifest_version": "0.1.1",
+  "author_email": "ketan@dotstudiopro.com",
+  "author_name": "Ketan Sakariya",
+  "name": "DotstudioLogin",
+  "description": "iOS lDotstudio Login plugin for applicaster.",
+  "type": "login",
+  "screen": true,
+  "identifier": "com.dotstudioz.loginplugin",
+  "ui_builder_support": true,
+  "whitelisted_account_ids": [
+    "5d812bbb7b81ea000e1168de"
+  ],
+  "min_zapp_sdk": "13.0.5",
+  "deprecated_since_zapp_sdk": "",
+  "unsupported_since_zapp_sdk": "",
+  "react_native": false,
+
+
+  "general": {
+    "group":true,
+    "label":"General Settings",
+    "tooltip":"These fields influence how the plugin is triggered and what the user experience flow should be",
+    "folded":true,
+    "fields":[
+      {
+        "type": "color_picker",
+        "key": "backgroundColor",
+        "label": "Background Color",
+        "initial_value": "#00FF00FF",
+        "tooltip_text": "Select Background color."
+      },
+      {
+        "type": "color_picker",
+        "key": "headerColor",
+        "initial_value": "#00FF00FF",
+        "tooltip_text": "Select Header color."
+      },
+      {
+        "type": "color_picker",
+        "key": "titleColor",
+        "initial_value": "#FF00FFFF",
+        "tooltip_text": "Select Title color."
+      },
+      {
+        "type": "uploader",
+        "key": "logo",
+        "tooltip_text": "Upload Your company Logo."
+      },
+      {
+        "type": "uploader",
+        "key": "assets_bundle",
+        "tooltip_text": "Upload a Zip file following the folder structure and hierarchy guideline of the platform. The Zip file will be extracted during the build time and will add the assets to the resources of the bundle/package. This field does not affect runtime and a change will require a new build of the app version."
+      },
+      {
+        "key": "show_on_startup",
+        "type": "switch",
+        "initial_value": true,
+        "label": "Show on Start ?",
+        "tooltip_text": "Turn this off if You don't want to show login screen on start."
+      }
+    ]
+  },
+  "custom_configuration_fields": [
+    {
+      "type": "text",
+      "key": "Title",
+      "label": "Title",
+      "tooltip_text": "Enter Company Title.",
+      "default": "Dotstudio"
+    },
+    {
+      "type": "text",
+      "key": "apiKey",
+      "tooltip_text": "Enter Dotstudio Company api key.",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "key": "auth0ClientId",
+      "tooltip_text": "Enter Auth0 client ID.",
+      "default": ""
+    }
+
+  ]
+}
