@@ -46,6 +46,9 @@ class ViewController: UIViewController {
 ////                facebookInfoVC.loginPlugin = loginPlugin
 //            }
 //        }
+        
+        SPLTLoginPluginConstants.apiKey = "c681a9f6a3b9d51502cc3978298feaccfa9f500b"
+        SPLTLoginPluginConstants.auth0ClientId = "fRI7uheX6IzdEKa4GXpQAAWBsIGX67oR"
         let loginPlugin = LoginPlugin()
         loginPlugin.executeOnApplicationReady(displayViewController: self) {
             print("executed on app ready")

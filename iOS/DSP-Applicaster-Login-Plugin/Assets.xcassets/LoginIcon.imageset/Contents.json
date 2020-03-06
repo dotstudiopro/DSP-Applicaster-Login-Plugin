@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "dotstudiopro-logo.png",
+      "filename" : "dotstudiopro-logo-square.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "dotstudiopro-logo-1.png",
+      "filename" : "dotstudiopro-logo-square-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "dotstudiopro-logo-2.png",
+      "filename" : "dotstudiopro-logo-square-2.png",
       "scale" : "3x"
     }
   ],
