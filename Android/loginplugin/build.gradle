@@ -10,10 +10,10 @@ android {
         versionCode 1
         versionName "0.0.7"
         consumerProguardFiles 'proguard-rules.pro'
-        manifestPlaceholders = [
+        /*manifestPlaceholders = [
                 auth0Domain: "dotstudiopro.auth0.com",
                 auth0Scheme: "demo",
-        ]
+        ]*/
     }
 
     buildTypes {
