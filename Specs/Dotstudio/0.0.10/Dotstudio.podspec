@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     s.subspec 'Core' do |c|
       s.resources = []
       c.frameworks = 'UIKit'
-      c.source_files = 'PluginClasses/*.{swift,h,m}','PluginClasses/**/*.{swift,h,m}'
+      c.source_files = "PluginClasses/*.{swift,h,m}","PluginClasses/**/*.{swift,h,m}"
       c.dependency 'ZappPlugins'
       c.dependency 'SwiftyStoreKit', '~> 0.15'
     end
