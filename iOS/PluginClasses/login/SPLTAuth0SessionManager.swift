@@ -49,7 +49,7 @@ public class SPLTAuth0SessionManager {
             return callback(SPLTAuth0SessionManagerError.noAccessToken)
         }
         Auth0
-            .authentication()
+            .authentication(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
             .userInfo(withAccessToken: accessToken)
             .start { result in
                 switch(result) {

@@ -10,7 +10,7 @@
 	"git@github.com:dotstudiopro/DSP-Applicaster-Login-Plugin.git"
   ],
   "dependency_name": "Dotstudio",
-  "dependency_version": "0.0.5",
+  "dependency_version": "0.0.10",
   "platform": "ios",
   "manifest_version": "0.1.1",
   "author_email": "ketan@dotstudiopro.com",
@@ -24,7 +24,7 @@
   "whitelisted_account_ids": [
     "5d812bbb7b81ea000e1168de"
   ],
-  "min_zapp_sdk": "13.0.5",
+  "min_zapp_sdk": "14.0.2",
   "deprecated_since_zapp_sdk": "",
   "unsupported_since_zapp_sdk": "",
   "react_native": false,
