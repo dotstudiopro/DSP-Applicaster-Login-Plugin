@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
     s.ios.dependency 'Alamofire'
     s.ios.dependency 'SimpleKeychain'
-    s.ios.dependency 'Lock', '~> 2.10'
+    s.ios.dependency 'Lock', '~> 2.15.0'
    
     s.subspec 'Core' do |c|
       s.resources = []

@@ -15,11 +15,11 @@ open class SPLTSubscriptionAPI {
     
     open func getSubscriptionProducts(completion: @escaping (_ infoDict: [String: Any]) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
 
-        Alamofire.request(SPLTRouter.getSubscriptionPlans, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        AF.request(SPLTRouter.getSubscriptionPlans, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             switch response.result {
             case .success( _):
-                if (response.result.value != nil) {
-                    if let subscriptionsDict = response.result.value as? [String: Any] {
+                if (response.value != nil) {
+                    if let subscriptionsDict = response.value as? [String: Any] {
                         if let bSuccess = subscriptionsDict["success"] as? Bool, bSuccess == true {
                             completion(subscriptionsDict)
                             return
@@ -46,13 +46,13 @@ open class SPLTSubscriptionAPI {
     open func checkSubscriptionStatus(_ strChannelId: String, completion: @escaping (_ bSubscriptionUnlocked: Bool, _ bAdsEnabled: Bool) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
         
         
-        Alamofire.request(SPLTRouter.checkSubscriptionStatus(strChannelId), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        AF.request(SPLTRouter.checkSubscriptionStatus(strChannelId), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             
             
             switch response.result {
             case .success(let data):
-                if (response.result.value != nil) {
-                    if let infoDict = response.result.value as? [String: AnyObject] {
+                if (response.value != nil) {
+                    if let infoDict = response.value as? [String: AnyObject] {
                         var bUnlocked = false
                         var bAdsEnabled = false
                         if let bUnlocked_ = infoDict["unlocked"] as? Bool {
@@ -94,11 +94,11 @@ open class SPLTSubscriptionAPI {
         jsonDict["notification_type"] = "INITIAL_BUY"
         jsonDict["product_id"] = strProductId //"monthly"
         
-        Alamofire.request(SPLTRouter.subscriptionAppleReceiptPost, method: .post, parameters: jsonDict, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        AF.request(SPLTRouter.subscriptionAppleReceiptPost, method: .post, parameters: jsonDict, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             switch response.result {
             case .success(let data):
-                if (response.result.value != nil) {
-                    if let infoDict = response.result.value as? [String: AnyObject] {
+                if (response.value != nil) {
+                    if let infoDict = response.value as? [String: AnyObject] {
                         completion(infoDict)
                         return
                     }
@@ -122,11 +122,11 @@ open class SPLTSubscriptionAPI {
     
     open func getActiveSubscriptions(_ completion: @escaping (_ infoDict: [String: Any]) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
         
-        Alamofire.request(SPLTRouter.getActiveSubscriptions, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        AF.request(SPLTRouter.getActiveSubscriptions, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             switch response.result {
             case .success(let data):
-                if (response.result.value != nil) {
-                    if let infoDict = response.result.value as? [String: AnyObject] {
+                if (response.value != nil) {
+                    if let infoDict = response.value as? [String: AnyObject] {
                         completion(infoDict)
                         return
                     }

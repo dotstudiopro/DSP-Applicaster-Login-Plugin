@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (4.9.1)
-  - Auth0 (1.21.0):
+  - Alamofire (5.0.2)
+  - Auth0 (1.22.1):
     - JWTDecode
     - SimpleKeychain
   - JWTDecode (2.4.1)
@@ -9,15 +9,15 @@ PODS:
     - Lock/Classic (= 2.15.0)
   - Lock/Classic (2.15.0):
     - Auth0 (~> 1.21)
-  - SimpleKeychain (0.10.0)
+  - SimpleKeychain (0.11.0)
   - SwiftyStoreKit (0.15.0)
-  - ZappCore (0.5.0)
-  - ZappPlugins (11.3.1):
+  - ZappCore (0.8.7)
+  - ZappPlugins (11.6.2):
     - ZappCore
 
 DEPENDENCIES:
   - Alamofire
-  - Lock (~> 2.10)
+  - Lock (~> 2.15.0)
   - SwiftyStoreKit (~> 0.15)
   - ZappPlugins
 
@@ -34,15 +34,15 @@ SPEC REPOS:
     - SwiftyStoreKit
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Auth0: 745d4600ccce1f852b5b4edf3d4c00ecb0e7e79e
+  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  Auth0: c3dd0b6f9031e9cc38be2a6973f766f33ccbad83
   JWTDecode: 4bd4da0cdf0f8154fd467fa48499f34ec057fb88
   Lock: 9473cacc444f424e191b3d62411a41f7f64ba2ca
-  SimpleKeychain: a5ed8ebd0ab7e46a910353ffe0293cd6f017a160
+  SimpleKeychain: 2c135c65e64cd4e7df7ec418407be83ee07ba1c2
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
-  ZappCore: f92ff80112b8dfac6ebba117b393df0665e93241
-  ZappPlugins: 9cd05b7787db4788c04747409907056fe867213b
+  ZappCore: 58ad2f6fd7117de8a727feae38ce11681cd350b3
+  ZappPlugins: efef8f1822300247ff70ed185e419e1056c066f3
 
-PODFILE CHECKSUM: eecf0e5126585ef5df3c9afa6480b29c6202f316
+PODFILE CHECKSUM: 36f916dbda72e921bbc1ec656885a6f807fb4107
 
 COCOAPODS: 1.9.0
