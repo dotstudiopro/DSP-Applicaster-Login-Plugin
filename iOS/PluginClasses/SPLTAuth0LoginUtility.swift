@@ -55,6 +55,14 @@ open class SPLTAuth0LoginUtility {
 
     }
     
+//    open func showLoginAndSubscriptionController(strCompanyId: String, initialLoginScreen: InitialLoginScreen, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: (_ error: NSError) -> Void) {
+//        SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
+//            print("success")
+//        }) { (error) in
+//            print("error")
+//            // handle error.
+//        }
+//    }
     open func showLoginController(strCompanyId: String, initialLoginScreen: InitialLoginScreen, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: (_ error: NSError) -> Void) {
         // c: 5690134e97f8154731aeed2d
         if let sourceViewController = self.sourceViewController {

@@ -33,9 +33,9 @@ open class SPLTTokenAPI {
         var parameters: [String: String] = [:]
         parameters["key"] = SPLTLoginPluginConstants.apiKey
 
-        Alamofire.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            if (response.result.value != nil) {
-                if let infoDict = response.result.value as? [String: AnyObject] {
+        AF.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            if (response.value != nil) {
+                if let infoDict = response.value as? [String: AnyObject] {
                     //self.delegate?.didReceiveChannels(infoDict)
                     print(infoDict)
                     if let bSuccess = infoDict["success"] as? Bool {
@@ -74,18 +74,20 @@ open class SPLTTokenAPI {
 //            completion(nil)
 //            return
 //        }
-        var headers: [String: String] = [:]
+        
+        var headers: HTTPHeaders = []
         if let strAccessToken = self.keychain.string(forKey: "accessToken") {
-            headers["x-access-token"] = strAccessToken
+            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
+            headers.add(httpHeader)
         }
-        if let strAccessToken = self.keychain.string(forKey: "clientToken") {
-            headers["x-client-token"] = strAccessToken
+        if let strClientToken = self.keychain.string(forKey: "clientToken") {
+            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
+            headers.add(httpHeader)
         }
         
-        
-        Alamofire.request("https://api.myspotlight.tv/users/token/refresh", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
-            if (response.result.value != nil) {
-                if let infoDict = response.result.value as? [String: AnyObject] {
+        AF.request("https://api.myspotlight.tv/users/token/refresh", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+            if (response.value != nil) {
+                if let infoDict = response.value as? [String: AnyObject] {
                     if let bSuccess = infoDict["success"] as? Bool {
                         if (bSuccess == true) {
                             if let strClientToken = infoDict["client_token"] as? String {

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "Dotstudio"
-    s.version          = '0.0.13'
+    s.version          = '0.0.11'
     s.summary          = "An Example of full screen plugin for Zapp iOS."
     s.description      = <<-DESC
     An Example of full screen plugin for Zapp iOS.
@@ -15,12 +15,16 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '10.0'
     s.requires_arc = true
     s.swift_version = '5.0'
+
+    s.ios.dependency 'Alamofire'
+    s.ios.dependency 'SimpleKeychain'
+    s.ios.dependency 'Lock', '~> 2.10'
    
     s.subspec 'Core' do |c|
       s.resources = []
       c.frameworks = 'UIKit'
-      c.source_files = 'iOS/PluginClasses/*.{swift,h,m}'
-      c.resources = 'iOS/PluginClasses/*.{storyboard,xcassets}'
+      c.source_files = "PluginClasses/*.{swift,h,m}"
+      c.source_files = "PluginClasses/**/*.{swift,h,m}"
       c.dependency 'ZappPlugins'
       c.dependency 'SwiftyStoreKit', '~> 0.15'
     end
