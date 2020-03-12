@@ -237,13 +237,21 @@ public class SPLTAuth0LoginUtility {
         Log.d(TAG, "showLoginController: CALLED");
         mContext = context;
 
-        Map<String, Object> parametersMap = ParameterBuilder
-                .newAuthenticationBuilder()
-                .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
-                .set("c", getCompanyKeyFromAccessToken(context))
-                .asDictionary();
+        if((SPLTLoginPluginConstants.apiKey == null ||
+                (SPLTLoginPluginConstants.apiKey != null && SPLTLoginPluginConstants.apiKey.length() == 0)) &&
+                (SPLTLoginPluginConstants.auth0ClientId == null ||
+                        (SPLTLoginPluginConstants.auth0ClientId != null && SPLTLoginPluginConstants.auth0ClientId.length() == 0))
+        ) {
+            Map<String, Object> parametersMap = ParameterBuilder
+                    .newAuthenticationBuilder()
+                    .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
+                    .set("c", getCompanyKeyFromAccessToken(context))
+                    .asDictionary();
 
-        validateLogoURLAndShowLogin(SPLTLoginPluginConstants.logo);
+            validateLogoURLAndShowLogin(SPLTLoginPluginConstants.logo);
+        } else {
+            return;
+        }
     }
 
     /**
@@ -321,7 +329,7 @@ public class SPLTAuth0LoginUtility {
             d = context.getResources().getDrawable(R.drawable.dotstudiopro_logo_black);
         }
 
-        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, "");
+        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, "Dotstudioz");
         String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.titleColor, "#000000");;
         String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
         String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
