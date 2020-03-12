@@ -9,7 +9,7 @@
     }
   ],
   "dependency_name": "com.github.dotstudiopro:DSP-Applicaster-Login-Plugin",
-  "dependency_version": "0.0.9",
+  "dependency_version": "0.0.10",
   "platform": "android",
   "manifest_version": "0.1.1",
   "author_email": "mohsin@dotstudioz.com",
@@ -35,42 +35,7 @@
     "tooltip":"These fields influence how the plugin is triggered and what the user experience flow should be",
     "folded":true,
     "fields":[
-      {
-        "type": "color_picker",
-        "key": "backgroundColor",
-        "label": "Background Color",
-        "initial_value": "#00FF00FF",
-        "tooltip_text": "Select Background color."
-      },
-      {
-        "type": "color_picker",
-        "key": "headerColor",
-        "initial_value": "#00FF00FF",
-        "tooltip_text": "Select Header color."
-      },
-      {
-        "type": "color_picker",
-        "key": "titleColor",
-        "initial_value": "#FF00FFFF",
-        "tooltip_text": "Select Title color."
-      },
-      {
-        "type": "uploader",
-        "key": "logo",
-        "tooltip_text": "Upload Your company Logo."
-      },
-      {
-        "type": "uploader",
-        "key": "assets_bundle",
-        "tooltip_text": "Upload a Zip file following the folder structure and hierarchy guideline of the platform. The Zip file will be extracted during the build time and will add the assets to the resources of the bundle/package. This field does not affect runtime and a change will require a new build of the app version."
-      },
-      {
-        "key": "show_on_startup",
-        "type": "switch",
-        "initial_value": true,
-        "label": "Show on Start ?",
-        "tooltip_text": "Turn this off if You don't want to show login screen on start."
-      }
+
     ]
   },
   "custom_configuration_fields": [
@@ -92,6 +57,42 @@
       "key": "auth0ClientId",
       "tooltip_text": "Enter Auth0 client ID.",
       "default": ""
+    },
+    {
+      "type": "color_picker",
+      "key": "backgroundColor",
+      "label": "Background Color",
+      "initial_value": "#00FF00FF",
+      "tooltip_text": "Select Background color."
+    },
+    {
+      "type": "color_picker",
+      "key": "headerColor",
+      "initial_value": "#00FF00FF",
+      "tooltip_text": "Select Header color."
+    },
+    {
+      "type": "color_picker",
+      "key": "titleColor",
+      "initial_value": "#FF00FFFF",
+      "tooltip_text": "Select Title color."
+    },
+    {
+      "type": "uploader",
+      "key": "logo",
+      "tooltip_text": "Upload Your company Logo."
+    },
+    {
+      "type": "uploader",
+      "key": "assets_bundle",
+      "tooltip_text": "Upload a Zip file following the folder structure and hierarchy guideline of the platform. The Zip file will be extracted during the build time and will add the assets to the resources of the bundle/package. This field does not affect runtime and a change will require a new build of the app version."
+    },
+    {
+      "key": "show_on_startup",
+      "type": "switch",
+      "initial_value": true,
+      "label": "Show on Start ?",
+      "tooltip_text": "Turn this off if You don't want to show login screen on start."
     }
 
   ]
