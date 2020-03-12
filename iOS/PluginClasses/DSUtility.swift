@@ -31,11 +31,11 @@ open class DSUtility {
     open func showAlertOnWindow(_ title: String?, message: String?, preferredStyle: UIAlertController.Style) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            if let window = appDelegate.window {
-                window.rootViewController?.present(alertController, animated: true)
-            }
-        }
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            if let window = appDelegate.window {
+//                window.rootViewController?.present(alertController, animated: true)
+//            }
+//        }
         return alertController
     }
     
