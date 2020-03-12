@@ -9,13 +9,13 @@
     }
   ],
   "dependency_name": "com.github.dotstudiopro:DSP-Applicaster-Login-Plugin",
-  "dependency_version": "0.0.10",
+  "dependency_version": "0.0.16",
   "platform": "android",
   "manifest_version": "0.1.1",
   "author_email": "mohsin@dotstudioz.com",
   "author_name": "Mohsin Shaikh",
   "name": "DotstudioLogin",
-  "description": "Android Dotstudio Login plugin for applicaster",
+  "description": "Dotstudio Login plugin for applicaster",
   "type": "login",
   "screen": true,
   "identifier": "com.dotstudioz.loginplugin",
@@ -23,21 +23,10 @@
   "whitelisted_account_ids": [
     "5d812bbb7b81ea000e1168de"
   ],
-  "min_zapp_sdk": "11.2.0.3",
+  "min_zapp_sdk": "11.3.1",
   "deprecated_since_zapp_sdk": "",
   "unsupported_since_zapp_sdk": "",
   "react_native": false,
-
-
-  "general": {
-    "group":true,
-    "label":"General Settings",
-    "tooltip":"These fields influence how the plugin is triggered and what the user experience flow should be",
-    "folded":true,
-    "fields":[
-
-    ]
-  },
   "custom_configuration_fields": [
     {
       "type": "text",
