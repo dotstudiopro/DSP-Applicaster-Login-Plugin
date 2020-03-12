@@ -2,7 +2,19 @@ package com.dotstudioz;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Parcel;
+import android.support.annotation.AttrRes;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.auth0.android.Auth0;
@@ -10,9 +22,11 @@ import com.auth0.android.authentication.AuthenticationAPIClient;
 import com.auth0.android.authentication.AuthenticationException;
 import com.auth0.android.authentication.ParameterBuilder;
 import com.auth0.android.callback.BaseCallback;
+import com.auth0.android.jwt.JWT;
 import com.auth0.android.lock.AuthenticationCallback;
 import com.auth0.android.lock.Lock;
 import com.auth0.android.lock.LockCallback;
+import com.auth0.android.lock.internal.configuration.Theme;
 import com.auth0.android.lock.utils.LockException;
 import com.auth0.android.result.Credentials;
 import com.auth0.android.result.UserProfile;
@@ -24,6 +38,9 @@ import com.dotstudioz.dotstudioPRO.services.services.CompanyTokenService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -73,6 +90,12 @@ public class SPLTAuth0LoginUtility {
                 AUTH0_REFRESH_TOKEN_RESPONSE_SHARED_PREFERENCE + uniqueCompanyIdentifier
         );
     }
+
+    /**
+     * extract company key from the access token
+     * @param context
+     * @return Company Key as a String
+     */
     private String getCompanyKeyFromAccessToken(Context context) {
         String accessToken;
         //Check if accessToken is present, if not then fetch it
@@ -110,6 +133,59 @@ public class SPLTAuth0LoginUtility {
         }
         return "";
     }
+
+    /**
+     * extract the company name from the access token
+     * @param context
+     * @return Comapany Name as a string
+     */
+    private String getCompanyNameFromAccessToken(Context context) {
+        String accessToken;
+        //Check if accessToken is present, if not then fetch it
+        try {
+            accessToken = SharedPreferencesUtil.getInstance(context).getSharedPreference(
+                    ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
+                    ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
+            if(accessToken != null && accessToken.length() > 0) {
+                SPLTLoginPluginConstants.strAccessToken = accessToken;
+                try {
+                    Base64 decoder = new Base64(true);
+                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strAccessToken.split("\\.")[1]);
+                    String s = new String(secret);
+                    JSONObject jsonObject = new JSONObject(s);
+
+                    if (jsonObject.has("iss")) {
+                        if(jsonObject.getJSONObject("iss").has("context")) {
+                            if(jsonObject.getJSONObject("iss").getJSONObject("context").has("name")) {
+                                String companyName = jsonObject.getJSONObject("iss").getJSONObject("context").getString("name");
+                                if (companyName != null && companyName.length() > 0) {
+                                    return companyName;
+                                } else {
+                                    return "";
+                                }
+                            }
+                        }
+                    } else {
+                        return "";
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return "";
+    }
+
+    /**
+     * extract the data from the access token and confirm if it is within the expiry date
+     * @param context
+     * @return true/false based on the expiry date
+     */
     private boolean isAccessTokenValid(Context context) {
         String accessToken;
         //Check if accessToken is present, if not then fetch it
@@ -161,41 +237,135 @@ public class SPLTAuth0LoginUtility {
         Log.d(TAG, "showLoginController: CALLED");
         mContext = context;
 
+        if((SPLTLoginPluginConstants.apiKey == null ||
+                (SPLTLoginPluginConstants.apiKey != null && SPLTLoginPluginConstants.apiKey.length() == 0)) &&
+                (SPLTLoginPluginConstants.auth0ClientId == null ||
+                        (SPLTLoginPluginConstants.auth0ClientId != null && SPLTLoginPluginConstants.auth0ClientId.length() == 0))
+        ) {
+            Map<String, Object> parametersMap = ParameterBuilder
+                    .newAuthenticationBuilder()
+                    .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
+                    .set("c", getCompanyKeyFromAccessToken(context))
+                    .asDictionary();
+
+            validateLogoURLAndShowLogin(SPLTLoginPluginConstants.logo);
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * check if the logo url passed as a parameter is valid and if so then download the image
+     * once the download is complete call startLockActivity or if the logoURL is invalid then
+     * call the startLockActivity without downloading the image
+     * @param logoURL
+     */
+    private void validateLogoURLAndShowLogin(String logoURL) {
+        //validate if a logo was assigned or else load the login screen without downloading the logo
+        if(logoURL != null && logoURL.length() > 0) {
+            new DownloadImageTask().execute(logoURL);
+        } else {
+            startLockActivity(mContext);
+        }
+    }
+    public Bitmap sharedBitmap;
+
+    /**
+     * Download the image using a URL and convert it to bitmap
+     * also on download complete call startLockActivity
+     */
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        public DownloadImageTask() {
+
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            Log.d(TAG, "doInBackground: CALLED");
+            if(urls != null && urls.length > 0) {
+                String url = urls[0];
+                Bitmap bmp = null;
+                try {
+                    InputStream in = new java.net.URL(url).openStream();
+                    bmp = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+                return bmp;
+            } else {
+                return null;
+            }
+        }
+        protected void onPostExecute(Bitmap result) {
+            if(result != null) {
+                sharedBitmap = result;
+            }
+
+            startLockActivity(mContext);
+        }
+    }
+
+    /**
+     * Helper method to validate string for data and return either the
+     * actual value or the default value in case of null string
+     * @param value - the actual value of the string
+     * @param defaultValue - default value in case of null value
+     * @return
+     */
+    private String validateValueOrSetDefault(String value, String defaultValue) {
+        String returnValue = defaultValue;
+        if(value != null && value.length() > 0) {
+            returnValue = value;
+        }
+        return returnValue;
+    }
+    public void startLockActivity(Context context) {
+
+        Drawable d = null;
+        //check if a logo is present or else use the default logo
+        if(sharedBitmap != null) {
+            d = new BitmapDrawable(context.getResources(), sharedBitmap);
+        } else {
+            d = context.getResources().getDrawable(R.drawable.dotstudiopro_logo_black);
+        }
+
+        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, "Dotstudioz");
+        String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.titleColor, "#000000");;
+        String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
+        String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
+
+        int initialScreenToUse = 0;
+
+        Log.d(TAG, "startLockActivity:line number 331 ");
+        Auth0 auth0 = new Auth0(SPLTLoginPluginConstants.auth0ClientId, SPLTLoginPluginConstants.auth0Domain);
         Map<String, Object> parametersMap = ParameterBuilder
                 .newAuthenticationBuilder()
                 .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
                 .set("c", getCompanyKeyFromAccessToken(context))
                 .asDictionary();
-
-            /*Theme customizedLockTheme = Theme.newBuilder()
-                    //.withHeaderLogo(R.drawable.famil_league_logo)
-                    .withHeaderLogo(R.drawable.com_auth0_lock_header_logo)
-                    .withHeaderTitle("HEADER TITLE")
-                    .withHeaderTitleColor(R.color.black)
-                    .withPrimaryColor(R.color.black)
-                    .withDarkPrimaryColor(R.color.black)
-                    .withHeaderColor(R.color.white)
-                    .build();*/
-        int initialScreenToUse = 0;
-
-        /*if(AppController.initialScreenToUse == 1)
-            initialScreenToUse = 1;
-        else
-            initialScreenToUse = 0;*/
-
-        Auth0 auth0 = new Auth0(SPLTLoginPluginConstants.auth0ClientId, SPLTLoginPluginConstants.auth0Domain);
-        /*Options options = new Options();
-        options.withTheme(customizedLockTheme);*/
-        mLock = Lock.newBuilder(auth0, mCallback).withAuthenticationParameters(parametersMap)//.withTheme(customizedLockTheme)
+        Log.d(TAG, "startLockActivity: line number 338");
+        mLock = Lock.newBuilder(auth0, mCallback).withAuthenticationParameters(parametersMap)
+                .withTheme(getCustomizedLockTheme(context, d, title, titleColor, headerColor, backgroundColor))
                 //Add parameters to the build
                 .withScheme("demo")
                 .initialScreen(initialScreenToUse)
                 .closable(true)
                 //.build();
                 .build(context);
-            /*mLock.onCreate(this);
-            auth0.getAuthorizeUrl();*/
+        Log.d(TAG, "startLockActivity: line number 347");
+
         context.startActivity(mLock.newIntent(context));
+    }
+    private Theme getCustomizedLockTheme(Context context, Drawable d, String title, String titleColor, String headerColor, String backgroundColor) {
+        Theme customizedLockTheme = Theme.newBuilder()
+                .withHeaderLogoDrawable(d)//logo
+                .withHeaderTitleString(title)//Header title text
+                .withHeaderTitleColorColor(Color.parseColor(titleColor))//Header title text color
+                .withHeaderColorColor(Color.parseColor(headerColor))//Header and logo background color
+                .withDarkPrimaryColorColor(Color.parseColor(backgroundColor))//LOG IN button color
+                .withPrimaryColorColor(Color.parseColor(backgroundColor))//LOG IN button pressed color
+                .buildWithActualValues();
+        return customizedLockTheme;
     }
     private Credentials mCredentials;
     private String mIdToken;
@@ -234,6 +404,10 @@ public class SPLTAuth0LoginUtility {
     private String mUserFirstName;
     private String mUserLastName;
     private String mUserAvatarPath;
+
+    /**
+     * using the AuthenticationAPIClient to get the client token received after the user had logged in
+     */
     private void getUserProfileFromAuth0() {
         mAuth0 = new Auth0(SPLTLoginPluginConstants.auth0ClientId, SPLTLoginPluginConstants.auth0Domain);
         // The process to reclaim an UserProfile is preceded by an Authentication call.
@@ -269,7 +443,6 @@ public class SPLTAuth0LoginUtility {
 
                                 }
                             });
-
                         }
 
                         @Override
@@ -279,9 +452,14 @@ public class SPLTAuth0LoginUtility {
                     });
         }
     }
+
+    /**
+     * extract the user details from the client token
+     * @param clientToken
+     */
     private void setClientTokenAndUserDetails(String clientToken) {
         SPLTLoginPluginConstants.strClientToken = clientToken;
-        Log.d(TAG, "scrapeOutInformationFromClientToken: SPLTLoginPluginConstants.strClientToken==>"+ SPLTLoginPluginConstants.strClientToken);
+        Log.d(TAG, "scrapeOutInformationFromClientToken: SPLTLoginPluginConstants.strClientToken==>"+SPLTLoginPluginConstants.strClientToken);
 
         Base64 decoder = new Base64(true);
         byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
@@ -317,18 +495,18 @@ public class SPLTAuth0LoginUtility {
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
     }
 
-    String token0252_27022020 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1YWIxNjAwNTk3ZjgxNTAxNGIzNTc4OTEiLCJleHBpcmVzIjoxNTgyNzYyNjU3ODEyLCJjb250ZXh0Ijp7ImF2YXRhciI6Imh0dHBzOi8vczMtdXMtd2VzdC0xLmFtYXpvbmF3cy5jb20vbWVkaWEtYXdzLmRvdHN0dWRpb3Byby5jb20vYXZhdGFycy81NzAyMTI2NDk3ZjgxNTlkMjM4ODFiYmYucG5nIiwiaWQiOiI1NzAyMTI2NDk3ZjgxNTlkMjM4ODFiYmYiLCJmaXJzdF9uYW1lIjoiTW9oIiwibGFzdF9uYW1lIjoiU2hhIn19.ffXGwGvQGEvXM9hcTYGBPXwx4FUSwJZB147dxc31tVw";
+    /**
+     * validate the time SPLTLoginPluginConstants.strClientToken's expire variable
+     * @return
+     */
     public boolean isClientTokenExpired() {
         if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
-            //String testClientToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2ZlOGZlMzk5ZjgxNWUzMDlkYmMyZjQiLCJleHBpcmVzIjoxNDkxNDM4NDU5NDc3LCJjb250ZXh0Ijp7ImF2YXRhciI6Imh0dHA6Ly9jZG4uZG90c3R1ZGlvcHJvLmNvbS9hdmF0YXJzLzU4NWQ0MjA2ZTY2YzBiMjUzNTc5ZTc3YTU0MmM0ZjU0OTdmODE1N2M0NzdiMjNjNi5wbmciLCJpZCI6IjU0MmM0ZjU0OTdmODE1N2M0NzdiMjNjNiIsImZpcnN0X25hbWUiOiJNb2hzaW4iLCJsYXN0X25hbWUiOiJTaGFpa2gifX0.OFtX3rUPZVzLLiIhlI7vXO5O4Jh-cBk-MSjHUUD9d9M";
-
             try {
                 Base64 decoder = new Base64(true);
                 byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
-                //byte[] secret = decoder.decodeBase64(token0252_27022020.split("\\.")[1]);
                 String s = new String(secret);
                 JSONObject jsonObject = new JSONObject(s);
-                Log.d(TAG, "isClientTokenExpired: asdas");
+                Log.d(TAG, "isClientTokenExpired: CALLED");
 
                 if (jsonObject.has("expires")) {
                     Date dt = new Date(jsonObject.getLong("expires"));
@@ -360,6 +538,12 @@ public class SPLTAuth0LoginUtility {
         Log.d(TAG, "isUserLoggedIn: CALLED");
         return checkIfUserAlreadyAuthenticated(context);
     }
+
+    /**
+     * check the shared preference if the client token is already present and valid
+     * @param context
+     * @return
+     */
     private boolean checkIfUserAlreadyAuthenticated(Context context) {
         String sp = SharedPreferencesUtil.getInstance(context).getSharedPreference(
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
@@ -367,13 +551,18 @@ public class SPLTAuth0LoginUtility {
 
         if(sp == null || sp.length() == 0) {
             SPLTLoginPluginConstants.strClientToken = "";
-            Log.d(TAG, "checkIfUserAlreadyAuthenticated: FALSE==>"+ SPLTLoginPluginConstants.strClientToken);
+            Log.d(TAG, "checkIfUserAlreadyAuthenticated: FALSE==>"+SPLTLoginPluginConstants.strClientToken);
             return false;
         } else {
             setTokenFromSharedPreference(context);
             return true;
         }
     }
+
+    /**
+     * read client token from shared preference and save it in SPLTLoginPluginConstants.strClientToken
+     * @param context
+     */
     private void setTokenFromSharedPreference(Context context) {
         String sp = SharedPreferencesUtil.getInstance(context).getSharedPreference(
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
@@ -383,7 +572,7 @@ public class SPLTAuth0LoginUtility {
             SPLTLoginPluginConstants.strClientToken = "";
         } else {
             SPLTLoginPluginConstants.strClientToken = sp;
-            Log.d(TAG, "checkIfUserAlreadyAuthenticated: TRUE==>"+ SPLTLoginPluginConstants.strClientToken);
+            Log.d(TAG, "checkIfUserAlreadyAuthenticated: TRUE==>"+SPLTLoginPluginConstants.strClientToken);
         }
 
         if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
@@ -424,6 +613,11 @@ public class SPLTAuth0LoginUtility {
         }
     }
 
+    /**
+     * logout method to clear the shared preference &
+     * assign SPLTLoginPluginConstants.strClientToken
+     * @param context
+     */
     public void logout(Context context) {
         Log.d(TAG, "logout: CALLED");
         SPLTLoginPluginConstants.strClientToken = "";
@@ -460,31 +654,13 @@ public class SPLTAuth0LoginUtility {
         mUserAvatarPath = "";
     }
 
-    /*public String getmUserEmailId() {
-        return mUserEmailId;
-    }
-    public String getmUserIdString() {
-        return mUserIdString;
-    }
-    public String getmUserFirstName() {
-        return mUserFirstName;
-    }
-    public String getmUserLastName() {
-        return mUserLastName;
-    }
-    public String getmUserAvatarPath() {
-        return mUserAvatarPath;
-    }*/
-
-
-
-
-
-
-
-
 
     private boolean requestFromRefreshClientTokenFlag = false;
+    /**
+     * get access token, based on the api key received from the plugin
+     * and save the access token in SPLTLoginPluginConstants.strAccessToken
+     * @param context
+     */
     private void requestAccessToken(final Context context) {
         CompanyTokenService companyTokenService = new CompanyTokenService(context);
         companyTokenService.setCompanyTokenServiceListener(new CompanyTokenService.ICompanyTokenService() {
@@ -499,7 +675,7 @@ public class SPLTAuth0LoginUtility {
                                 SPLTLoginPluginConstants.strAccessToken,
                                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
 
-                        Log.d(TAG, "companyTokenServiceResponse: SPLTLoginPluginConstants.strAccessToken==>"+ SPLTLoginPluginConstants.strAccessToken);
+                        Log.d(TAG, "companyTokenServiceResponse: SPLTLoginPluginConstants.strAccessToken==>"+SPLTLoginPluginConstants.strAccessToken);
                         if(requestFromRefreshClientTokenFlag) {
                             requestFromRefreshClientTokenFlag = false;
                             // call back the refreshClientToken now
@@ -521,13 +697,19 @@ public class SPLTAuth0LoginUtility {
         });
         companyTokenService.requestForToken(SPLTLoginPluginConstants.apiKey, ApplicationConstantURL.getInstance().TOKEN_URL);
     }
+
+    /**
+     * refresh the existing client token
+     * and save the client token in SPLTLoginPluginConstants.strClientToken
+     * @param context
+     */
     private void refreshClientToken(final Context context) {
         String accessToken = SharedPreferencesUtil.getInstance(context).getSharedPreference(
                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
         if(accessToken != null && accessToken.length() > 0) {
             SPLTLoginPluginConstants.strAccessToken = accessToken;
-            Log.d(TAG, "refreshClientToken: From SharedPreference SPLTLoginPluginConstants.strAccessToken==>"+ SPLTLoginPluginConstants.strAccessToken);
+            Log.d(TAG, "refreshClientToken: From SharedPreference SPLTLoginPluginConstants.strAccessToken==>"+SPLTLoginPluginConstants.strAccessToken);
         }
 
         if(SPLTLoginPluginConstants.strAccessToken == null || SPLTLoginPluginConstants.strAccessToken.length() == 0) {
@@ -546,7 +728,7 @@ public class SPLTAuth0LoginUtility {
                         String idToken = ACTUAL_RESPONSE;
                         SPLTLoginPluginConstants.strClientToken = idToken;
 
-                        Log.d(TAG, "clientTokenResponse: SPLTLoginPluginConstants.strClientToken==>"+ SPLTLoginPluginConstants.strClientToken);
+                        Log.d(TAG, "clientTokenResponse: SPLTLoginPluginConstants.strClientToken==>"+SPLTLoginPluginConstants.strClientToken);
 
                         SharedPreferencesUtil.getInstance(context).addToSharedPreference(
                                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
