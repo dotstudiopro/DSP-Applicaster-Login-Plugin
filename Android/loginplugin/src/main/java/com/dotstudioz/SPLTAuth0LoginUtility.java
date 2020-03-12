@@ -237,11 +237,8 @@ public class SPLTAuth0LoginUtility {
         Log.d(TAG, "showLoginController: CALLED");
         mContext = context;
 
-        if((SPLTLoginPluginConstants.apiKey == null ||
-                (SPLTLoginPluginConstants.apiKey != null && SPLTLoginPluginConstants.apiKey.length() == 0)) &&
-                (SPLTLoginPluginConstants.auth0ClientId == null ||
-                        (SPLTLoginPluginConstants.auth0ClientId != null && SPLTLoginPluginConstants.auth0ClientId.length() == 0))
-        ) {
+        if(SPLTLoginPluginConstants.apiKey != null && SPLTLoginPluginConstants.apiKey.length() > 0 &&
+                SPLTLoginPluginConstants.auth0ClientId != null && SPLTLoginPluginConstants.auth0ClientId.length() > 0) {
             Map<String, Object> parametersMap = ParameterBuilder
                     .newAuthenticationBuilder()
                     .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
