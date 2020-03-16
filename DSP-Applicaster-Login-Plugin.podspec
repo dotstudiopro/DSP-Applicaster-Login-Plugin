@@ -20,12 +20,12 @@ Pod::Spec.new do |s|
       s.resources = []
       c.frameworks = 'UIKit'
       c.source_files = 'iOS/PluginClasses/*.{swift,h,m}'
-      # c.source_files = 'iOS/PluginClasses/objects/*.{swift,h,m}'
-      # c.source_files = 'iOS/PluginClasses/api/*.{swift,h,m}'
-      # c.source_files = 'iOS/PluginClasses/login/*.{swift,h,m}'
-      # c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
+      c.source_files = 'iOS/PluginClasses/objects/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/api/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/login/*.{swift,h,m}'
+      c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
       c.dependency 'ZappPlugins'
-      # c.dependency 'SwiftyStoreKit', '~> 0.15'
+      c.dependency 'SwiftyStoreKit', '~> 0.15'
     end
                   
     s.xcconfig =  { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
