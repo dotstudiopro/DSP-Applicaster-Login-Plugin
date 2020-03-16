@@ -10,7 +10,7 @@
 	"git@github.com:dotstudiopro/DSP-Applicaster-Login-Plugin.git"
   ],
   "dependency_name": "Dotstudio",
-  "dependency_version": "0.0.19",
+  "dependency_version": "0.0.20",
   "platform": "ios",
   "manifest_version": "0.1.1",
   "author_email": "ketan@dotstudiopro.com",
