@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
       c.source_files = 'iOS/PluginClasses/objects/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/api/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/login/*.{swift,h,m}'
-      c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
+      # c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
       c.dependency 'ZappPlugins'
       # c.dependency 'SwiftyStoreKit', '~> 0.15'
     end

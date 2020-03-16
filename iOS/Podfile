@@ -15,7 +15,7 @@ target 'DSP-Applicaster-Login-Plugin' do
     pod 'Alamofire'
 #    pod 'Auth0'
     pod 'Lock', '~> 2.15.0'
-    pod 'SwiftyStoreKit', '~> 0.15'
+#    pod 'SwiftyStoreKit', '~> 0.15'
 #    pod 'Dotstudio', :path => 'DSP-Applicaster-Login-Plugin.podspec'
 end
 

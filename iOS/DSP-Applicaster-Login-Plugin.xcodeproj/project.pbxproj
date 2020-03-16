@@ -17,10 +17,7 @@
 		6CAA551D23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA551C23F6D5C60036E3D5 /* DSP_Applicaster_Login_PluginUITests.swift */; };
 		6CBDE2BD241BCDAE00E91807 /* SPLTSubscriptionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AB241BCDAE00E91807 /* SPLTSubscriptionProduct.swift */; };
 		6CBDE2BE241BCDAE00E91807 /* SPLTChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AC241BCDAE00E91807 /* SPLTChannel.swift */; };
-		6CBDE2BF241BCDAE00E91807 /* SPLTSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AE241BCDAE00E91807 /* SPLTSubscribeViewController.swift */; };
-		6CBDE2C0241BCDAE00E91807 /* SPLTSubscriptionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AF241BCDAE00E91807 /* SPLTSubscriptionUtility.swift */; };
 		6CBDE2C1241BCDAE00E91807 /* subscribe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B0241BCDAE00E91807 /* subscribe.storyboard */; };
-		6CBDE2C2241BCDAE00E91807 /* SPLTSubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B1241BCDAE00E91807 /* SPLTSubscriptionCell.swift */; };
 		6CBDE2C3241BCDAE00E91807 /* LoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B2241BCDAE00E91807 /* LoginPlugin.swift */; };
 		6CBDE2C4241BCDAE00E91807 /* SPLTTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B4241BCDAE00E91807 /* SPLTTokenAPI.swift */; };
 		6CBDE2C5241BCDAE00E91807 /* SPLTAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B5241BCDAE00E91807 /* SPLTAPI.swift */; };
@@ -435,20 +432,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CBDE2BF241BCDAE00E91807 /* SPLTSubscribeViewController.swift in Sources */,
 				6CBDE2BE241BCDAE00E91807 /* SPLTChannel.swift in Sources */,
 				6CBDE2C4241BCDAE00E91807 /* SPLTTokenAPI.swift in Sources */,
 				6CBDE2C6241BCDAE00E91807 /* SPLTSubscriptionAPI.swift in Sources */,
 				6CBDE2C7241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift in Sources */,
 				6CBDE2CA241BCDAE00E91807 /* DSUtility.swift in Sources */,
 				6CBDE2C5241BCDAE00E91807 /* SPLTAPI.swift in Sources */,
-				6CBDE2C0241BCDAE00E91807 /* SPLTSubscriptionUtility.swift in Sources */,
 				6CBDE2BD241BCDAE00E91807 /* SPLTSubscriptionProduct.swift in Sources */,
 				6CBDE2C3241BCDAE00E91807 /* LoginPlugin.swift in Sources */,
 				6CBDE2C8241BCDAE00E91807 /* SPLTAuth0SessionManager.swift in Sources */,
 				6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */,
 				6CBDE2C9241BCDAE00E91807 /* SPLTLoginPluginConstants.swift in Sources */,
-				6CBDE2C2241BCDAE00E91807 /* SPLTSubscriptionCell.swift in Sources */,
 				6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
