@@ -24,13 +24,37 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin extends BaseLoginContract implements GenericPluginI, PluginScreen {
+public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract, GenericPluginI, PluginScreen {
 
     private static String TAG = "LoginPlugin";
+    public Context mContext;
 
     @Override
     public void executeOnApplicationReady(Context context, HookListener listener) {
-        super.executeOnApplicationReady(context, listener);
+        if(context != null) {
+            mContext = context;
+        }
+        /*super.executeOnApplicationReady(context, listener);
+        Log.d(TAG, "executeOnApplicationReady: CALLED");
+        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        if(SPLTLoginPluginConstants.show_on_startup) {
+            SPLTAuth0LoginUtility.getInstance().initialize(context);
+            SPLTAuth0LoginUtility.getInstance().login(context);
+        }*/
+    }
+
+    /***
+     * this function called after Plugins loaded, you can add logic that not related to the application data
+     * as Zapp strings or applicaster models.
+     * @param context APIntroActivity
+     * @param listener listener to continue the application flow after execution finished.
+     */
+    @Override
+    public void executeOnStartup(Context context, HookListener listener) {
+        if(context != null) {
+            mContext = context;
+        }
         Log.d(TAG, "executeOnApplicationReady: CALLED");
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
@@ -52,8 +76,111 @@ public class LoginPlugin extends BaseLoginContract implements GenericPluginI, Pl
         // TODO:
     }
 
+    /**
+     * This method performs login in the current provider.
+     *
+     * @param context
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     * @param callback         The callback to be invoked when the login process is done.
+     */
+    @Override
+    public void login(Context context, Map additionalParams, Callback callback) {
+        Log.d(TAG, "login: CALLED");
+        Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+        SPLTAuth0LoginUtility.getInstance().login(context, new SPLTAuth0LoginUtility.ILoginPlugin() {
+            @Override
+            public void loginResponse(boolean result, String token) {
+                callback.onResult(result);
+            }
+        });
+    }
+
+    /**
+     * This method performs login in the current provider.
+     * This login method is being called before trying to play an item.
+     *
+     * @param context
+     * @param playable         The playable we want to perform login for.
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     * @param callback         The callback to be invoked when the login process is done.
+     */
+    @Override
+    public void login(Context context, Playable playable, Map additionalParams, Callback callback) {
+        Log.d(TAG, "login: CALLED");
+        Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+        SPLTAuth0LoginUtility.getInstance().login(context, new SPLTAuth0LoginUtility.ILoginPlugin() {
+            @Override
+            public void loginResponse(boolean result, String token) {
+                callback.onResult(result);
+            }
+        });
+    }
+
+    /**
+     * Call this method in order to perform logout from the current provider.
+     *
+     * @param context
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     * @param callback         The callback to be invoked when the logout process is done.
+     * @return
+     */
+    @Override
+    public void logout(Context context, Map additionalParams, Callback callback) {
+        Log.d(TAG, "logout: CALLED");
+        Log.d(TAG, "logout: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "logout: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+        SPLTAuth0LoginUtility.getInstance().logout(context);
+        if(callback != null)
+            callback.onResult(true);
+    }
+
     public boolean isItemLocked(Object model) {
         return false;
+    }
+
+    /**
+     * @return true if the login provider has a valid token - in most cases it would be just checking the the token is persisted.
+     * This method shouldn't consider authorization for this token and user - means you don't need to really validate the token is
+     */
+    @Override
+    public boolean isTokenValid() {
+        Log.d(TAG, "isTokenValid: CALLED");
+        Log.d(TAG, "isTokenValid: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
+        Log.d(TAG, "isTokenValid: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        boolean isClientTokenValid = false;
+        if(mContext != null) {
+            SPLTAuth0LoginUtility.getInstance().initialize(mContext);
+            isClientTokenValid = SPLTAuth0LoginUtility.getInstance().isClientTokenValid();
+        }
+        return isClientTokenValid;
+    }
+
+    /**
+     * @return The token held by the current login provider.
+     */
+    @Override
+    public String getToken() {
+        if(mContext != null) {
+            SPLTAuth0LoginUtility.getInstance().initialize(mContext);
+            return SPLTAuth0LoginUtility.getInstance().getClientToken(mContext);
+        }
+        return null;
+    }
+
+    /**
+     * This method allows external screens / JavaScript / React to set the token.
+     *
+     * @param token The new token.
+     */
+    @Override
+    public void setToken(String token) {
+        SPLTAuth0LoginUtility.getInstance().initialize(mContext);
+        SPLTAuth0LoginUtility.getInstance().setClientTokenFromExternalInterface(mContext, token);
     }
 
     /**
@@ -115,5 +242,22 @@ public class LoginPlugin extends BaseLoginContract implements GenericPluginI, Pl
     @Override
     public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
         return null;
+    }
+
+    /**
+     * This interface is being deprecated due to not passing all information about plugin
+     * PLEASE USE GenericPluginI instead
+     * initialization of the player plugin configuration with a Map params
+     *
+     * @param params
+     */
+    @Override
+    public void setPluginConfigurationParams(Map params) {
+
+    }
+
+    @Override
+    public boolean handlePluginScheme(Context context, Map<String, String> data) {
+        return false;
     }
 }

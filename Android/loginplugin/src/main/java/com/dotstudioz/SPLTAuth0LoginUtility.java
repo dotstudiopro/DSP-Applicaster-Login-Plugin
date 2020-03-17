@@ -73,6 +73,8 @@ public class SPLTAuth0LoginUtility {
         } else {
             requestAccessToken(context);
         }
+
+        setClientTokenFromSharedPreference(context);
     }
     private void initializeAPIDomain() {
         ApplicationConstantURL.API_DOMAIN = "http://api.myspotlight.tv"; //PRODUCTION SERVER
@@ -230,8 +232,17 @@ public class SPLTAuth0LoginUtility {
         return false;
     }
 
+    public interface ILoginPlugin {
+        public void loginResponse(boolean result, String token);
+    }
     public void login(Context context) {
         showLoginController(context);
+    }
+    public ILoginPlugin iLoginPlugin;
+    public void login(Context context, ILoginPlugin iLP) {
+        if(iLP != null)
+            iLoginPlugin = iLP;
+            showLoginController(context);
     }
     private void showLoginController(Context context) {
         Log.d(TAG, "showLoginController: CALLED");
@@ -326,10 +337,10 @@ public class SPLTAuth0LoginUtility {
             d = context.getResources().getDrawable(R.drawable.dotstudiopro_logo_black);
         }
 
-        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, "Dotstudioz");
-        String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.titleColor, "#000000");;
-        String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
-        String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, "#d3d3d3");
+        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, SPLTLoginPluginConstants.defaultTitle);
+        String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.titleColor, SPLTLoginPluginConstants.defaultTitleColor);;
+        String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, SPLTLoginPluginConstants.defaultHeaderColor);
+        String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, SPLTLoginPluginConstants.defaultHeaderColor);
 
         int initialScreenToUse = 0;
 
@@ -387,13 +398,27 @@ public class SPLTAuth0LoginUtility {
         @Override
         public void onCanceled() {
             Log.d(TAG, "onCanceled: CALLED!!!");
+            sendLoginResponse(false);
         }
 
         @Override
         public void onError(LockException error){
             Toast.makeText(mContext, "Log In - Error Occurred", Toast.LENGTH_SHORT).show();
+            sendLoginResponse(false);
         }
     };
+    public void sendLoginResponse(boolean flag) {
+        if(iLoginPlugin != null) {
+            if(!flag) {
+                iLoginPlugin.loginResponse(false, null);
+            } else {
+                if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0)
+                    iLoginPlugin.loginResponse(true, SPLTLoginPluginConstants.strClientToken);
+                else
+                    iLoginPlugin.loginResponse(false, null);
+            }
+        }
+    }
     private UserProfile mUserProfile;
     private Auth0 mAuth0;
     private String mUserEmailId;
@@ -451,6 +476,17 @@ public class SPLTAuth0LoginUtility {
     }
 
     /**
+     * setting the client token if passed from external screens / JavaScript / React to set the token.
+     * @param context
+     * @param clientToken
+     */
+    public void setClientTokenFromExternalInterface(Context context, String clientToken) {
+        if(context != null) {
+            mContext = context;
+            setClientTokenAndUserDetails(clientToken);
+        }
+    }
+    /**
      * extract the user details from the client token
      * @param clientToken
      */
@@ -490,36 +526,41 @@ public class SPLTAuth0LoginUtility {
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
                 SPLTLoginPluginConstants.strClientToken,
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
+
+        if(iLoginPlugin != null)
+            sendLoginResponse(true);
     }
 
     /**
      * validate the time SPLTLoginPluginConstants.strClientToken's expire variable
+     * return false if client token is expired
+     * return true if the client token is still valid
      * @return
      */
-    public boolean isClientTokenExpired() {
+    public boolean isClientTokenValid() {
         if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
             try {
                 Base64 decoder = new Base64(true);
                 byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
                 String s = new String(secret);
                 JSONObject jsonObject = new JSONObject(s);
-                Log.d(TAG, "isClientTokenExpired: CALLED");
+                Log.d(TAG, "isClientTokenValid: CALLED");
 
                 if (jsonObject.has("expires")) {
                     Date dt = new Date(jsonObject.getLong("expires"));
-                    Log.d(TAG, "isClientTokenExpired: Expiry Date From token==>" + dt.toString());
+                    Log.d(TAG, "isClientTokenValid: Expiry Date From token==>" + dt.toString());
                     Date currentDate = new Date();
-                    Log.d(TAG, "isClientTokenExpired: Current Date==>" + currentDate.toString());
+                    Log.d(TAG, "isClientTokenValid: Current Date==>" + currentDate.toString());
 
                     if (dt.compareTo(currentDate) > 0) {
-                        Log.d(TAG, "isClientTokenExpired: token is not expired");
+                        Log.d(TAG, "isClientTokenValid: token is not expired");
                         return true;
                     } else {
-                        Log.d(TAG, "isClientTokenExpired: token is expired");
+                        Log.d(TAG, "isClientTokenValid: token is expired");
                         return false;
                     }
                 } else {
-                    Log.d(TAG, "isClientTokenExpired: token is expired");
+                    Log.d(TAG, "isClientTokenValid: token is expired");
                     return false;
                 }
 
@@ -551,7 +592,7 @@ public class SPLTAuth0LoginUtility {
             Log.d(TAG, "checkIfUserAlreadyAuthenticated: FALSE==>"+SPLTLoginPluginConstants.strClientToken);
             return false;
         } else {
-            setTokenFromSharedPreference(context);
+            setClientTokenFromSharedPreference(context);
             return true;
         }
     }
@@ -560,7 +601,7 @@ public class SPLTAuth0LoginUtility {
      * read client token from shared preference and save it in SPLTLoginPluginConstants.strClientToken
      * @param context
      */
-    private void setTokenFromSharedPreference(Context context) {
+    private void setClientTokenFromSharedPreference(Context context) {
         String sp = SharedPreferencesUtil.getInstance(context).getSharedPreference(
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
@@ -742,5 +783,17 @@ public class SPLTAuth0LoginUtility {
             });
             clientTokenRefreshClass.refreshExistingClientToken(SPLTLoginPluginConstants.strAccessToken, SPLTLoginPluginConstants.strClientToken);
         }
+    }
+
+    /**
+     * returns the stored client token if present in the shared preference
+     * @param context
+     * @return
+     */
+    public String getClientToken(Context context) {
+        if(checkIfUserAlreadyAuthenticated(context))
+            return SPLTLoginPluginConstants.strClientToken;
+        else
+            return null;
     }
 }

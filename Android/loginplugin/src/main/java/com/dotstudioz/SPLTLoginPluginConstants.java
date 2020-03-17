@@ -33,6 +33,10 @@ public class SPLTLoginPluginConstants {
     public static String title;// = "Dotstudioz";
     public static String TITLE_KEY = "title";
 
+    public static String defaultTitle = "Dotstudioz";
+    public static String defaultTitleColor = "#000000";
+    public static String defaultHeaderColor = "#d3d3d3";
+
     /*public static String apiKey;
     public static String auth0ClientId;*/
     public static String apiKey = "a12878949f4ea52703ab6a07c662b31895886cea";
