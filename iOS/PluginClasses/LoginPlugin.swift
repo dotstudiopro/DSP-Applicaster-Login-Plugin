@@ -32,30 +32,37 @@ import JWTDecode
     
     public required override init() {
         super.init()
+        self.initializeConstants()
+    }
+    
+    func initializeConstants() {
+        if let strClientToken = self.keychain.string(forKey: "clientToken") {
+            SPLTLoginPluginUtility.strClientToken = strClientToken
+        }
     }
     
     func parseConfigurationJSON() {
         if let show_on_startup = configurationJSON?["show_on_startup"] as? String {
-            SPLTLoginPluginConstants.show_on_startup = show_on_startup.boolValue()
+            SPLTLoginPluginUtility.show_on_startup = show_on_startup.boolValue()
         }
         if let apiKey = configurationJSON?["apiKey"] as? String {
-            SPLTLoginPluginConstants.apiKey = apiKey
+            SPLTLoginPluginUtility.apiKey = apiKey
         }
         if let auth0ClientId = configurationJSON?["auth0ClientId"] as? String {
-            SPLTLoginPluginConstants.auth0ClientId = auth0ClientId
+            SPLTLoginPluginUtility.auth0ClientId = auth0ClientId
         }
 
         if let strBackgroundColor = configurationJSON?["backgroundColor"] as? String,
             let backgroundColor = UIColor(argbHexString: strBackgroundColor) {
-            SPLTLoginPluginConstants.backgroundColor = backgroundColor
+            SPLTLoginPluginUtility.backgroundColor = backgroundColor
         }
         if let strHeaderColor = configurationJSON?["headerColor"] as? String,
             let headerColor = UIColor(argbHexString: strHeaderColor) {
-            SPLTLoginPluginConstants.headerColor = headerColor
+            SPLTLoginPluginUtility.headerColor = headerColor
         }
         if let strTitleColor = configurationJSON?["titleColor"] as? String,
             let titleColor = UIColor(argbHexString: strTitleColor) {
-            SPLTLoginPluginConstants.titleColor = titleColor
+            SPLTLoginPluginUtility.titleColor = titleColor
         }
     }
     
@@ -79,8 +86,8 @@ import JWTDecode
     */
     @objc func executeOnApplicationReady(displayViewController: UIViewController?, completion: (() -> Void)?) {
         self.displayViewController = displayViewController
-        if SPLTLoginPluginConstants.show_on_startup {
-            SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
+        if SPLTLoginPluginUtility.show_on_startup {
+            SPLTAuth0LoginUtility.shared.showLoginAndSubscriptionController(viewController: displayViewController!, completion: { (bSuccess) in
                 print("success")
             }) { (error) in
                 print("error")
@@ -122,7 +129,7 @@ import JWTDecode
      Getter to the user Token usually can be used for authentication check
     */
     public func getUserToken() -> String {
-        if let strClientToken = SPLTLoginPluginConstants.strClientToken {
+        if let strClientToken = SPLTLoginPluginUtility.strClientToken {
             return strClientToken
         }
         return ""
@@ -134,7 +141,7 @@ import JWTDecode
      */
     public func setUserToken(token: String?) {
         if let strClientToken = token {
-            SPLTLoginPluginConstants.strClientToken = strClientToken
+            SPLTLoginPluginUtility.strClientToken = strClientToken
         }
     }
     
@@ -225,7 +232,7 @@ import JWTDecode
     
 //MARK: Private
     private func isTokenValid() -> Bool {
-        return !self.isTokenExpired()
+        return !SPLTLoginPluginUtility.shared.isTokenExpired()
         // check JWT token & validate for expiry
 //        var retVal = false
 //        if let expirationDate = self.getUserExpirationDate(),
@@ -238,59 +245,6 @@ import JWTDecode
 //        return retVal
     }
     
-    open func isTokenExpired() -> Bool {
-        if self.isAccessTokenExpired() {
-            return true
-        }
-        if self.isClientTokenExpired() {
-            return true
-        }
-        return false
-    }
-    open func isAccessTokenExpired() -> Bool {
-        if let strAccessToken = SPLTLoginPluginConstants.strAccessToken {
-            do {
-                let jwt = try decode(jwt: strAccessToken)
-                if let iExpiryMiliseconds = jwt.body["expires"] as? Int {
-                    let iCurMiliseconds = Int(Date().timeIntervalSince1970 * 1000)
-                    print(iExpiryMiliseconds)
-                    print(iCurMiliseconds)
-                    if iExpiryMiliseconds < iCurMiliseconds {
-                        print("Access Token Expired")
-                        return true
-                    } else {
-                        print("Access Token not Expired")
-                        return false
-                    }
-                }
-            } catch {
-                print("Something went wrong!")
-            }
-        }
-        return true // return true as access token is not available.
-    }
-    open func isClientTokenExpired() -> Bool {
-        if let strClientToken = SPLTLoginPluginConstants.strClientToken {
-            do {
-                let jwt = try decode(jwt: strClientToken)
-                if let iExpiryMiliseconds = jwt.body["expires"] as? Int {
-                    let iCurMiliseconds = Int(Date().timeIntervalSince1970 * 1000)
-                    print(iExpiryMiliseconds)
-                    print(iCurMiliseconds)
-                    if iExpiryMiliseconds < iCurMiliseconds {
-                        print("Client Token Expired")
-                        return true
-                    } else {
-                        print("Client Token not Expired")
-                    }
-                }
-                
-            } catch {
-                print("Something went wrong!")
-            }
-        }
-        return false
-    }
 }
 
 

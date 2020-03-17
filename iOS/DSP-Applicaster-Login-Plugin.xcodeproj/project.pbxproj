@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C9BB0E4241FB59500B470A8 /* SPLTSubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B1241BCDAE00E91807 /* SPLTSubscriptionCell.swift */; };
+		6C9BB0E5241FB5A000B470A8 /* SPLTSubscriptionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AF241BCDAE00E91807 /* SPLTSubscriptionUtility.swift */; };
+		6C9BB0E6241FB5A300B470A8 /* SPLTSubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2AE241BCDAE00E91807 /* SPLTSubscribeViewController.swift */; };
 		6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54F423F6D5C40036E3D5 /* AppDelegate.swift */; };
 		6CAA54F823F6D5C40036E3D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CAA54F623F6D5C40036E3D5 /* Main.storyboard */; };
 		6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA54FE23F6D5C40036E3D5 /* ViewController.swift */; };
@@ -24,7 +27,7 @@
 		6CBDE2C6241BCDAE00E91807 /* SPLTSubscriptionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B6241BCDAE00E91807 /* SPLTSubscriptionAPI.swift */; };
 		6CBDE2C7241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B8241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift */; };
 		6CBDE2C8241BCDAE00E91807 /* SPLTAuth0SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2B9241BCDAE00E91807 /* SPLTAuth0SessionManager.swift */; };
-		6CBDE2C9241BCDAE00E91807 /* SPLTLoginPluginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginConstants.swift */; };
+		6CBDE2C9241BCDAE00E91807 /* SPLTLoginPluginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginUtility.swift */; };
 		6CBDE2CA241BCDAE00E91807 /* DSUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBDE2BC241BCDAE00E91807 /* DSUtility.swift */; };
 		6F3B664705CE72D80ED1EE4F /* Pods_DSP_Applicaster_Login_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BE1E6EF55EFC978609C086 /* Pods_DSP_Applicaster_Login_Plugin.framework */; };
 /* End PBXBuildFile section */
@@ -78,7 +81,7 @@
 		6CBDE2B6241BCDAE00E91807 /* SPLTSubscriptionAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPLTSubscriptionAPI.swift; sourceTree = "<group>"; };
 		6CBDE2B8241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPLTAuth0LoginUtility.swift; sourceTree = "<group>"; };
 		6CBDE2B9241BCDAE00E91807 /* SPLTAuth0SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPLTAuth0SessionManager.swift; sourceTree = "<group>"; };
-		6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPLTLoginPluginConstants.swift; sourceTree = "<group>"; };
+		6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPLTLoginPluginUtility.swift; sourceTree = "<group>"; };
 		6CBDE2BC241BCDAE00E91807 /* DSUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSUtility.swift; sourceTree = "<group>"; };
 		9161B3D6A5017E75649C3FF6 /* Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		E23FC0C4F5E6FAEEA9881423 /* Pods-DSP-Applicaster-Login-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; path = "Target Support Files/Pods-DSP-Applicaster-Login-Plugin/Pods-DSP-Applicaster-Login-Plugin.release.xcconfig"; sourceTree = "<group>"; };
@@ -233,7 +236,7 @@
 			children = (
 				6CBDE2B8241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift */,
 				6CBDE2B9241BCDAE00E91807 /* SPLTAuth0SessionManager.swift */,
-				6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginConstants.swift */,
+				6CBDE2BA241BCDAE00E91807 /* SPLTLoginPluginUtility.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -438,11 +441,14 @@
 				6CBDE2C7241BCDAE00E91807 /* SPLTAuth0LoginUtility.swift in Sources */,
 				6CBDE2CA241BCDAE00E91807 /* DSUtility.swift in Sources */,
 				6CBDE2C5241BCDAE00E91807 /* SPLTAPI.swift in Sources */,
+				6C9BB0E5241FB5A000B470A8 /* SPLTSubscriptionUtility.swift in Sources */,
 				6CBDE2BD241BCDAE00E91807 /* SPLTSubscriptionProduct.swift in Sources */,
 				6CBDE2C3241BCDAE00E91807 /* LoginPlugin.swift in Sources */,
 				6CBDE2C8241BCDAE00E91807 /* SPLTAuth0SessionManager.swift in Sources */,
+				6C9BB0E6241FB5A300B470A8 /* SPLTSubscribeViewController.swift in Sources */,
 				6CAA54FF23F6D5C40036E3D5 /* ViewController.swift in Sources */,
-				6CBDE2C9241BCDAE00E91807 /* SPLTLoginPluginConstants.swift in Sources */,
+				6CBDE2C9241BCDAE00E91807 /* SPLTLoginPluginUtility.swift in Sources */,
+				6C9BB0E4241FB59500B470A8 /* SPLTSubscriptionCell.swift in Sources */,
 				6CAA54F523F6D5C40036E3D5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

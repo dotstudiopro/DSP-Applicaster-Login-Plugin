@@ -31,7 +31,7 @@ open class SPLTTokenAPI {
         // MARK: URLStringConvertible
         // apiKey : dpro : c681a9f6a3b9d51502cc3978298feaccfa9f500b
         var parameters: [String: String] = [:]
-        parameters["key"] = SPLTLoginPluginConstants.apiKey
+        parameters["key"] = SPLTLoginPluginUtility.apiKey
 
         AF.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             if (response.value != nil) {
@@ -42,7 +42,7 @@ open class SPLTTokenAPI {
                         if (bSuccess == true) {
                             if let strAccessToken = infoDict["token"] as? String {
                                 self.keychain.setString(strAccessToken, forKey: "accessToken")
-                                SPLTLoginPluginConstants.strAccessToken = strAccessToken
+                                SPLTLoginPluginUtility.strAccessToken = strAccessToken
 //                                SPLTRouter.strAccessToken = strAccessToken
 //                                UserDefaults.standard.setValue(strAccessToken, forKey: "strAccessToken")
 //                                UserDefaults.standard.synchronize()
@@ -92,7 +92,7 @@ open class SPLTTokenAPI {
                         if (bSuccess == true) {
                             if let strClientToken = infoDict["client_token"] as? String {
                                 self.keychain.setString(strClientToken, forKey: "clientToken")
-                                SPLTLoginPluginConstants.strClientToken = strClientToken
+                                SPLTLoginPluginUtility.strClientToken = strClientToken
 //                                SPLTRouter.strClientToken = strClientToken
 //                                UserDefaults.standard.setValue(strClientToken, forKey: "strClientToken")
 //                                UserDefaults.standard.synchronize()

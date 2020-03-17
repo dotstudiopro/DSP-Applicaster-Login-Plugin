@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "Dotstudio"
-    s.version          = '0.0.20'
+    s.version          = '0.0.21'
     s.summary          = "An Example of full screen plugin for Zapp iOS."
     s.description      = <<-DESC
     An Example of full screen plugin for Zapp iOS.
@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
       c.source_files = 'iOS/PluginClasses/objects/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/api/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/login/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/utility/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/subscription/*.{swift,h,m}'
       c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
       c.dependency 'ZappPlugins'
       # c.dependency 'SwiftyStoreKit', '~> 0.15'

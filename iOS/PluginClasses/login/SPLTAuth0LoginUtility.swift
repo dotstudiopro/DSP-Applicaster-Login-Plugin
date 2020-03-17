@@ -30,6 +30,24 @@ open class SPLTAuth0LoginUtility {
     
     public init() {}
 
+    open func showLoginAndSubscriptionController(viewController: UIViewController, initialLoginScreen: InitialLoginScreen = .login, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
+        
+        if let strClientToken = SPLTLoginPluginUtility.strClientToken {
+            // Login is already done. show subscription controller.
+            SPLTTokenAPI().refreshAllTokens { (strToken) in
+                let storyboardViewController = UIStoryboard(name: "subscribe", bundle: nil)
+                let spltSubscribeViewController = storyboardViewController.instantiateViewController(withIdentifier: "SPLTSubscribeViewController")
+                viewController.present(spltSubscribeViewController, animated: true) {
+                    // completion
+                }
+
+            }
+            
+        } else {
+            self.showLoginControllerFrom(viewController: viewController, initialLoginScreen: initialLoginScreen, completion: completion, completionError: completionError)
+        }
+    }
+    
     open func showLoginControllerFrom(viewController: UIViewController, initialLoginScreen: InitialLoginScreen = .login, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
         self.sourceViewController = viewController
         SPLTTokenAPI().getToken { (strToken) in
@@ -55,14 +73,6 @@ open class SPLTAuth0LoginUtility {
 
     }
     
-//    open func showLoginAndSubscriptionController(strCompanyId: String, initialLoginScreen: InitialLoginScreen, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: (_ error: NSError) -> Void) {
-//        SPLTAuth0LoginUtility.shared.showLoginControllerFrom(viewController: displayViewController!, completion: { (bSuccess) in
-//            print("success")
-//        }) { (error) in
-//            print("error")
-//            // handle error.
-//        }
-//    }
     open func showLoginController(strCompanyId: String, initialLoginScreen: InitialLoginScreen, completion: @escaping (_ bSuccess: Bool) -> Void, completionError: (_ error: NSError) -> Void) {
         // c: 5690134e97f8154731aeed2d
         if let sourceViewController = self.sourceViewController {
@@ -70,7 +80,7 @@ open class SPLTAuth0LoginUtility {
             
             
             Lock
-                .classic(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
+                .classic(clientId: SPLTLoginPluginUtility.auth0ClientId, domain: SPLTLoginPluginUtility.auth0Domain)
                 // withConnections, withOptions, withStyle, etc
                 .withOptions {
                     $0.closable = true
@@ -91,9 +101,9 @@ open class SPLTAuth0LoginUtility {
                     // style.
                     $0.logo = LazyImage(name: "LoginIcon")
                     $0.title = ""
-                    $0.backgroundColor = SPLTLoginPluginConstants.backgroundColor
-                    $0.headerColor = SPLTLoginPluginConstants.headerColor
-                    $0.titleColor = SPLTLoginPluginConstants.titleColor
+                    $0.backgroundColor = SPLTLoginPluginUtility.backgroundColor
+                    $0.headerColor = SPLTLoginPluginUtility.headerColor
+                    $0.titleColor = SPLTLoginPluginUtility.titleColor
 ////                        $0.inputTextColor = UIColor.white
 ////                    $0.primaryColor = UIColor.white
 //                    $0.secondaryButtonColor = UIColor.black
@@ -116,7 +126,7 @@ open class SPLTAuth0LoginUtility {
                         DispatchQueue.main.async {
                             if let strClientToken = SPLTAuth0SessionManager.shared.profile?.customClaims?["spotlight"] as? String {
                                 self.keychain.setString(strClientToken, forKey: "clientToken")
-                                SPLTLoginPluginConstants.strClientToken = strClientToken
+                                SPLTLoginPluginUtility.strClientToken = strClientToken
 //                                    SPLTRouter.strClientToken = strClientToken
 //                                    UserDefaults.standard.setValue(strClientToken, forKey: "strClientToken")
 //                                    UserDefaults.standard.synchronize()
