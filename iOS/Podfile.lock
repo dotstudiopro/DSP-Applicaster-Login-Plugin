@@ -3,6 +3,18 @@ PODS:
   - Auth0 (1.22.1):
     - JWTDecode
     - SimpleKeychain
+  - Dotstudio (0.0.24):
+    - Alamofire (= 4.9.1)
+    - Dotstudio/Core (= 0.0.24)
+    - Lock (~> 2.15.0)
+    - SimpleKeychain
+    - SwiftyStoreKit (~> 0.15)
+  - Dotstudio/Core (0.0.24):
+    - Alamofire (= 4.9.1)
+    - Lock (~> 2.15.0)
+    - SimpleKeychain
+    - SwiftyStoreKit (~> 0.15)
+    - ZappPlugins
   - JWTDecode (2.4.1)
   - Lock (2.15.0):
     - Auth0 (~> 1.21)
@@ -17,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
+  - Dotstudio (from `./../DSP-Applicaster-Login-Plugin.podspec`)
   - Lock (~> 2.15.0)
   - SwiftyStoreKit (~> 0.15)
   - ZappPlugins
@@ -33,9 +46,14 @@ SPEC REPOS:
     - SimpleKeychain
     - SwiftyStoreKit
 
+EXTERNAL SOURCES:
+  Dotstudio:
+    :path: "./../DSP-Applicaster-Login-Plugin.podspec"
+
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Auth0: c3dd0b6f9031e9cc38be2a6973f766f33ccbad83
+  Dotstudio: bc5ae01de51fcaaaeb2ddac98f9563ac61773caf
   JWTDecode: 4bd4da0cdf0f8154fd467fa48499f34ec057fb88
   Lock: 9473cacc444f424e191b3d62411a41f7f64ba2ca
   SimpleKeychain: 2c135c65e64cd4e7df7ec418407be83ee07ba1c2
@@ -43,6 +61,6 @@ SPEC CHECKSUMS:
   ZappCore: 58ad2f6fd7117de8a727feae38ce11681cd350b3
   ZappPlugins: efef8f1822300247ff70ed185e419e1056c066f3
 
-PODFILE CHECKSUM: c35a670cc814032432bd72ce7308e2539aa6355a
+PODFILE CHECKSUM: a980dda2546018d82441e9ef21eb5b5d1f9702ad
 
 COCOAPODS: 1.9.0
