@@ -49,7 +49,7 @@ public class SPLTAuth0SessionManager {
             return callback(SPLTAuth0SessionManagerError.noAccessToken)
         }
         Auth0
-            .authentication(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
+            .authentication(clientId: SPLTLoginPluginUtility.auth0ClientId, domain: SPLTLoginPluginUtility.auth0Domain)
             .userInfo(withAccessToken: accessToken)
             .start { result in
                 switch(result) {
@@ -67,7 +67,7 @@ public class SPLTAuth0SessionManager {
             return callback(SPLTAuth0SessionManagerError.noRefreshToken)
         }
         Auth0
-            .authentication(clientId: SPLTLoginPluginConstants.auth0ClientId, domain: SPLTLoginPluginConstants.auth0Domain)
+            .authentication(clientId: SPLTLoginPluginUtility.auth0ClientId, domain: SPLTLoginPluginUtility.auth0Domain)
 //            .authentication()
             .renew(withRefreshToken: refreshToken, scope: "openid profile offline_access")
             .start { result in

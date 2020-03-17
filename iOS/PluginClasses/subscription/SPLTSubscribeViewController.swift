@@ -446,13 +446,13 @@ extension SPLTSubscribeViewController : UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let SPLTSubscriptionCell: SPLTSubscriptionCell = tableView.dequeueReusableCell(withIdentifier: "SPLTSubscriptionCellIdentifier", for: indexPath) as? SPLTSubscriptionCell {
-            SPLTSubscriptionCell.selectionStyle = .none
-            SPLTSubscriptionCell.delegate = self
+        if let spltSubscriptionCell = tableView.dequeueReusableCell(withIdentifier: "SPLTSubscriptionCell", for: indexPath) as? SPLTSubscriptionCell {
+            spltSubscriptionCell.selectionStyle = .none
+            spltSubscriptionCell.delegate = self
                 let product = SPLTSubscriptionUtility.shared.subscriptionProducts[indexPath.row]
-                SPLTSubscriptionCell.setCellData(product, indexPath: indexPath)
+                spltSubscriptionCell.setCellData(product, indexPath: indexPath)
             
-            return SPLTSubscriptionCell
+            return spltSubscriptionCell
         } else {
             return UITableViewCell()
         }
