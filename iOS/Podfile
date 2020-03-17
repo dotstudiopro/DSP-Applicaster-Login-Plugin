@@ -12,7 +12,7 @@ end
 
 target 'DSP-Applicaster-Login-Plugin' do
     shared_pods
-    pod 'Alamofire'
+    pod 'Alamofire', '4.9.1'
 #    pod 'Auth0'
     pod 'Lock', '~> 2.15.0'
     pod 'SwiftyStoreKit', '~> 0.15'

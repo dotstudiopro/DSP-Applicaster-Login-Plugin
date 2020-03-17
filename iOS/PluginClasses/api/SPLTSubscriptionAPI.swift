@@ -15,17 +15,15 @@ open class SPLTSubscriptionAPI {
     
     open func getSubscriptionProducts(completion: @escaping (_ infoDict: [String: Any]) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
 
-        var headers: HTTPHeaders = []
+        var headers: [String: String] = [:]
         if let strAccessToken = SPLTLoginPluginUtility.strAccessToken {
-            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
-            headers.add(httpHeader)
+            headers["x-access-token"] = strAccessToken
         }
         if let strClientToken = SPLTLoginPluginUtility.strClientToken {
-            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
-            headers.add(httpHeader)
+            headers["x-client-token"] = strClientToken
         }
 
-        AF.request(SPLTRouter.getSubscriptionPlans, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(SPLTRouter.getSubscriptionPlans, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
             switch response.result {
             case .success( _):
                 if (response.value != nil) {
@@ -55,18 +53,16 @@ open class SPLTSubscriptionAPI {
     
     open func checkSubscriptionStatus(_ strChannelId: String, completion: @escaping (_ bSubscriptionUnlocked: Bool, _ bAdsEnabled: Bool) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
         
-        var headers: HTTPHeaders = []
+        var headers: [String: String] = [:]
         if let strAccessToken = SPLTLoginPluginUtility.strAccessToken {
-            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
-            headers.add(httpHeader)
+            headers["x-access-token"] = strAccessToken
         }
         if let strClientToken = SPLTLoginPluginUtility.strClientToken {
-            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
-            headers.add(httpHeader)
+            headers["x-client-token"] = strClientToken
         }
 
         
-        AF.request(SPLTRouter.checkSubscriptionStatus(strChannelId), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(SPLTRouter.checkSubscriptionStatus(strChannelId), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
             
             
             switch response.result {
@@ -114,17 +110,15 @@ open class SPLTSubscriptionAPI {
         jsonDict["notification_type"] = "INITIAL_BUY"
         jsonDict["product_id"] = strProductId //"monthly"
         
-        var headers: HTTPHeaders = []
+        var headers: [String: String] = [:]
         if let strAccessToken = SPLTLoginPluginUtility.strAccessToken {
-            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
-            headers.add(httpHeader)
+            headers["x-access-token"] = strAccessToken
         }
         if let strClientToken = SPLTLoginPluginUtility.strClientToken {
-            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
-            headers.add(httpHeader)
+            headers["x-client-token"] = strClientToken
         }
 
-        AF.request(SPLTRouter.subscriptionAppleReceiptPost, method: .post, parameters: jsonDict, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(SPLTRouter.subscriptionAppleReceiptPost, method: .post, parameters: jsonDict, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
             switch response.result {
             case .success(let data):
                 if (response.value != nil) {
@@ -152,17 +146,15 @@ open class SPLTSubscriptionAPI {
     
     open func getActiveSubscriptions(_ completion: @escaping (_ infoDict: [String: Any]) -> Void, completionError: @escaping (_ error: NSError) -> Void) {
         
-        var headers: HTTPHeaders = []
+        var headers: [String: String] = [:]
         if let strAccessToken = SPLTLoginPluginUtility.strAccessToken {
-            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
-            headers.add(httpHeader)
+            headers["x-access-token"] = strAccessToken
         }
         if let strClientToken = SPLTLoginPluginUtility.strClientToken {
-            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
-            headers.add(httpHeader)
+            headers["x-client-token"] = strClientToken
         }
 
-        AF.request(SPLTRouter.getActiveSubscriptions, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(SPLTRouter.getActiveSubscriptions, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
             switch response.result {
             case .success(let data):
                 if (response.value != nil) {

@@ -33,7 +33,7 @@ open class SPLTTokenAPI {
         var parameters: [String: String] = [:]
         parameters["key"] = SPLTLoginPluginUtility.apiKey
 
-        AF.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        Alamofire.request("https://api.myspotlight.tv/token", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             if (response.value != nil) {
                 if let infoDict = response.value as? [String: AnyObject] {
                     //self.delegate?.didReceiveChannels(infoDict)
@@ -75,17 +75,15 @@ open class SPLTTokenAPI {
 //            return
 //        }
         
-        var headers: HTTPHeaders = []
-        if let strAccessToken = self.keychain.string(forKey: "accessToken") {
-            let httpHeader = HTTPHeader(name: "x-access-token", value: strAccessToken)
-            headers.add(httpHeader)
+        var headers: [String: String] = [:]
+        if let strAccessToken = SPLTLoginPluginUtility.strAccessToken {
+            headers["x-access-token"] = strAccessToken
         }
-        if let strClientToken = self.keychain.string(forKey: "clientToken") {
-            let httpHeader = HTTPHeader(name: "x-client-token", value: strClientToken)
-            headers.add(httpHeader)
+        if let strClientToken = SPLTLoginPluginUtility.strClientToken {
+            headers["x-client-token"] = strClientToken
         }
         
-        AF.request("https://api.myspotlight.tv/users/token/refresh", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+        Alamofire.request("https://api.myspotlight.tv/users/token/refresh", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
             if (response.value != nil) {
                 if let infoDict = response.value as? [String: AnyObject] {
                     if let bSuccess = infoDict["success"] as? Bool {
