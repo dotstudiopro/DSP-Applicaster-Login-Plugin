@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "Dotstudio"
-    s.version          = '0.0.15'
+    s.version          = '0.0.22'
     s.summary          = "An Example of full screen plugin for Zapp iOS."
     s.description      = <<-DESC
     An Example of full screen plugin for Zapp iOS.
@@ -16,9 +16,10 @@ Pod::Spec.new do |s|
     s.requires_arc = true
     s.swift_version = '5.0'
 
-    s.ios.dependency 'Alamofire'
+    s.ios.dependency 'Alamofire', '~> 5.0'
     s.ios.dependency 'SimpleKeychain'
     s.ios.dependency 'Lock', '~> 2.15.0'
+    s.ios.dependency 'SwiftyStoreKit', '~> 0.15'
    
     s.subspec 'Core' do |c|
       s.resources = []
@@ -27,9 +28,11 @@ Pod::Spec.new do |s|
       c.source_files = 'iOS/PluginClasses/objects/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/api/*.{swift,h,m}'
       c.source_files = 'iOS/PluginClasses/login/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/utility/*.{swift,h,m}'
+      c.source_files = 'iOS/PluginClasses/subscription/*.{swift,h,m}'
       c.resources = 'iOS/PluginClasses/subscription/*.{storyboard,xcassets}'
       c.dependency 'ZappPlugins'
-      c.dependency 'SwiftyStoreKit', '~> 0.15'
+      # c.dependency 'SwiftyStoreKit', '~> 0.15'
     end
                   
     s.xcconfig =  { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
