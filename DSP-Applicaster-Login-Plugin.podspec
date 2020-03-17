@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = "Dotstudio"
-    s.version          = '0.0.23'
+    s.version          = '0.0.24'
     s.summary          = "An Example of full screen plugin for Zapp iOS."
     s.description      = <<-DESC
     An Example of full screen plugin for Zapp iOS.
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
     s.author           = { "Ketan Sakariya" => "ketan@dotstudiopro.com" }
     s.source           = { :git => "https://github.com/dotstudiopro/DSP-Applicaster-Login-Plugin.git", :tag => s.version.to_s }
   
-    s.ios.deployment_target  = "10.0"
-    s.platform     = :ios, '10.0'
+    s.ios.deployment_target  = "9.2"
+    s.platform     = :ios, '9.2'
     s.requires_arc = true
     s.swift_version = '5.0'
    
