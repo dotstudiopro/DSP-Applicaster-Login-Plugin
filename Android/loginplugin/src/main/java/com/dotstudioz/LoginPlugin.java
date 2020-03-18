@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract, GenericPluginI, PluginScreen {
+public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract, GenericPluginI, PluginScreen, HookScreen {
 
     private static String TAG = "LoginPlugin";
     public Context mContext;
@@ -241,6 +241,7 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
 
     @Override
     public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
+        System.out.println("generateFragment");
         return null;
     }
 
@@ -253,11 +254,59 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
      */
     @Override
     public void setPluginConfigurationParams(Map params) {
-
+        System.out.println("setPluginConfigurationParams: params==>"+params != null?params.toString():"");
     }
 
     @Override
     public boolean handlePluginScheme(Context context, Map<String, String> data) {
+        System.out.println("handlePluginScheme:data==>"+data!=null?data.toString():"");
         return false;
+    }
+
+    @NotNull
+    @Override
+    public HashMap<String, String> getHook() {
+        System.out.println("getHook");
+        return null;
+    }
+
+    @Override
+    public void setHook(@NotNull HashMap<String, String> hashMap) {
+        System.out.println("setHook:hashMap==>"+hashMap!=null?hashMap.toString():"");
+    }
+
+    @Override
+    public void executeHook(@NotNull Context context, @NotNull HookScreenListener hookScreenListener, @Nullable Map<String, ?> map) {
+        System.out.println("executeHook:map==>"+map != null?map.toString():"");
+    }
+
+    @NotNull
+    @Override
+    public HookScreenListener getListener() {
+        System.out.println("getListener");
+        return null;
+    }
+
+    @Override
+    public void hookDismissed() {
+        System.out.println("hookDismissed");
+    }
+
+    @Override
+    public boolean isFlowBlocker() {
+        System.out.println("isFlowBlocker");
+        return false;
+    }
+
+    @Override
+    public boolean isRecurringHook() {
+        System.out.println("isRecurringHook");
+        return false;
+    }
+
+    @Override
+    public boolean shouldPresent() {
+        System.out.println("shouldPresent");
+        return true;
     }
 }
