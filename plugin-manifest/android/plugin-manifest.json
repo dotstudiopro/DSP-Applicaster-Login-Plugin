@@ -9,9 +9,9 @@
     }
   ],
   "dependency_name": "com.github.dotstudiopro:DSP-Applicaster-Login-Plugin",
-  "dependency_version": "0.0.16",
+  "dependency_version": "0.0.27",
   "platform": "android",
-  "manifest_version": "0.1.1",
+  "manifest_version": "0.1.2",
   "author_email": "mohsin@dotstudioz.com",
   "author_name": "Mohsin Shaikh",
   "name": "DotstudioLogin",
@@ -27,6 +27,7 @@
   "deprecated_since_zapp_sdk": "",
   "unsupported_since_zapp_sdk": "",
   "react_native": false,
+  "preload": true,
   "custom_configuration_fields": [
     {
       "type": "text",
@@ -83,6 +84,21 @@
       "label": "Show on Start ?",
       "tooltip_text": "Turn this off if You don't want to show login screen on start."
     }
-
-  ]
+  ],
+  "hooks": {
+    "fields": [
+      {
+        "group": true,
+        "label": "Before Load",
+        "folded": true,
+        "fields": [
+          {
+            "key": "preload_plugins",
+            "type": "preload_plugins_selector",
+            "label": "Select Plugins"
+          }
+        ]
+      }
+    ]
+  }
 }

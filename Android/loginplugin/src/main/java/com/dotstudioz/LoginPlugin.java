@@ -241,7 +241,7 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
 
     @Override
     public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
-        System.out.println("generateFragment");
+        System.out.println("generateFragment screenMap==>"+screenMap != null?screenMap.toString():"");
         return null;
     }
 
