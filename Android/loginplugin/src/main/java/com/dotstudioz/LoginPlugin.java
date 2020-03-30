@@ -1,79 +1,47 @@
 package com.dotstudioz;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.applicaster.hook_screen.HookScreen;
 import com.applicaster.hook_screen.HookScreenListener;
 import com.applicaster.plugin_manager.GenericPluginI;
 import com.applicaster.plugin_manager.Plugin;
-import com.applicaster.plugin_manager.hook.ApplicationLoaderHookUpI;
-import com.applicaster.plugin_manager.login.BaseLoginContract;
 import com.applicaster.plugin_manager.hook.HookListener;
+import com.applicaster.plugin_manager.login.BaseLoginContract;
 import com.applicaster.plugin_manager.login.LoginContract;
 import com.applicaster.plugin_manager.playersmanager.Playable;
 import com.applicaster.plugin_manager.screen.PluginScreen;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract, GenericPluginI, PluginScreen, HookScreen {
+public class LoginPlugin extends BaseLoginContract implements LoginContract, GenericPluginI, HookScreen {
 
     private static String TAG = "LoginPlugin";
-    public Context mContext;
+
+    private Context mContext;
 
     @Override
     public void executeOnApplicationReady(Context context, HookListener listener) {
-        if(context != null) {
-            mContext = context;
-        }
-        /*super.executeOnApplicationReady(context, listener);
+        super.executeOnApplicationReady(context, listener);
+        mContext = context;
         Log.d(TAG, "executeOnApplicationReady: CALLED");
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
-        if(SPLTLoginPluginConstants.show_on_startup) {
-            SPLTAuth0LoginUtility.getInstance().initialize(context);
-            SPLTAuth0LoginUtility.getInstance().login(context);
-        }*/
-    }
-
-    /***
-     * this function called after Plugins loaded, you can add logic that not related to the application data
-     * as Zapp strings or applicaster models.
-     * @param context APIntroActivity
-     * @param listener listener to continue the application flow after execution finished.
-     */
-    @Override
-    public void executeOnStartup(Context context, HookListener listener) {
-        if(context != null) {
-            mContext = context;
-        }
-        Log.d(TAG, "executeOnApplicationReady: CALLED");
-        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
-        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
+        Log.d(TAG, "executeOnApplicationReady: SPLTLoginPluginConstants.show_on_startup==>"+SPLTLoginPluginConstants.show_on_startup);
         if(SPLTLoginPluginConstants.show_on_startup) {
             SPLTAuth0LoginUtility.getInstance().initialize(context);
             SPLTAuth0LoginUtility.getInstance().login(context);
         }
-    }
-
-    protected void logout(Context context, Map additionalParams) {
-        // TODO:
-    }
-
-    protected void login(Context context, Playable playable, Map additionalParams) {
-        // TODO:
-    }
-
-    protected void login(Context context, Map additionalParams) {
-        // TODO:
     }
 
     /**
@@ -85,6 +53,7 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
      */
     @Override
     public void login(Context context, Map additionalParams, Callback callback) {
+        mContext = context;
         Log.d(TAG, "login: CALLED");
         Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
@@ -108,6 +77,7 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
      */
     @Override
     public void login(Context context, Playable playable, Map additionalParams, Callback callback) {
+        mContext = context;
         Log.d(TAG, "login: CALLED");
         Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
@@ -130,6 +100,7 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
      */
     @Override
     public void logout(Context context, Map additionalParams, Callback callback) {
+        mContext = context;
         Log.d(TAG, "logout: CALLED");
         Log.d(TAG, "logout: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
         Log.d(TAG, "logout: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
@@ -139,61 +110,57 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
             callback.onResult(true);
     }
 
+    /**
+     * Implement this method in order to start the login process. At the end of your process - you must call the `notifyEvent` method.
+     *
+     * @param context
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     */
+    @Override
+    protected void login(Context context, Map additionalParams) {
+        mContext = context;
+        Log.d(TAG, "login: CALLED");
+    }
+
+    /**
+     * Implement this method in order to start the login process. At the end of your process - you must call the `notifyEvent` method.
+     *
+     * @param context
+     * @param playable         The playable we want to perform login for.
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     */
+    @Override
+    protected void login(Context context, Playable playable, Map additionalParams) {
+        mContext = context;
+        Log.d(TAG, "login: playable CALLED");
+    }
+
+    /**
+     * Implement this method in order to start the logout process. At the end of your process - you must call the `notifyEvent` method.
+     *
+     * @param context
+     * @param additionalParams Extra parameters you would like to provide to the current login provider.
+     */
+    @Override
+    protected void logout(Context context, Map additionalParams) {
+        mContext = context;
+        Log.d(TAG, "lgout: CALLED");
+    }
+
+    /**
+     * @param model The model we check for.
+     * @return true if the given model requires login (regardless of the user's login status). false otherwise.
+     */
+    @Override
     public boolean isItemLocked(Object model) {
-        return false;
+        Log.d(TAG, "isItemLocked: CALLED");
+        return true;
     }
 
-    /**
-     * @return true if the login provider has a valid token - in most cases it would be just checking the the token is persisted.
-     * This method shouldn't consider authorization for this token and user - means you don't need to really validate the token is
-     */
-    @Override
-    public boolean isTokenValid() {
-        Log.d(TAG, "isTokenValid: CALLED");
-        Log.d(TAG, "isTokenValid: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
-        Log.d(TAG, "isTokenValid: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
-        boolean isClientTokenValid = false;
-        if(mContext != null) {
-            SPLTAuth0LoginUtility.getInstance().initialize(mContext);
-            isClientTokenValid = SPLTAuth0LoginUtility.getInstance().isClientTokenValid();
-        }
-        return isClientTokenValid;
-    }
 
-    /**
-     * @return The token held by the current login provider.
-     */
-    @Override
-    public String getToken() {
-        if(mContext != null) {
-            SPLTAuth0LoginUtility.getInstance().initialize(mContext);
-            return SPLTAuth0LoginUtility.getInstance().getClientToken(mContext);
-        }
-        return null;
-    }
 
-    /**
-     * This method allows external screens / JavaScript / React to set the token.
-     *
-     * @param token The new token.
-     */
-    @Override
-    public void setToken(String token) {
-        SPLTAuth0LoginUtility.getInstance().initialize(mContext);
-        SPLTAuth0LoginUtility.getInstance().setClientTokenFromExternalInterface(mContext, token);
-    }
 
-    /**
-     * initialization of the player plugin configuration with a Plugin,
-     * which contains configuration
-     *
-     * @param plugin
-     */
-    @Override
-    public void setPluginModel(Plugin plugin) {
-        if(plugin != null && plugin.configuration != null)
-            readPluginParameters(plugin.configuration);
-    }
+
     private void readPluginParameters(Object obj) {
         if(obj != null) {
             if (obj instanceof List) {
@@ -222,6 +189,8 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
                         SPLTLoginPluginConstants.getInstance().show_on_startup = false;
                         if(((Map)obj).get(keyString).toString().equalsIgnoreCase("true"))
                             SPLTLoginPluginConstants.getInstance().show_on_startup = true;
+                    } else if(keyString.equals(SPLTLoginPluginConstants.VISIT_WEBSITE_MESSAGE_KEY)) {
+                        SPLTLoginPluginConstants.getInstance().visitWebsiteMessage = ((Map)obj).get(keyString).toString();
                     }
                 }
             } else {
@@ -230,83 +199,126 @@ public class LoginPlugin /*extends BaseLoginContract*/ implements LoginContract,
         }
     }
 
-    @Override
-    public void present(Context context, HashMap<String, Object> screenMap, Serializable dataSource, boolean isActivity) {
-        Log.d(TAG, "present: CALLED");
-        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>"+SPLTLoginPluginConstants.apiKey);
-        Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>"+SPLTLoginPluginConstants.auth0ClientId);
-        SPLTAuth0LoginUtility.getInstance().initialize(context);
-        SPLTAuth0LoginUtility.getInstance().login(context);
-    }
-
-    @Override
-    public Fragment generateFragment(HashMap<String, Object> screenMap, Serializable dataSource) {
-        System.out.println("generateFragment screenMap==>"+screenMap != null?screenMap.toString():"");
-        return null;
+    private void logd(String methodName, Object obj) {
+        if(obj != null) {
+            if (obj instanceof List) {
+                Log.d(TAG, "logd: "+methodName+" : Length==>"+((List)obj).size());
+            } else if (obj instanceof Map) {
+                Log.d(TAG, "logd: "+methodName+" : Length==>"+((Map)obj).size());
+                Iterator<String> itrk = ((Map)obj).keySet().iterator();
+                while(itrk.hasNext()) {
+                    String keyString = itrk.next();
+                    Log.d(TAG, "logd: "+keyString+"==>"+((Map)obj).get(keyString));
+                }
+            } else {
+                Log.d(TAG, "logd: "+methodName+" : Length==>"+obj.toString());
+            }
+        } else {
+            Log.d(TAG, "logd: "+methodName+" : Empty");
+        }
     }
 
     /**
-     * This interface is being deprecated due to not passing all information about plugin
-     * PLEASE USE GenericPluginI instead
-     * initialization of the player plugin configuration with a Map params
+     * initialization of the player plugin configuration with a Plugin,
+     * which contains configuration
      *
-     * @param params
+     * @param plugin
      */
     @Override
-    public void setPluginConfigurationParams(Map params) {
-        System.out.println("setPluginConfigurationParams: params==>"+params != null?params.toString():"");
-    }
-
-    @Override
-    public boolean handlePluginScheme(Context context, Map<String, String> data) {
-        System.out.println("handlePluginScheme:data==>"+data!=null?data.toString():"");
-        return false;
+    public void setPluginModel(Plugin plugin) {
+        if(plugin != null)
+            readPluginParameters(plugin.configuration);
     }
 
     @NotNull
     @Override
     public HashMap<String, String> getHook() {
-        System.out.println("getHook");
-        return null;
+        Log.d(TAG, "getHook: CALLED");
+        return hookScreen;
     }
 
     @Override
     public void setHook(@NotNull HashMap<String, String> hashMap) {
-        System.out.println("setHook:hashMap==>"+hashMap!=null?hashMap.toString():"");
+        Log.d(TAG, "setHook: CALLED");
+        this.hookScreen = hookScreen;
     }
 
+    HookScreenListener hookListener;
+    HashMap<String, String> hookScreen = new HashMap<>();
     @Override
     public void executeHook(@NotNull Context context, @NotNull HookScreenListener hookScreenListener, @Nullable Map<String, ?> map) {
-        System.out.println("executeHook:map==>"+map != null?map.toString():"");
+        mContext = context;
+        Log.d(TAG, "executeHook: CALLED");
+
+        this.hookListener = hookScreenListener;
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+
+        if(this.hookListener == null)
+            Log.d(TAG, "executeHook: this.hookListener is null");
+
+        if(map != null) {
+            Log.d(TAG, "executeHook: map==>"+map.toString());
+        }
+
+        String dspChannelId = "5bbc1a1c97f815395ed6dabc";
+        checkSubscription(context, dspChannelId);
+    }
+
+    private void hookCompleted(boolean flag) {
+        Log.d(TAG, "hookCompleted: CALLED, flag==>"+flag);
+        //flag = false;
+        if(this.hookListener != null) {
+            Log.d(TAG, "hookCompleted: flag==>"+flag);
+            if (flag) {
+                //Toast.makeText(mContext, "Subscribed!!!", Toast.LENGTH_SHORT).show();
+                this.hookListener.hookCompleted(null);
+            } else {
+                //Toast.makeText(mContext, "Not Subscribed!!!", Toast.LENGTH_SHORT).show();
+                SPLTSubscriptionUtility.getInstance().showSubscriptionAlertDialog(mContext, hookListener);
+                //this.hookListener.hookFailed(null);
+            }
+        }
+    }
+
+    private void checkSubscription(Context context, String dspChanId) {
+        SPLTSubscriptionUtility.getInstance().setISPLTSubscriptionUtilityHookInterface(new SPLTSubscriptionUtility.ISPLTSubscriptionUtilityHookInterface() {
+            @Override
+            public void spltSubscriptionUtilityHookCompleted(boolean flag) {
+                Log.d(TAG, "spltSubscriptionUtilityHookCompleted: CALLED!!!");
+                hookCompleted(flag);
+            }
+        });
+        SPLTSubscriptionUtility.getInstance().isSubscriptionValid(context, dspChanId);
     }
 
     @NotNull
     @Override
     public HookScreenListener getListener() {
-        System.out.println("getListener");
-        return null;
+        Log.d(TAG, "getListener: HookScreenListener CALLED");
+        return hookListener;
     }
 
     @Override
     public void hookDismissed() {
-        System.out.println("hookDismissed");
+        Log.d(TAG, "hookDismissed: CALLED");
+        getListener().hookFailed(null);
     }
 
     @Override
     public boolean isFlowBlocker() {
-        System.out.println("isFlowBlocker");
-        return false;
+        Log.d(TAG, "isFlowBlocker: CALLED");
+        return true;
     }
 
     @Override
     public boolean isRecurringHook() {
-        System.out.println("isRecurringHook");
-        return false;
+        Log.d(TAG, "isRecurringHook: CALLED");
+        return true;
     }
 
     @Override
     public boolean shouldPresent() {
-        System.out.println("shouldPresent");
+        Log.d(TAG, "shouldPresent: CALLED");
         return true;
     }
 }

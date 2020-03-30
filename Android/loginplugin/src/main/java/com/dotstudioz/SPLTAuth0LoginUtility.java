@@ -106,10 +106,10 @@ public class SPLTAuth0LoginUtility {
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
             if(accessToken != null && accessToken.length() > 0) {
-                SPLTLoginPluginConstants.strAccessToken = accessToken;
+                SPLTLoginPluginConstants.getInstance().strAccessToken = accessToken;
                 try {
                     Base64 decoder = new Base64(true);
-                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strAccessToken.split("\\.")[1]);
+                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strAccessToken.split("\\.")[1]);
                     String s = new String(secret);
                     JSONObject jsonObject = new JSONObject(s);
 
@@ -149,10 +149,10 @@ public class SPLTAuth0LoginUtility {
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
             if(accessToken != null && accessToken.length() > 0) {
-                SPLTLoginPluginConstants.strAccessToken = accessToken;
+                SPLTLoginPluginConstants.getInstance().strAccessToken = accessToken;
                 try {
                     Base64 decoder = new Base64(true);
-                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strAccessToken.split("\\.")[1]);
+                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strAccessToken.split("\\.")[1]);
                     String s = new String(secret);
                     JSONObject jsonObject = new JSONObject(s);
 
@@ -196,10 +196,10 @@ public class SPLTAuth0LoginUtility {
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
                     ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
             if(accessToken != null && accessToken.length() > 0) {
-                SPLTLoginPluginConstants.strAccessToken = accessToken;
+                SPLTLoginPluginConstants.getInstance().strAccessToken = accessToken;
                 try {
                     Base64 decoder = new Base64(true);
-                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strAccessToken.split("\\.")[1]);
+                    byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strAccessToken.split("\\.")[1]);
                     String s = new String(secret);
                     JSONObject jsonObject = new JSONObject(s);
 
@@ -412,8 +412,8 @@ public class SPLTAuth0LoginUtility {
             if(!flag) {
                 iLoginPlugin.loginResponse(false, null);
             } else {
-                if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0)
-                    iLoginPlugin.loginResponse(true, SPLTLoginPluginConstants.strClientToken);
+                if(SPLTLoginPluginConstants.getInstance().strClientToken != null && SPLTLoginPluginConstants.getInstance().strClientToken.length() > 0)
+                    iLoginPlugin.loginResponse(true, SPLTLoginPluginConstants.getInstance().strClientToken);
                 else
                     iLoginPlugin.loginResponse(false, null);
             }
@@ -491,11 +491,11 @@ public class SPLTAuth0LoginUtility {
      * @param clientToken
      */
     private void setClientTokenAndUserDetails(String clientToken) {
-        SPLTLoginPluginConstants.strClientToken = clientToken;
-        Log.d(TAG, "scrapeOutInformationFromClientToken: SPLTLoginPluginConstants.strClientToken==>"+SPLTLoginPluginConstants.strClientToken);
+        SPLTLoginPluginConstants.getInstance().strClientToken = clientToken;
+        Log.d(TAG, "scrapeOutInformationFromClientToken: SPLTLoginPluginConstants.getInstance().strClientToken==>"+SPLTLoginPluginConstants.getInstance().strClientToken);
 
         Base64 decoder = new Base64(true);
-        byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
+        byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strClientToken.split("\\.")[1]);
         String s = new String(secret);
         //Log.d("MainActivity", "String of secret:String of secret:" + s);
         try {
@@ -524,7 +524,7 @@ public class SPLTAuth0LoginUtility {
 
         SharedPreferencesUtil.getInstance(mContext).addToSharedPreference(
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
-                SPLTLoginPluginConstants.strClientToken,
+                SPLTLoginPluginConstants.getInstance().strClientToken,
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
 
         if(iLoginPlugin != null)
@@ -532,16 +532,16 @@ public class SPLTAuth0LoginUtility {
     }
 
     /**
-     * validate the time SPLTLoginPluginConstants.strClientToken's expire variable
+     * validate the time SPLTLoginPluginConstants.getInstance().strClientToken's expire variable
      * return false if client token is expired
      * return true if the client token is still valid
      * @return
      */
     public boolean isClientTokenValid() {
-        if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
+        if(SPLTLoginPluginConstants.getInstance().strClientToken != null && SPLTLoginPluginConstants.getInstance().strClientToken.length() > 0) {
             try {
                 Base64 decoder = new Base64(true);
-                byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
+                byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strClientToken.split("\\.")[1]);
                 String s = new String(secret);
                 JSONObject jsonObject = new JSONObject(s);
                 Log.d(TAG, "isClientTokenValid: CALLED");
@@ -588,8 +588,8 @@ public class SPLTAuth0LoginUtility {
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
 
         if(sp == null || sp.length() == 0) {
-            SPLTLoginPluginConstants.strClientToken = "";
-            Log.d(TAG, "checkIfUserAlreadyAuthenticated: FALSE==>"+SPLTLoginPluginConstants.strClientToken);
+            SPLTLoginPluginConstants.getInstance().strClientToken = "";
+            Log.d(TAG, "checkIfUserAlreadyAuthenticated: FALSE==>"+SPLTLoginPluginConstants.getInstance().strClientToken);
             return false;
         } else {
             setClientTokenFromSharedPreference(context);
@@ -598,7 +598,7 @@ public class SPLTAuth0LoginUtility {
     }
 
     /**
-     * read client token from shared preference and save it in SPLTLoginPluginConstants.strClientToken
+     * read client token from shared preference and save it in SPLTLoginPluginConstants.getInstance().strClientToken
      * @param context
      */
     private void setClientTokenFromSharedPreference(Context context) {
@@ -607,16 +607,16 @@ public class SPLTAuth0LoginUtility {
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
 
         if(sp == null || sp.length() == 0) {
-            SPLTLoginPluginConstants.strClientToken = "";
+            SPLTLoginPluginConstants.getInstance().strClientToken = "";
         } else {
-            SPLTLoginPluginConstants.strClientToken = sp;
-            Log.d(TAG, "checkIfUserAlreadyAuthenticated: TRUE==>"+SPLTLoginPluginConstants.strClientToken);
+            SPLTLoginPluginConstants.getInstance().strClientToken = sp;
+            Log.d(TAG, "checkIfUserAlreadyAuthenticated: TRUE==>"+SPLTLoginPluginConstants.getInstance().strClientToken);
         }
 
-        if(SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
+        if(SPLTLoginPluginConstants.getInstance().strClientToken != null && SPLTLoginPluginConstants.getInstance().strClientToken.length() > 0) {
             try {
                 Base64 decoder = new Base64(true);
-                byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.strClientToken.split("\\.")[1]);
+                byte[] secret = decoder.decodeBase64(SPLTLoginPluginConstants.getInstance().strClientToken.split("\\.")[1]);
                 String s = new String(secret);
 
                 try {
@@ -653,12 +653,12 @@ public class SPLTAuth0LoginUtility {
 
     /**
      * logout method to clear the shared preference &
-     * assign SPLTLoginPluginConstants.strClientToken
+     * assign SPLTLoginPluginConstants.getInstance().strClientToken
      * @param context
      */
     public void logout(Context context) {
         Log.d(TAG, "logout: CALLED");
-        SPLTLoginPluginConstants.strClientToken = "";
+        SPLTLoginPluginConstants.getInstance().strClientToken = "";
 
         SharedPreferencesUtil.getInstance(context).removeFromSharedPreference(
                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
@@ -696,7 +696,7 @@ public class SPLTAuth0LoginUtility {
     private boolean requestFromRefreshClientTokenFlag = false;
     /**
      * get access token, based on the api key received from the plugin
-     * and save the access token in SPLTLoginPluginConstants.strAccessToken
+     * and save the access token in SPLTLoginPluginConstants.getInstance().strAccessToken
      * @param context
      */
     private void requestAccessToken(final Context context) {
@@ -706,31 +706,31 @@ public class SPLTAuth0LoginUtility {
             public void companyTokenServiceResponse(JSONObject responseBody) {
                 try {
                     if(responseBody != null && responseBody.has("token")) {
-                        SPLTLoginPluginConstants.strAccessToken = responseBody.getString("token");
+                        SPLTLoginPluginConstants.getInstance().strAccessToken = responseBody.getString("token");
 
                         SharedPreferencesUtil.getInstance(context).addToSharedPreference(
                                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
-                                SPLTLoginPluginConstants.strAccessToken,
+                                SPLTLoginPluginConstants.getInstance().strAccessToken,
                                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
 
-                        Log.d(TAG, "companyTokenServiceResponse: SPLTLoginPluginConstants.strAccessToken==>"+SPLTLoginPluginConstants.strAccessToken);
+                        Log.d(TAG, "companyTokenServiceResponse: SPLTLoginPluginConstants.getInstance().strAccessToken==>"+SPLTLoginPluginConstants.getInstance().strAccessToken);
                         if(requestFromRefreshClientTokenFlag) {
                             requestFromRefreshClientTokenFlag = false;
                             // call back the refreshClientToken now
                             refreshClientToken(context);
                         }
                     } else {
-                        SPLTLoginPluginConstants.strAccessToken = "";
+                        SPLTLoginPluginConstants.getInstance().strAccessToken = "";
                     }
                 } catch(Exception e) {
-                    SPLTLoginPluginConstants.strAccessToken = "";
+                    SPLTLoginPluginConstants.getInstance().strAccessToken = "";
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void companyTokenServiceError(String responseBody) {
-                SPLTLoginPluginConstants.strAccessToken = "";
+                SPLTLoginPluginConstants.getInstance().strAccessToken = "";
             }
         });
         companyTokenService.requestForToken(SPLTLoginPluginConstants.apiKey, ApplicationConstantURL.getInstance().TOKEN_URL);
@@ -738,40 +738,45 @@ public class SPLTAuth0LoginUtility {
 
     /**
      * refresh the existing client token
-     * and save the client token in SPLTLoginPluginConstants.strClientToken
+     * and save the client token in SPLTLoginPluginConstants.getInstance().strClientToken
      * @param context
      */
     private void refreshClientToken(final Context context) {
         String accessToken = SharedPreferencesUtil.getInstance(context).getSharedPreference(
                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE,
                 ApplicationConstants.TOKEN_RESPONSE_SHARED_PREFERENCE_KEY);
+        ApplicationConstants.xAccessToken = accessToken;
+        ApplicationConstants.CLIENT_TOKEN = SPLTLoginPluginConstants.getInstance().strClientToken;
         if(accessToken != null && accessToken.length() > 0) {
-            SPLTLoginPluginConstants.strAccessToken = accessToken;
-            Log.d(TAG, "refreshClientToken: From SharedPreference SPLTLoginPluginConstants.strAccessToken==>"+SPLTLoginPluginConstants.strAccessToken);
+            SPLTLoginPluginConstants.getInstance().strAccessToken = accessToken;
+            Log.d(TAG, "refreshClientToken: From SharedPreference SPLTLoginPluginConstants.getInstance().strAccessToken==>"+SPLTLoginPluginConstants.getInstance().strAccessToken);
         }
 
-        if(SPLTLoginPluginConstants.strAccessToken == null || SPLTLoginPluginConstants.strAccessToken.length() == 0) {
+        if(SPLTLoginPluginConstants.getInstance().strAccessToken == null || SPLTLoginPluginConstants.getInstance().strAccessToken.length() == 0) {
             requestFromRefreshClientTokenFlag = true;
             requestAccessToken(context);
             return;
         }
 
-        if(SPLTLoginPluginConstants.strAccessToken != null && SPLTLoginPluginConstants.strAccessToken.length() > 0 &&
-                SPLTLoginPluginConstants.strClientToken != null && SPLTLoginPluginConstants.strClientToken.length() > 0) {
+        if(SPLTLoginPluginConstants.getInstance().strAccessToken != null && SPLTLoginPluginConstants.getInstance().strAccessToken.length() > 0 &&
+                SPLTLoginPluginConstants.getInstance().strClientToken != null && SPLTLoginPluginConstants.getInstance().strClientToken.length() > 0) {
             com.dotstudioz.dotstudioPRO.services.accesstoken.ClientTokenRefreshClass clientTokenRefreshClass = new com.dotstudioz.dotstudioPRO.services.accesstoken.ClientTokenRefreshClass(context);
             clientTokenRefreshClass.setClientTokenRefreshListener(new com.dotstudioz.dotstudioPRO.services.accesstoken.ClientTokenRefreshClass.IClientTokenRefresh() {
                 @Override
                 public void clientTokenResponse(String ACTUAL_RESPONSE) {
                     try {
                         String idToken = ACTUAL_RESPONSE;
-                        SPLTLoginPluginConstants.strClientToken = idToken;
+                        SPLTLoginPluginConstants.getInstance().strClientToken = idToken;
 
-                        Log.d(TAG, "clientTokenResponse: SPLTLoginPluginConstants.strClientToken==>"+SPLTLoginPluginConstants.strClientToken);
+                        Log.d(TAG, "clientTokenResponse: SPLTLoginPluginConstants.getInstance().strClientToken==>"+SPLTLoginPluginConstants.getInstance().strClientToken);
 
                         SharedPreferencesUtil.getInstance(context).addToSharedPreference(
                                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE,
-                                SPLTLoginPluginConstants.strClientToken,
+                                SPLTLoginPluginConstants.getInstance().strClientToken,
                                 ApplicationConstants.USER_DETAILS_RESPONSE_SHARED_PREFERENCE_KEY);
+
+                        if(refreshClientTokenInterfaceFlag)
+                            refreshClientTokenInterfaceResult(true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -779,9 +784,12 @@ public class SPLTAuth0LoginUtility {
 
                 @Override
                 public void clientTokenError(String ERROR) {
+                    if(refreshClientTokenInterfaceFlag)
+                        refreshClientTokenInterfaceResult(false);
                 }
             });
-            clientTokenRefreshClass.refreshExistingClientToken(SPLTLoginPluginConstants.strAccessToken, SPLTLoginPluginConstants.strClientToken);
+            refreshClientTokenInterfaceFlag = true;
+            clientTokenRefreshClass.refreshExistingClientToken(SPLTLoginPluginConstants.getInstance().strAccessToken, SPLTLoginPluginConstants.getInstance().strClientToken);
         }
     }
 
@@ -792,8 +800,35 @@ public class SPLTAuth0LoginUtility {
      */
     public String getClientToken(Context context) {
         if(checkIfUserAlreadyAuthenticated(context))
-            return SPLTLoginPluginConstants.strClientToken;
+            return SPLTLoginPluginConstants.getInstance().strClientToken;
         else
             return null;
+    }
+
+    public interface IRefreshClientToken {
+        void clientTokenRefreshSuccess(String clientToken);
+        void clientTokenRefreshFailed(String error);
+    }
+    private IRefreshClientToken iRefreshClientToken;
+    private boolean refreshClientTokenInterfaceFlag = false;
+    public void setRefreshClientTokenInterface(IRefreshClientToken irct) {
+        if(irct instanceof IRefreshClientToken) {
+            this.iRefreshClientToken = (IRefreshClientToken) irct;
+        } else {
+            this.iRefreshClientToken = null;
+        }
+    }
+    public void refreshClientTokenInterface(Context context) {
+        if(this.iRefreshClientToken != null) {
+            refreshClientToken(context);
+        }
+    }
+    private void refreshClientTokenInterfaceResult(boolean flag) {
+        if(this.iRefreshClientToken != null) {
+            if(flag)
+                this.iRefreshClientToken.clientTokenRefreshSuccess(ApplicationConstants.CLIENT_TOKEN);
+            else
+                this.iRefreshClientToken.clientTokenRefreshFailed("Failed refreshing the client token, need to relogin");
+        }
     }
 }
