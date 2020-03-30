@@ -83,6 +83,12 @@
       "initial_value": true,
       "label": "Show on Start ?",
       "tooltip_text": "Turn this off if You don't want to show login screen on start."
+    },
+    {
+      "type": "text",
+      "key": "visitWebsiteMessage",
+      "tooltip_text": "Visit website to subscribe!!!",
+      "default": "Visit website to subscribe!!!"
     }
   ],
   "hooks": {

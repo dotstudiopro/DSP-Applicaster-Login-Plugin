@@ -32,8 +32,7 @@ public class SPLTLoginPluginConstants {
     public static String SHOW_ON_STARTUP_KEY = "show_on_startup";
     public static String title;// = "Dotstudioz";
     public static String TITLE_KEY = "title";
-    public static String VISIT_WEBSITE_MESSAGE_KEY = "visit_website_message";
-    public String getVisitWebsiteMessage = "Dotstudioz";
+    public static String VISIT_WEBSITE_MESSAGE_KEY = "visitWebsiteMessage";
 
     public static String defaultTitle = "Dotstudioz";
     public static String defaultTitleColor = "#000000";
