@@ -573,8 +573,8 @@ public class SPLTAuth0LoginUtility {
     }
 
     public boolean isUserLoggedIn(Context context) {
-        Log.d(TAG, "isUserLoggedIn: CALLED");
-        return checkIfUserAlreadyAuthenticated(context);
+        Log.d(TAG, "isUserLoggedIn: CALLED CALLED");
+        return !checkIfUserAlreadyAuthenticated(context);
     }
 
     /**

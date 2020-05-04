@@ -4,10 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.applicaster.hook_screen.HookScreenListener;
-import com.dotstudioz.dotstudioPRO.services.constants.ApplicationConstants;
 import com.dotstudioz.dotstudioPRO.services.services.CheckChannelSubscriptionStatusService_V1;
 import com.dotstudioz.services.APIClient;
 import com.dotstudioz.services.APIInterface;
@@ -16,13 +14,13 @@ import retrofit2.Call;
 
 public class SPLTSubscriptionUtility {
     private static String TAG = "SPLTSubscriptionUtility";
-    private static final SPLTSubscriptionUtility ourInstance = new SPLTSubscriptionUtility();
+    /*private static final SPLTSubscriptionUtility ourInstance = new SPLTSubscriptionUtility();
 
     public static SPLTSubscriptionUtility getInstance() {
         return ourInstance;
-    }
+    }*/
 
-    private SPLTSubscriptionUtility() {
+    public SPLTSubscriptionUtility() {
     }
 
     public interface ISPLTSubscriptionUtilityHookInterface {
@@ -83,11 +81,9 @@ public class SPLTSubscriptionUtility {
             }
         }
     }
-
     private void checkSubscription(Context context, String dspChannelId) {
         checkChannelSubscriptionStatusService(context, dspChannelId);
     }
-
     APIInterface apiInterface;
     public void checkChannelSubscriptionStatusService(Context context, String idToPass) {
         CheckChannelSubscriptionStatusService_V1 checkChannelSubscriptionStatusServiceV1 = new CheckChannelSubscriptionStatusService_V1(context);
@@ -150,6 +146,7 @@ public class SPLTSubscriptionUtility {
         }
     }
 
+    public boolean isAlreadyShowingSubscriptionAlertDialog = false;
     public void showSubscriptionAlertDialog(Context context, HookScreenListener hookScreenListener) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setTitle("SUBSCRIPTION");
@@ -162,11 +159,36 @@ public class SPLTSubscriptionUtility {
                     public void onClick(DialogInterface dialog, int id) {
                         if(hookScreenListener != null)
                             hookScreenListener.hookFailed(null);
+                        isAlreadyShowingSubscriptionAlertDialog = false;
                         dialog.cancel();
                     }
                 });
 
         AlertDialog alert11 = builder1.create();
-        alert11.show();
+        if(!isAlreadyShowingSubscriptionAlertDialog) {
+            isAlreadyShowingSubscriptionAlertDialog = true;
+            alert11.show();
+        }
+    }
+    public void showSubscriptionAlertDialog(Context context) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setTitle("SUBSCRIPTION");
+        builder1.setMessage(SPLTLoginPluginConstants.getInstance().visitWebsiteMessage);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        isAlreadyShowingSubscriptionAlertDialog = false;
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        if(!isAlreadyShowingSubscriptionAlertDialog) {
+            isAlreadyShowingSubscriptionAlertDialog = true;
+            alert11.show();
+        }
     }
 }
