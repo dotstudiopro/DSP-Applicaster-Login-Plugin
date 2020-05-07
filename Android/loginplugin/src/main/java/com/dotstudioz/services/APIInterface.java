@@ -19,6 +19,9 @@ public interface APIInterface {
     @GET("/subscriptions/check/{id}")
     Call<Object> checkSubscriptions(@Path("id") String id);
 
+    @GET
+    Call<Object> getChannelById(@Url String url);
+
     @GET("/subscriptions/summary")
     Call<Object> subscriptionSummary();
 

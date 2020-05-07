@@ -2,19 +2,13 @@ package com.dotstudioz;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Parcel;
-import android.support.annotation.AttrRes;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.auth0.android.Auth0;
@@ -22,7 +16,6 @@ import com.auth0.android.authentication.AuthenticationAPIClient;
 import com.auth0.android.authentication.AuthenticationException;
 import com.auth0.android.authentication.ParameterBuilder;
 import com.auth0.android.callback.BaseCallback;
-import com.auth0.android.jwt.JWT;
 import com.auth0.android.lock.AuthenticationCallback;
 import com.auth0.android.lock.Lock;
 import com.auth0.android.lock.LockCallback;
@@ -39,8 +32,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -98,7 +89,7 @@ public class SPLTAuth0LoginUtility {
      * @param context
      * @return Company Key as a String
      */
-    private String getCompanyKeyFromAccessToken(Context context) {
+    public String getCompanyKeyFromAccessToken(Context context) {
         String accessToken;
         //Check if accessToken is present, if not then fetch it
         try {

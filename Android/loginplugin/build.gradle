@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "0.0.27"
+        versionName "0.0.28"
         consumerProguardFiles 'proguard-rules.pro', 'proguard-gson.pro', 'proguard-otto.pro', 'proguard-lock-2.pro'
     }
 
@@ -73,8 +73,8 @@ dependencies {
 
     implementation 'com.auth0:java-jwt:2.1.0'
 
-    implementation 'com.github.dotstudiopro:dotstudiopro-android-model:1.0.18'
-    implementation ('com.github.dotstudiopro:dotstudiopro-android-services:1.0.73') {
+    implementation 'com.github.dotstudiopro:dotstudiopro-android-model:1.0.19'
+    implementation ('com.github.dotstudiopro:dotstudiopro-android-services:1.0.74') {
         exclude group: 'com.android.support', module: 'customtabs'
         exclude group: 'com.google.code.gson', module: 'gson'
         exclude group: 'com.android.support', module: 'multidex'

@@ -149,20 +149,19 @@ public class SPLTSubscriptionUtility {
     public boolean isAlreadyShowingSubscriptionAlertDialog = false;
     public void showSubscriptionAlertDialog(Context context, HookScreenListener hookScreenListener) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-        builder1.setTitle("SUBSCRIPTION");
-        builder1.setMessage(SPLTLoginPluginConstants.getInstance().visitWebsiteMessage);
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if(hookScreenListener != null)
-                            hookScreenListener.hookFailed(null);
-                        isAlreadyShowingSubscriptionAlertDialog = false;
-                        dialog.cancel();
-                    }
-                });
+        builder1.setTitle("SUBSCRIPTION")
+                .setMessage(SPLTLoginPluginConstants.getInstance().visitWebsiteMessage)
+                .setCancelable(true)
+                .setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if(hookScreenListener != null)
+                                hookScreenListener.hookFailed(null);
+                            isAlreadyShowingSubscriptionAlertDialog = false;
+                            dialog.cancel();
+                        }
+                    });
 
         AlertDialog alert11 = builder1.create();
         if(!isAlreadyShowingSubscriptionAlertDialog) {
@@ -172,11 +171,10 @@ public class SPLTSubscriptionUtility {
     }
     public void showSubscriptionAlertDialog(Context context) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-        builder1.setTitle("SUBSCRIPTION");
-        builder1.setMessage(SPLTLoginPluginConstants.getInstance().visitWebsiteMessage);
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
+        builder1.setTitle("SUBSCRIPTION")
+                .setMessage(SPLTLoginPluginConstants.getInstance().visitWebsiteMessage)
+                .setCancelable(true)
+                .setPositiveButton(
                 "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
