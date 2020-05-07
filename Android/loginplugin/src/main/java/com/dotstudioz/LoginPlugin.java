@@ -424,7 +424,7 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
     private void hookCompleted(boolean flag) {
         Log.d(TAG, "hookCompleted: CALLED, flag==>"+flag);
         //changing the value of flag manually for testing
-        flag = false;
+        //flag = false;
         LoginPluginSharedSingleton.getInstance().lastSubscriptionResult = flag;
         if(this.hookListener != null) {
             Log.d(TAG, "hookCompleted: flag==>"+flag);

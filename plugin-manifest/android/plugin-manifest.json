@@ -9,7 +9,7 @@
     }
   ],
   "dependency_name": "com.github.dotstudiopro:DSP-Applicaster-Login-Plugin",
-  "dependency_version": "0.0.29",
+  "dependency_version": "0.0.30",
   "platform": "android",
   "manifest_version": "0.1.2",
   "author_email": "mohsin@dotstudioz.com",
