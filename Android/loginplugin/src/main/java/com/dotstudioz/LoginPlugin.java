@@ -42,9 +42,9 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
         mContext = context;
         try {
             Log.d(TAG, "executeOnApplicationReady: CALLED");
-            Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.apiKey);
-            Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.auth0ClientId);
-            Log.d(TAG, "executeOnApplicationReady: SPLTLoginPluginConstants.show_on_startup==>" + SPLTLoginPluginConstants.show_on_startup);
+            Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.getInstance().apiKey);
+            Log.d(TAG, "executeOnStartup: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.getInstance().auth0ClientId);
+            Log.d(TAG, "executeOnApplicationReady: SPLTLoginPluginConstants.show_on_startup==>" + SPLTLoginPluginConstants.getInstance().show_on_startup);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -55,8 +55,11 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
         //read the access token if available from SharedPreference
         SPLTAuth0LoginUtility.getInstance().getCompanyKeyFromAccessToken(context);
 
+        //read the client token if available from SharedPreference
+        SPLTAuth0LoginUtility.getInstance().initialize(context);
+
         //check if the login is to be shown on the app startup
-        if(SPLTLoginPluginConstants.show_on_startup) {
+        if(SPLTLoginPluginConstants.getInstance().show_on_startup) {
 
             //initialize before doing anything else
             SPLTAuth0LoginUtility.getInstance().initialize(context);
@@ -78,8 +81,8 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
         mContext = context;
         try {
             Log.d(TAG, "login: CALLED ctx, addParams, callable");
-            Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.apiKey);
-            Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.auth0ClientId);
+            Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.getInstance().apiKey);
+            Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.getInstance().auth0ClientId);
             Log.d(TAG, "login: SPLTLoginPluginConstants.getInstance().strClientToken==>" + SPLTLoginPluginConstants.getInstance().strClientToken);
             Log.d(TAG, "login: SPLTAuth0LoginUtility.getInstance().isClientTokenValid()==>" + SPLTAuth0LoginUtility.getInstance().isClientTokenValid());
         } catch(Exception e) {
@@ -112,8 +115,8 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
         mContext = context;
         try {
             Log.d(TAG, "login: CALLED ctx, Playable, addParams, callable");
-            Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.apiKey);
-            Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.auth0ClientId);
+            Log.d(TAG, "login: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.getInstance().apiKey);
+            Log.d(TAG, "login: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.getInstance().auth0ClientId);
             Log.d(TAG, "login: SPLTLoginPluginConstants.getInstance().strClientToken==>" + SPLTLoginPluginConstants.getInstance().strClientToken);
             Log.d(TAG, "login: SPLTAuth0LoginUtility.getInstance().isClientTokenValid()==>" + SPLTAuth0LoginUtility.getInstance().isClientTokenValid());
             Log.d(TAG, "login: " + playable != null ? playable.getPlayableId() : "");
@@ -121,11 +124,20 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
             e.printStackTrace();
         }
 
+        LoginPluginSharedSingleton.getInstance().isCallForPlayableLogin = true;
+        LoginPluginSharedSingleton.getInstance().playableLoginCallback = callback;
+
         //as this method is only called in case of a player page, so we are checking if the user is subscribed or not
         if (SPLTLoginPluginConstants.getInstance().strClientToken != null && SPLTLoginPluginConstants.getInstance().strClientToken.length() > 0 &&
                 SPLTAuth0LoginUtility.getInstance().isClientTokenValid()) {
-            //call to check if the user has subscription to the selected channel id
-            checkSubscription(context, LoginPluginSharedSingleton.getInstance().selectedChannelId);
+            if(SPLTLoginPluginConstants.getInstance().subscription_enabled) {
+                //call to check if the user has subscription to the selected channel id
+                checkSubscription(context, LoginPluginSharedSingleton.getInstance().selectedChannelId);
+            } else {
+                LoginPluginSharedSingleton.getInstance().isCallForPlayableLogin = false;
+                LoginPluginSharedSingleton.getInstance().playableLoginCallback = null;
+                callback.onResult(true);
+            }
         } else {
             //initialize before doing anything else
             SPLTAuth0LoginUtility.getInstance().initialize(context);
@@ -134,7 +146,14 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
             SPLTAuth0LoginUtility.getInstance().login(context, new SPLTAuth0LoginUtility.ILoginPlugin() {
                 @Override
                 public void loginResponse(boolean result, String token) {
-                    callback.onResult(result);
+                    if(SPLTLoginPluginConstants.getInstance().subscription_enabled) {
+                        //call to check if the user has subscription to the selected channel id
+                        checkSubscription(context, LoginPluginSharedSingleton.getInstance().selectedChannelId);
+                    } else {
+                        LoginPluginSharedSingleton.getInstance().isCallForPlayableLogin = false;
+                        LoginPluginSharedSingleton.getInstance().playableLoginCallback = null;
+                        callback.onResult(true);
+                    }
                 }
             });
         }
@@ -153,8 +172,8 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
         mContext = context;
         try {
             Log.d(TAG, "logout: CALLED");
-            Log.d(TAG, "logout: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.apiKey);
-            Log.d(TAG, "logout: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.auth0ClientId);
+            Log.d(TAG, "logout: SPLTLoginPluginConstants.apiKey==>" + SPLTLoginPluginConstants.getInstance().apiKey);
+            Log.d(TAG, "logout: SPLTLoginPluginConstants.auth0ClientId==>" + SPLTLoginPluginConstants.getInstance().auth0ClientId);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -229,8 +248,6 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
                 e.printStackTrace();
             }
             LoginPluginSharedSingleton.getInstance().selectedChannelId = ((APAtomEntry)model).getContainerId();
-            if(canResetFlag)
-                LoginPluginSharedSingleton.getInstance().lastSubscriptionResult = false;
         } else if(model instanceof APAtomEntryAdsPlayable) {
             try {
                 Log.d(TAG, "isItemLocked: Selected Channel ID==>" + LoginPluginSharedSingleton.getInstance().selectedChannelId);
@@ -244,27 +261,16 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
             } catch(Exception e) {
                 e.printStackTrace();
             }
-
-            flag = true;
-            canResetFlag = false;
         }
 
-        if(flag) {
-            Log.d(TAG, "isItemLocked: LoginPluginSharedSingleton.getInstance().lastSubscriptionResult==>"+LoginPluginSharedSingleton.getInstance().lastSubscriptionResult);
-            if(LoginPluginSharedSingleton.getInstance().selectedChannelId != null &&
-                    LoginPluginSharedSingleton.getInstance().selectedChannelId.length() > 0 &&
-                    LoginPluginSharedSingleton.getInstance().lastSubscriptionResult) {
-                //canResetFlag = true;
-                return false;
-            } else {
-                //canResetFlag = true;
-                return true;
-            }
-        } else {
+        //validating if the subscription is enabled or not, if so then need to validate
+        //so by returning true, it will call the login(ctx, playable,....) method
+        //if(SPLTLoginPluginConstants.getInstance().subscription_enabled) {
+            return true;
+        /*} else {
             return false;
-        }
+        }*/
     }
-    boolean canResetFlag = false;
 
     /**
      * initialization of the player plugin configuration with a Plugin,
@@ -367,6 +373,14 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
 
     APIInterface apiInterface;
     private void checkSubscription(Context context, String selectedChannelId) {
+        //check if we already have the selected channel ID, we will get that only if a channel was loaded
+        if(selectedChannelId != null && selectedChannelId.length() > 0) {
+            //dont do anything here, continue with the subscription check
+        } else {
+            //as we do not have a valid channel id, so we are believing that the video is clicked from search or deeplinking
+            hookCompleted(true);
+            return;
+        }
         String countryCode = "US";
         if(LoginPluginSharedSingleton.getInstance().ISO_CODE != null && LoginPluginSharedSingleton.getInstance().ISO_CODE.length() > 0)
             countryCode = LoginPluginSharedSingleton.getInstance().ISO_CODE;
@@ -423,16 +437,25 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
     }
     private void hookCompleted(boolean flag) {
         Log.d(TAG, "hookCompleted: CALLED, flag==>"+flag);
-        //changing the value of flag manually for testing
-        //flag = false;
-        LoginPluginSharedSingleton.getInstance().lastSubscriptionResult = flag;
-        if(this.hookListener != null) {
-            Log.d(TAG, "hookCompleted: flag==>"+flag);
-            if (flag) {
-                this.hookListener.hookCompleted(null);
-            } else {
-                (new SPLTSubscriptionUtility()).showSubscriptionAlertDialog(mContext, this.hookListener);
-                //this.hookListener.hookFailed(null);
+
+        if(LoginPluginSharedSingleton.getInstance().isCallForPlayableLogin) {
+            LoginPluginSharedSingleton.getInstance().isCallForPlayableLogin = false;
+            if(LoginPluginSharedSingleton.getInstance().playableLoginCallback != null) {
+                if(flag) {
+                    LoginPluginSharedSingleton.getInstance().playableLoginCallback.onResult(flag);
+                } else {
+                    (new SPLTSubscriptionUtility()).showSubscriptionAlertDialog(mContext, null);
+                }
+            }
+        } else {
+            if (this.hookListener != null) {
+                Log.d(TAG, "hookCompleted: flag==>" + flag);
+                if (flag) {
+                    this.hookListener.hookCompleted(null);
+                } else {
+                    (new SPLTSubscriptionUtility()).showSubscriptionAlertDialog(mContext, this.hookListener);
+                    //this.hookListener.hookFailed(null);
+                }
             }
         }
     }
@@ -465,6 +488,10 @@ public class LoginPlugin extends BaseLoginContract implements LoginContract, Gen
                         SPLTLoginPluginConstants.getInstance().show_on_startup = false;
                         if(((Map)obj).get(keyString).toString().equalsIgnoreCase("true"))
                             SPLTLoginPluginConstants.getInstance().show_on_startup = true;
+                    } else if(keyString.equals(SPLTLoginPluginConstants.SUBSCRIPTION_ENABLED_KEY)) {
+                        SPLTLoginPluginConstants.getInstance().subscription_enabled = false;
+                        if(((Map)obj).get(keyString).toString().equalsIgnoreCase("true"))
+                            SPLTLoginPluginConstants.getInstance().subscription_enabled = true;
                     } else if(keyString.equals(SPLTLoginPluginConstants.VISIT_WEBSITE_MESSAGE_KEY)) {
                         SPLTLoginPluginConstants.getInstance().visitWebsiteMessage = ((Map)obj).get(keyString).toString();
                     }

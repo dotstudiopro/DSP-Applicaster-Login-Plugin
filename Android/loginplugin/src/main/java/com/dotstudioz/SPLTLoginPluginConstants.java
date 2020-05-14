@@ -30,6 +30,8 @@ public class SPLTLoginPluginConstants {
     public static String LOGO_KEY = "logo";
     public static boolean show_on_startup;// = true;
     public static String SHOW_ON_STARTUP_KEY = "show_on_startup";
+    public static boolean subscription_enabled;// = true;
+    public static String SUBSCRIPTION_ENABLED_KEY = "subscription_enabled";
     public static String title;// = "Dotstudioz";
     public static String TITLE_KEY = "title";
     public static String VISIT_WEBSITE_MESSAGE_KEY = "visitWebsiteMessage";

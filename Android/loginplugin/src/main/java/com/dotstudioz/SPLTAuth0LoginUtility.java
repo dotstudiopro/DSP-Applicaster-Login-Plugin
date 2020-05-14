@@ -239,15 +239,15 @@ public class SPLTAuth0LoginUtility {
         Log.d(TAG, "showLoginController: CALLED");
         mContext = context;
 
-        if(SPLTLoginPluginConstants.apiKey != null && SPLTLoginPluginConstants.apiKey.length() > 0 &&
-                SPLTLoginPluginConstants.auth0ClientId != null && SPLTLoginPluginConstants.auth0ClientId.length() > 0) {
+        if(SPLTLoginPluginConstants.getInstance().apiKey != null && SPLTLoginPluginConstants.getInstance().apiKey.length() > 0 &&
+                SPLTLoginPluginConstants.getInstance().auth0ClientId != null && SPLTLoginPluginConstants.getInstance().auth0ClientId.length() > 0) {
             Map<String, Object> parametersMap = ParameterBuilder
                     .newAuthenticationBuilder()
                     .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
                     .set("c", getCompanyKeyFromAccessToken(context))
                     .asDictionary();
 
-            validateLogoURLAndShowLogin(SPLTLoginPluginConstants.logo);
+            validateLogoURLAndShowLogin(SPLTLoginPluginConstants.getInstance().logo);
         } else {
             return;
         }
@@ -328,15 +328,15 @@ public class SPLTAuth0LoginUtility {
             d = context.getResources().getDrawable(R.drawable.dotstudiopro_logo_black);
         }
 
-        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.title, SPLTLoginPluginConstants.defaultTitle);
-        String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.titleColor, SPLTLoginPluginConstants.defaultTitleColor);;
-        String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, SPLTLoginPluginConstants.defaultHeaderColor);
-        String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.headerColor, SPLTLoginPluginConstants.defaultHeaderColor);
+        String title = validateValueOrSetDefault(SPLTLoginPluginConstants.getInstance().title, SPLTLoginPluginConstants.getInstance().defaultTitle);
+        String titleColor = validateValueOrSetDefault(SPLTLoginPluginConstants.getInstance().titleColor, SPLTLoginPluginConstants.getInstance().defaultTitleColor);;
+        String headerColor = validateValueOrSetDefault(SPLTLoginPluginConstants.getInstance().headerColor, SPLTLoginPluginConstants.getInstance().defaultHeaderColor);
+        String backgroundColor = validateValueOrSetDefault(SPLTLoginPluginConstants.getInstance().headerColor, SPLTLoginPluginConstants.getInstance().defaultHeaderColor);
 
         int initialScreenToUse = 0;
 
         Log.d(TAG, "startLockActivity:line number 331 ");
-        Auth0 auth0 = new Auth0(SPLTLoginPluginConstants.auth0ClientId, SPLTLoginPluginConstants.auth0Domain);
+        Auth0 auth0 = new Auth0(SPLTLoginPluginConstants.getInstance().auth0ClientId, SPLTLoginPluginConstants.getInstance().auth0Domain);
         Map<String, Object> parametersMap = ParameterBuilder
                 .newAuthenticationBuilder()
                 .setScope(ParameterBuilder.SCOPE_OFFLINE_ACCESS)
@@ -422,7 +422,7 @@ public class SPLTAuth0LoginUtility {
      * using the AuthenticationAPIClient to get the client token received after the user had logged in
      */
     private void getUserProfileFromAuth0() {
-        mAuth0 = new Auth0(SPLTLoginPluginConstants.auth0ClientId, SPLTLoginPluginConstants.auth0Domain);
+        mAuth0 = new Auth0(SPLTLoginPluginConstants.getInstance().auth0ClientId, SPLTLoginPluginConstants.getInstance().auth0Domain);
         // The process to reclaim an UserProfile is preceded by an Authentication call.
         AuthenticationAPIClient aClient = new AuthenticationAPIClient(mAuth0);
 

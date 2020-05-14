@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.applicaster.hook_screen.HookScreenListener;
+import com.applicaster.plugin_manager.login.LoginContract;
 import com.dotstudioz.dotstudioPRO.models.dto.CustomFieldDTO;
 import com.dotstudioz.dotstudioPRO.models.dto.SpotLightCategoriesDTO;
 import com.dotstudioz.dotstudioPRO.models.dto.SpotLightChannelDTO;
@@ -34,7 +35,8 @@ public class LoginPluginSharedSingleton {
     public HookScreenListener hookListener;
 
     //flag to hold the subscription check for the last channel loaded
-    public boolean lastSubscriptionResult = false;
+    public boolean isCallForPlayableLogin = false;
+    public LoginContract.Callback playableLoginCallback;
 
     public String ISO_CODE;
     public String COUNTRY;
@@ -112,7 +114,7 @@ public class LoginPluginSharedSingleton {
                     SPLTLoginPluginConstants.getInstance().strAccessToken = "";
                 }
             });
-            companyTokenService.requestForToken(SPLTLoginPluginConstants.apiKey, ApplicationConstantURL.getInstance().TOKEN_URL);
+            companyTokenService.requestForToken(SPLTLoginPluginConstants.getInstance().apiKey, ApplicationConstantURL.getInstance().TOKEN_URL);
         }
     }
 
